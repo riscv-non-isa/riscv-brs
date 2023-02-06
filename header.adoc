@@ -1,7 +1,7 @@
 [[header]]
-:description: RISC-V Example Specification Document (Zexmpl)
+:description: RISC-V Boot and Runtime Services Specification Document (BRS)
 :company: RISC-V.org
-:revdate: 1/2022
+:revdate: 2/2023
 :revnumber: 1.0
 :revremark: This document is in development. Assume everything can change. See http://riscv.org/spec-state for details.
 :url-riscv: http://riscv.org
@@ -36,8 +36,8 @@ endif::[]
 :footnote:
 :xrefstyle: short
 
-= RISC-V Example Specification Document (Zexmpl)
-Author 1; Author 2; RISC-V Task Group
+= RISC-V Boot and Runtime Services Specification (BRS)
+Aaron Durbin; Andrei Warkentin; OS-A SEE Task Group
 
 // Preamble
 [WARNING]
@@ -55,13 +55,23 @@ Attribution 4.0 International License (CC-BY 4.0). The full
 license text is available at
 https://creativecommons.org/licenses/by/4.0/.
 
-Copyright 2022 by RISC-V International.
+Copyright 2023 by RISC-V International.
 
 [preface]
 include::contributors.adoc[]
 
+include::about.adoc[]
+include::background.adoc[]
 include::intro.adoc[]
-include::chapter2.adoc[]
+include::recipes.adoc[]
+include::processor.adoc[]
+include::sbi.adoc[]
+include::secondary.adoc[]
+include::uefi.adoc[]
+include::acpi.adoc[]
+include::smbios.adoc[]
+include::appendices.adoc[]
+
 //the index must precede the bibliography
 include::index.adoc[]
 include::bibliography.adoc[]
