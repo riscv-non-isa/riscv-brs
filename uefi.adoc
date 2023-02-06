@@ -1,2 +1,26 @@
 [[uefi]]
 == UEFI Requirements
+=== UEFI Version
+=== UEFI Compliance
+=== UEFI System Environment and Configuration
+==== Privilege Levels
+===== UEFI Boot in HS-Mode
+===== UEFI Boot in (V)S-Mode
+==== System Volume Format
+==== UEFI Image Format
+===== UEFI Drivers
+===== UEFI Applications
+===== PE/COFF Images
+==== Graphics Output (GOP) Protocol
+==== Address Translation Support
+=== UEFI Boot Services
+==== Memory Map
+==== UEFI Loaded Images
+==== Configuration Tables
+=== UEFI Runtime Services
+==== Runtime Exception Level
+==== Runtime Memory Map
+==== Real-Time Clock (RTC)
+==== UEFI Reset and Shutdown
+==== Variable Services
+=== Firmware Update
