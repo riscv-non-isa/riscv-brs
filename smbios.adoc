@@ -1,2 +1,44 @@
 [[smbios]]
 == SMBIOS Requirements
+=== SMBIOS Version
+==== SMBIOS Requirements on UEFI
+=== SMBIOS Structures
+==== Type 00: BIOS Information (Required)
+==== Type 01: System Informatio (Required)
+==== Type 02: Baseboard/Module Information (Recommended)
+==== Type 03: System Enclosure/Chassis (Recommended)
+==== Type 04: Processor Information (Required)
+==== Type 07: Cache Information (Required)
+==== Type 08: Port Connector Information (Recommended)
+Recommended for platforms with physical ports.
+
+==== Type 09: System Slots (Conditionally Required)
+Required for platforms with expansion slots.
+
+==== Type 11: OEM Strings (Recommended)
+==== Type 13: BIOS Language Information (Recommended)
+==== Type 14: Group Associations (Recommended)
+Recommended for platforms to describe associations between SMBIOS types.
+
+==== Type 16: Physical Memory Array (Required)
+==== Type 17: Memory Device (Required)
+==== Type 19: Memory Array Mapped Address (Required)
+==== Type 32: System Boot Information (Required)
+==== Type 38: IPMI Device Information (Conditionally Required)
+Required for platforms with an IPMIv1.0 BMC Host Interface.
+
+==== Type 39: System Power Supplies (Recommended)
+Recommended for servers.
+
+==== Type 41: Onboard Devices Extended Information (Recommended)
+==== Type 42: Redfish Host Interface (Conditionally Required)
+Required for platforms supporting the Redfish Host Interface.
+
+==== Type 43: TPM Device (Conditionally Required)
+Required for platforms with a TPM.
+
+==== Type 44: Standard Processor Additional Information (Required)
+==== Type 45: Firmware Inventory Information (Recommended)
+==== Type 46: String Property (Recommended)
+
+

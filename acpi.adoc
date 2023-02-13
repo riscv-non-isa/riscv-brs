@@ -1,2 +1,26 @@
 [[acpi]]
 == ACPI Requirements
+=== ACPI Version
+=== ACPI-provided Data Structures
+=== ACPI Tables
+==== Mandatory ACPI Tables
+===== RSDP
+===== XSDT
+===== FADT
+===== DSDT and SSDT
+===== MADT
+===== RHCT
+===== SPCR
+===== MCFG
+===== PPTT
+==== Recommended ACPI Tables
+==== Optional ACPI Tables
+=== ACPI Definition Blocks
+=== ACPI Methods and Objects
+==== Global Methods and Objects
+==== Device Methods and Objects
+==== Event Signaling
+==== Address Translation Support
+=== Hardware Requirements Imposed by ACPI
+==== Processor Performance Control
+==== Time and Alarm Device
