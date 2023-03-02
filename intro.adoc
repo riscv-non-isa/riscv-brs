@@ -1,2 +1,6 @@
 [[intro]]
 == Introduction
+
+The Boot and Runtime Services specification provides the requirements for system vendors and Operating System Vendors (OSVs) to interoperate with one another by providing expectations for the Operating System (OS) to utilize in acts of device discovery, system management, and other rich operations provided in this specification. The approach taken is to leverage industry standards as well as RISC-V ratified specifications.
+
+There are two solutions initially focused on in the form of recipes that describe the various requirements needed for each. The recipe names are named BRS-I and BRS-B, interoperable and bespoke, repsectively.
