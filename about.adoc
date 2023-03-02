@@ -13,6 +13,7 @@
 | DT              | DeviceTree cite:[DT].
 | EBBR            | Embedded Base Boot Requirements Specification cite:[EBBR].
 | OSV             | Operating System Vendor.
+| Profile         | RISC-V Profile cite:[Profile].
 | SBI             | RISC-V Supervisor Binary Interface Specification cite:[SBI].
 | SMBIOS          | System Management BIOS cite:[SMBIOS].
 | UEFI            | Unified Extensible Firmware Interface Specification cite:[UEFI].
