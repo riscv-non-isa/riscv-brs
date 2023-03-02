@@ -1,4 +1,4 @@
 [[recipes]]
 == Recipes
-=== BRS-H Recipe
-=== BRS-V Recipe
+=== BRS-I Recipe
+=== BRS-B Recipe

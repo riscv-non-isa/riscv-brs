@@ -8,6 +8,8 @@
 | Term            ^| Definition
 | ACPI            | Advanced Configuration and Power Interface Specification cite:[ACPI].
 | BRS             | RISC-V Boot and Runtime Services. This document.
+| BRS-I           | Boot and Runtime Services Recipe targeting interoperation across different software suppliers.
+| BRS-B           | Boot and Runtime Services Recipe using a bespoke solution.
 | DT              | DeviceTree cite:[DT].
 | EBBR            | Embedded Base Boot Requirements Specification cite:[EBBR].
 | OSV             | Operating System Vendor.
