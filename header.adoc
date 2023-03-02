@@ -19,7 +19,7 @@
 :imagesoutdir: images
 :bibtex-file: brs.bib
 :bibtex-order: alphabetical
-:bibtex-style: apa
+:bibtex-style: ieee
 :icons: font
 :lang: en
 :listing-caption: Listing
