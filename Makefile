@@ -1,5 +1,5 @@
 HEADER_SOURCE := header.adoc
-PDF_RESULT := os-a-see-spec.pdf
+PDF_RESULT := riscv-brs-spec.pdf
 
 all: build
 

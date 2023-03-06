@@ -1,4 +1,21 @@
 [[recipes]]
 == Recipes
-=== BRS-H Recipe
-=== BRS-V Recipe
+=== BRS-I Recipe
+
+.BRS-I Recipe Overview
+[width=90%]
+[%header, cols="20,10,10,10,10,10"]
+|===
+| Minimum Profile        ^| UEFI | ACPI | DT | SBI | SMBIOS
+| RVA20 | >= 2.10 | >= 6.5 | N/A | >= 1.0 | >= 3.6.0
+|===
+
+=== BRS-B Recipe
+
+.BRS-B Recipe Overview
+[width=90%]
+[%header, cols="20,10,10,10,10,10"]
+|===
+| Minimum Profile        ^| UEFI | ACPI | DT | SBI | SMBIOS
+| RVA20 | EBBR cite:[EBBR] | optional | optional | >= 1.0 | >= 3.6.0
+|===
