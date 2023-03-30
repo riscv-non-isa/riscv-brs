@@ -26,32 +26,10 @@
 ===== CXL Protocols
 ===== PCIe Protocols
 ===== Graphics Protocols
-=== Recommended and Conditionally Required ACPI Tables
-==== I/O Topology
-==== TPM
-==== Platform Error Interfaces
-==== NUMA
-==== PCC
-==== Platform Debug Trigger
-==== NVDIMM
-==== Graphics Resource Table
-==== IPMI
-==== CXL
-==== iSCSI and NVMe-oF
-==== DBG2
-=== Recommended and Conditionally Required ACPI Methods
-==== CPU Performance Control
-==== CPU and System Idle Control
-==== NUMA
-==== IPMI
-==== Device Configuration and Control
-==== Resources
-==== CXL
-==== Time and Alarm
-==== PCI and PCIe
 === CXL Requirements
 ==== CXL Host Bridge
 ==== CXL Root Device
 ===== ACPI Device Object for CXL Root Device
 ==== NUMA
-
+=== Firmware Implementation Guidance
+==== ACPI Implementation Guidance
