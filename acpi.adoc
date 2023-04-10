@@ -7,7 +7,7 @@ This section defines mandatory and optional ACPI requirements on top of the ACPI
 
 === ACPI High-Level Requirements
 
-A compliant platform must:
+A compliant system must:
 
 * Conform to UEFI specification requirements for ACPI:
 ** RISC-V Platforms (cite:[UEFI] Section 2.3.7)
@@ -28,7 +28,7 @@ ACPI support.
 
 ==== HW-Reduced ACPI Model
 
-Compliant RISC-V platforms only implement the HW-Reduced ACPI Model. This means the hardware portion of
+Compliant RISC-V systems only implement the HW-Reduced ACPI Model. This means the hardware portion of
 cite:[ACPI] (Section 4) is not required or supported. All functionality is instead provided through equivalent
 software-defined interfaces and the complexity in supporting ACPI is reduced.
 
@@ -44,7 +44,7 @@ The following additional BRS requirements apply:
 
 ==== Hart Performance Control
 
-If the platform provides support for OS-directed hart performance control, then it must be exposed using
+If the system provides support for OS-directed hart performance control, then it must be exposed using
 Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8).
 
 ==== Time and Alarm Device
@@ -64,7 +64,7 @@ through the driver-backed OperationRegion.
 
 This section lists additional BRS-specific requirements
 for the mandatory and conditionally-required ACPI tables in a compliant
-platform.
+system.
 
 This section does not list ACPI tables without additional BRS-imposed
 requirements.
@@ -77,7 +77,7 @@ syntax and semantics of the ACPI or other relevant firmware specification.
 Entry ordering can be correlated with initialization order by an OS, but
 should not be taken to reflect affinity in resource sharing,
 e.g. sockets, caches, etc. RINTC hart ID and ACPI Processor UID should
-not be decoded in a platform-specific manner to divine CPU topology.
+not be decoded in a system-specific manner to divine CPU topology.
 The PPTT Processor Properties Topology Table (PPTT) is to be used to
 describe affinities.
 
@@ -85,13 +85,13 @@ describe affinities.
 
 The Processor Properties Table (PPTT, cite:[ACPI] Section 5.2.29)
 describes the hart affinities and shared resources, such as caches.
-It is mandatory, even for platforms with a simple hart topology.
+It is mandatory, even for systems with a simple hart topology.
 
 ==== Conditionally Required ACPI Tables
 
 This section lists BRS-specific requirements for ACPI tables that depend
-on hardware features that may not be present in compliant platforms.
-For example, some platforms may not have PCIe busses or a serial port.
+on hardware features that may not be present in compliant systems.
+For example, some systems may not have PCIe busses or a serial port.
 
 ===== MCFG
 

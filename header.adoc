@@ -44,7 +44,7 @@ Aaron Durbin; Andrei Warkentin; OS-A SEE Task Group
 .This document is in the link:http://riscv.org/spec-state[Development state]
 ====
 Assume everything can change. This draft specification will change before 
-being accepted as standard, so implementations made to this draft 
+being accepted as standard, so systems made to this draft 
 specification will likely not conform to the future standard.
 ====
 
