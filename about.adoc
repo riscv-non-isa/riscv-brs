@@ -17,5 +17,6 @@
 | Profile         | RISC-V Profile cite:[Profile].
 | SBI             | RISC-V Supervisor Binary Interface Specification cite:[SBI].
 | SMBIOS          | System Management BIOS cite:[SMBIOS].
+| TAD             | Time and Alarm Device cite:[ACPI] Section 9.17.
 | UEFI            | Unified Extensible Firmware Interface Specification cite:[UEFI].
 |===
