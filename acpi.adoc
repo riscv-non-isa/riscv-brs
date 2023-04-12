@@ -3,7 +3,7 @@
 
 The Advanced Configuration and Power Interface specification provides the OS-centric view of system configuration, various hardware resources, events and power management.
 
-This section defines mandatory and optional ACPI requirements on top of the ACPI specification cite:[ACPI]. Additional non-normative guidance may be found in <<ACPI Implementation Guidance>>.
+This section defines mandatory and optional ACPI requirements on top of the ACPI specification cite:[ACPI]. Additional non-normative guidance may be found in the <<acpi-guidance, appendix>>.
 
 === ACPI High-Level Requirements
 
@@ -16,8 +16,8 @@ A compliant system must:
 ** Multiple APIC Description Table (MADT, cite:[ACPI] Section 5.2.12)
 ** RISC-V Hart Capabilities Table (RHCT, cite:[ACPI] Section 5.2.36)
 * Meet the requirements in <<Minimum Hardware Requirements Imposed By ACPI>>
-* Be 64-bits clean.
-** RSDT must not be implemented.
+* [[acpi-64bit-clean]]Be 64-bits clean.
+** RSDT must not be implemented, with RsdtAddress in RSDP be 0.
 ** 32-bit address fields must be 0.
 * Implement a firmware-first APEI model (cite:[ACPI] Section 18.4)
 
@@ -26,6 +26,7 @@ A compliant system must:
 This section lists the BRS-specific hardware requirements imposed by
 ACPI support.
 
+[[acpi-hw-reduced]]
 ==== HW-Reduced ACPI Model
 
 Compliant RISC-V systems only implement the HW-Reduced ACPI Model cite:[ACPI] (Section 4.1).
@@ -75,6 +76,7 @@ requirements.
 All ACPI tables not listed here may be used, if they comply with the
 syntax and semantics of the ACPI or other relevant firmware specification.
 
+[[acpi-madt]]
 ==== MADT
 
 Entry ordering can be correlated with initialization order by an OS, but
@@ -96,14 +98,15 @@ This section lists BRS-specific requirements for ACPI tables that depend
 on hardware features that may not be present in compliant systems.
 For example, some systems may not have PCIe busses or a serial port.
 
+[[acpi-mcfg]]
 ===== MCFG
 
-The PCI Memory-mapped Configuration Space (MCFG) table cite:[PCIFW] is
-required if PCIe is made available to the OS.
+The PCI Memory-mapped Configuration Space (MCFG) table cite:[PCIFW] must only be present if and only if cite:[PCIFW] compatible PCIe is made available to the OS.
 
 * PCIe configuration space must be exposed to the OS in an ECAM-compatible manner.
 * MCFG table must not require a custom vendor-specific PCIe root complex OS driver.
 
+[[acpi-spcr]]
 ===== SPCR
 
 The Serial Port Console Redirection Table cite:[SPCR] is required on
@@ -121,6 +124,7 @@ Additional requirements:
 Generic Address Structure).
 ** There must be a matching AML device object.
 
+[[acpi-aml]]
 === ACPI Methods and Objects
 
 This section lists additional BRS-specific requirements for ACPI

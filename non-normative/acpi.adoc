@@ -1,0 +1,103 @@
+ACPI information is structured as tables with the address of the root of these
+tables known as Root System Description Table (RSDP) passed to the OS
+via a EFI_ACPI_20_TABLE_GUID configuration table in the UEFI firmware.
+The Operating System uses this address to locate all other ACPI tables.
+
+Certain implementations may make use of the RISC-V Functional Fixed hardware Specification cite:[FFH].
+
+<<acpi-guidance-tab-min>> defines a minimum set of structures that must exist to support basic booting of RISC-V system with ACPI support. <<acpi-guidance-tab-opt>> lists additional possibile ACPI tables based on the optional features that can be supported. The latter is not meant to be exhaustive and mostly focuses on tables that
+have specific guidance or that expected to be frequently implemented.
+
+.*Minimum required ACPI System Description Tables*
+[[acpi-guidance-tab-min]]
+[cols="3,2,2", width=95%, align="center", options="header"]
+|===
+|ACPI Table                                    |ACPI Section|Note
+|Root System Description Pointer (RSDP)        |5.2.5      | See <<acpi-64bit-clean, high-level requirements>>.
+|Extended System Description Table (XSDT)      |5.2.8      | Contains pointers to other tables.
+|Fixed ACPI Description Table (FADT)           |5.2.9      | See <<acpi-hw-reduced>> and <<acpi-guidance-fadt, the notes below>>.
+|Differentiated System Description Table (DSDT)|5.2.11.1   | See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
+|Multiple APIC Description Table (MADT)        |5.2.12     | See <<acpi-madt>> and <<acpi-guidance-madt, the notes below>>
+|RISC-V Hart Capabilities Table (RHCT)         |New        | Communicates
+information about certain capabilities like ISA string, cache and MMU info.
+|Processor Properties Topology Table (PPTT)    |5.2.29     |CPU and Cache 
+                                                            topology
+                                                            information
+|===
+
+// Add RIMT for IOMMU here.
+
+.*Additional ACPI System Description Tables based on feature support.*
+[[acpi-guidance-tab-opt]]
+[cols="3,2,2", width=95%, align="center", options="header"]
+|===
+|ACPI Table                                    |ACPI Section  |Note
+|Memory-mapped Configuration space (MCFG)      |cite:[PCIFW]  |See <<acpi-guidance-pcie, the notes below>>
+| Secondary System Description Table (SSDT)    |5.2.11.2      |See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
+|Serial Port Console Redirection (SPCR)        |cite:[SPCR]   |See <<acpi-spcr>> and <<acpi-guidance-spcr, the notes below>>
+|System Resource Affinity Table (SRAT)         |5.2.16        |If the platform supports NUMA
+|System Locality Information Table (SLIT)      |5.2.17        |If the platform supports NUMA
+|Boot Error Record Table (BERT)                |18.3.1        |If ACPI RAS is supported
+|Error Injection Table (EINJ)                  |18.6.1        |If ACPI RAS is supported
+|Error Record Serialization Table (ERST)       |18.5          |If ACPI RAS is supported
+|Hardware Error Source Table (HEST)            |18.3.2        |If ACPI RAS is supported
+|===
+
+[[acpi-guidance-aml]]
+===== DSDT and SSDTs
+
+The ACPI name space describes devices which cannot be enumerated by any other standard ways. These typically include SoC embedded memory-mapped I/O devices, such as UARTs, <<acpi-guidance-pcie, PCIe>> or CXL root complexes, GPIO controllers, etc.
+
+It's an implementation choice if the ACPI name space is defined solely with a DSDT or with any additional SSDTs. For example, a UEFI implementation
+may choose to use SSDTs to:
+
+* describe devices that vary across SoC SKUs, revisions or variants.
+* describe devices, where the backing AML is generated or patched at boot time.
+
+// Provide guidance here for converting existing device tree node definitions to ACPI.
+
+// Provide guidance here for describing NS16550-compatible UARTs.
+
+[[acpi-guidance-fadt]]
+===== FADT
+
+cite:[ACPI] (Section 5.2.9) provides guidance on filling the
+Fixed ACPI Description Table for HW-reduced ACPI.
+
+Don't forget to select an appropriate Preferred PM Profile.
+
+[[acpi-guidance-madt]]
+===== MADT
+
+RINTC (per-hart) structures are mandatory. Depending on the interrupt controller implemented by the system, the MADT will also contain either PLIC or IMSIC/APLIC structures.
+
+[[acpi-guidance-pcie]]
+===== PCIe
+
+On some architectures, it became an industry accepted norm to describe PCIe implementations not compliant to the PCI Firmware Specification cite:[PCIFW]
+using specification-defined ACPI tables and objects. RISC-V systems compliant to the BRS must only expose ECAM-compatible implementations using the
+MCFG and the standard AML Hardware ID (HID) PNP0A08 and Compatible ID (CID) PNP0A03, and must not rely on ACPI table header information or other out-of-band
+means of detecting quirked behavior.
+
+Some minor incompatibilities, such as split PCIe configuration spaces or incorrect CFG0 filtering, can be handled by emulating ECAM accesses in privileged firmware
+(e.g. M-mode) or similar facilities (e.g. a hypervisor).
+
+Non-compliant implementations must be exposed using vendor-specific mechanisms (e.g. AML object with custom HID, custom vendor-specific ACPI table if necessary).
+In cases where such PCIe implementations are only used to expose a fixed non-removable device (e.g. USB host controller or NVMe), the device could be exposed via
+a DSDT/SSDT MMIO device object without making the OS aware of the underlying PCIe connection.
+
+// Provide guidance here on AML object used, including interrupt routing, why I/O space is not included.
+
+[[acpi-guidance-spcr]]
+===== SPCR
+
+Early serial console can be implemented using either an NS16550 UART (SPCR Interface Type 0x12) or
+SBI console (SPCR Interface Type 0x15). When SPCR describes SBI console, the OS must use
+the SBI Probe extension (FID #3) to detect the appropriate facilities, e.g. the Debug Console Extension
+(DBCN) or the deprecated legacy console EIDs.
+
+The new Precise Baud Rate field, introduced in cite:[SPCR] rev. 4, allows describing rates faster
+than 115200 baud for NS16550-compatible UARTS.
+
+Hardware not capable of interrupt-driven operation and SBI console should be described with
+Interrupt Type 0 and Global System Interrupt 0.

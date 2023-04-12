@@ -17,6 +17,7 @@
 | Profile         | RISC-V Profile cite:[Profile].
 | SBI             | RISC-V Supervisor Binary Interface Specification cite:[SBI].
 | SMBIOS          | System Management BIOS cite:[SMBIOS].
+| SoC             | System on a chip, a combination of processor and supporting chipset logic in single package.
 | System          | A system is the entirety of a computing entity, including all elements in a platform (hardware, firmware) and software (hypervisor, operating system, user applications, user data). A system can be thought of both as a logical construct (e.g. a software stack) or physical construct (e.g. a notebook, a desktop, a server, a network switch, etc).
 | TAD             | Time and Alarm Device cite:[ACPI] Section 9.17.
 | UEFI            | Unified Extensible Firmware Interface Specification cite:[UEFI].
