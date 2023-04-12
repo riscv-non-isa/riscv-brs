@@ -44,8 +44,9 @@ The following additional BRS requirements apply:
 
 ==== Hart Performance Control
 
-If the system provides support for OS-directed hart performance control, then it must be exposed using
-Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8).
+If the platform provides support for OS-directed hart performance control and power management,
+then it must be exposed using Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8.4.6).
+Processor idle states must be described using Low Power Idle (LPI, cite:[ACPI] Section 8.4.3).
 
 ==== Time and Alarm Device
 
