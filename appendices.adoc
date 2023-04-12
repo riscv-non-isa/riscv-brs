@@ -32,4 +32,18 @@
 ===== ACPI Device Object for CXL Root Device
 ==== NUMA
 === Firmware Implementation Guidance
+
+The guidance section is non-normative, and covers certain
+implementation choices, suggestions, historical context, etc.
+
 ==== ACPI Implementation Guidance
+
+Certain implementations may make use of the RISC-V Functional Fixed hardware Specification cite:[FFH].
+
+===== FADT
+
+cite:[ACPI] (Section 5.2.9) provides guidance on filling the
+Fixed ACPI Description Table for HW-reduced ACPI.
+
+Don't forget to select an appropriate Preferred PM Profile.
+
