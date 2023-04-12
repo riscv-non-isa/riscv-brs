@@ -1,8 +1,14 @@
 == Contributors
 
-This RISC-V specification has been contributed to directly or indirectly by:
+This RISC-V specification has been contributed to directly or indirectly by (in alphabetical order):
 
 [%hardbreaks]
 * Aaron Durbin <adurbin@rivosinc.com>
+* Andrew Jones <ajones@ventanamicro.com>
+* Jared McNeill <jmcneill@vmware.com>
+* Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+* Sunil V L <sunilvl@ventanamicro.com>
+* Paul Walmsley <paul.walmsley@sifive.com>
 * Andrei Evgenievich Warkentin <andrei.warkentin@intel.com>
 
+We express our gratitude to everyone that contributed to, reviewed, or improved the document through their comments and questions.

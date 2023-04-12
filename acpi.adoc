@@ -1,26 +1,144 @@
 [[acpi]]
 == ACPI Requirements
-=== ACPI Version
-=== ACPI-provided Data Structures
-=== ACPI Tables
-==== Mandatory ACPI Tables
-===== RSDP
-===== XSDT
-===== FADT
-===== DSDT and SSDT
-===== MADT
-===== RHCT
-===== SPCR
-===== MCFG
-===== PPTT
-==== Recommended ACPI Tables
-==== Optional ACPI Tables
-=== ACPI Definition Blocks
-=== ACPI Methods and Objects
-==== Global Methods and Objects
-==== Device Methods and Objects
-==== Event Signaling
-==== Address Translation Support
-=== Hardware Requirements Imposed by ACPI
-==== Processor Performance Control
+
+The Advanced Configuration and Power Interface specification provides the OS-centric view of system configuration, various hardware resources, events and power management.
+
+This section defines mandatory and optional ACPI requirements on top of the ACPI specification cite:[ACPI]. Additional non-normative guidance may be found in <<ACPI Implementation Guidance>>.
+
+=== ACPI High-Level Requirements
+
+A compliant system must:
+
+* Conform to UEFI specification requirements for ACPI:
+** RISC-V Platforms (cite:[UEFI] Section 2.3.7)
+** Industry Standard Configuration Tables (cite:[UEFI] Section 4.6.1.1)
+* Conform to version 6.6 of the ACPI specification, including RISC-V requirements listed in:
+** Multiple APIC Description Table (MADT, cite:[ACPI] Section 5.2.12)
+** RISC-V Hart Capabilities Table (RHCT, cite:[ACPI] Section 5.2.36)
+* Meet the requirements in <<Minimum Hardware Requirements Imposed By ACPI>>
+* Be 64-bits clean.
+** RSDT must not be implemented.
+** 32-bit address fields must be 0.
+* Implement a firmware-first APEI model (cite:[ACPI] Section 18.4)
+
+=== ACPI-specific Hardware Requirements
+
+This section lists the BRS-specific hardware requirements imposed by
+ACPI support.
+
+==== HW-Reduced ACPI Model
+
+Compliant RISC-V systems only implement the HW-Reduced ACPI Model cite:[ACPI] (Section 4.1).
+This means the hardware portion of cite:[ACPI] (Section 4) is not required or
+supported. All functionality is instead provided through equivalent
+software-defined interfaces and the complexity in supporting ACPI is reduced.
+
+The following additional BRS requirements apply:
+
+* No FACS table.
+* Both interrupt-signaled and GPIO-signaled ACPI Events are supported
+  (cite:[ACPI] Section 5.6)
+* There is at least 1 wake event.
+** Note: for systems that do not support Sx states except S5 soft off, this can be just the power button.
+* For the ACPI Platform Error Interfaces (APEI) support:
+** There is 1 event for non-fatal error signaling (cite:[ACPI] Section 18.3.2.7.2)
+** There is 1 NMI-equivalent signal for use in fatal errors (cite:[ACPI] Section 18)
+
+==== Hart Performance Control
+
+If the platform provides support for OS-directed hart performance control and power management,
+then it must be exposed using Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8.4.6).
+Processor idle states must be described using Low Power Idle (LPI, cite:[ACPI] Section 8.4.3).
+
 ==== Time and Alarm Device
+
+UEFI Runtime Service should be used to provide time services to the
+OS, unless the RTC is subject to arbitration issues between concurrent
+OS and UEFI accesses to the underlying hardware. See <<<UEFI Real-Time
+Clock>>>.
+
+In situations where the Time and Alarm Device (TAD) depends on a
+vendor-specific OS driver for correct function (SPI, I2C, etc), the TAD must
+be functional if the OS driver is not loaded. That is, when a dependent
+driver is loaded, an AML method switches further accesses to go
+through the driver-backed OperationRegion.
+
+=== Additional ACPI Table Requirements
+
+This section lists additional BRS-specific requirements
+for the mandatory and conditionally-required ACPI tables in a compliant
+system.
+
+This section does not list ACPI tables without additional BRS-imposed
+requirements.
+
+All ACPI tables not listed here may be used, if they comply with the
+syntax and semantics of the ACPI or other relevant firmware specification.
+
+==== MADT
+
+Entry ordering can be correlated with initialization order by an OS, but
+should not be taken to reflect affinity in resource sharing,
+e.g. sockets, caches, etc. RINTC hart ID and ACPI Processor UID should
+not be decoded in a system-specific manner to divine CPU topology.
+The PPTT Processor Properties Topology Table (PPTT) is to be used to
+describe affinities.
+
+==== PPTT
+
+The Processor Properties Table (PPTT, cite:[ACPI] Section 5.2.29)
+describes the hart affinities and shared resources, such as caches.
+It is mandatory, even for systems with a simple hart topology.
+
+==== Conditionally Required ACPI Tables
+
+This section lists BRS-specific requirements for ACPI tables that depend
+on hardware features that may not be present in compliant systems.
+For example, some systems may not have PCIe busses or a serial port.
+
+===== MCFG
+
+The PCI Memory-mapped Configuration Space (MCFG) table cite:[PCIFW] is
+required if PCIe is made available to the OS.
+
+* PCIe configuration space must be exposed to the OS in an ECAM-compatible manner.
+* MCFG table must not require a custom vendor-specific PCIe root complex OS driver.
+
+===== SPCR
+
+The Serial Port Console Redirection Table cite:[SPCR] is required on
+systems where the graphics hardware is not present or not made
+available to an OS loader via the standard UEFI
+EFI_GRAPHICS_OUTPUT_PROTOCOL interface. In these cases, the table
+provides essential configuration for an early OS boot console.
+
+Additional requirements:
+
+// Version 4 is WIP https://github.com/andreiw/ms-acpi-tables-for-riscv/tree/riscv_plus_improvements
+* Revision 4 or later of SPCR.
+* For NS16550-compatible UARTs:
+** Use Interface Type 0x12 (16550-compatible with parameters defined in
+Generic Address Structure).
+** There must be a matching AML device object.
+
+=== ACPI Methods and Objects
+
+This section lists additional BRS-specific requirements for ACPI
+methods and objects.
+
+==== Global Methods and Objects
+
+Harts must be defined under \_SB (System Bus) namespace and not in the deprecated \_PR (Processors) namespace.
+
+==== Device Methods and Objects
+
+* _CCA: Cache Coherency Attribute. This object provides information
+  about whether a device has to manage cache coherency and about
+  hardware support. This object is mandatory for all devices that
+  can access CPU-visible memory. (cite:[ACPI] Section 6.2.17)
+* _PRS: Possible Resource Settings. Not supported.
+* _SRS: Set Resource Settings. Not supported.
+* _CRS: Current Resource Settings
+** PCIe Root Complex descriptors must not contain resources of type DWordIO, QWordIO or ExtendedIO as the legacy PCI I/O port space is not supported.
+
+
