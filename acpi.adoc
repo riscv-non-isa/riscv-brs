@@ -28,12 +28,14 @@ ACPI support.
 
 ==== HW-Reduced ACPI Model
 
-Compliant RISC-V systems only implement the HW-Reduced ACPI Model. This means the hardware portion of
-cite:[ACPI] (Section 4) is not required or supported. All functionality is instead provided through equivalent
+Compliant RISC-V systems only implement the HW-Reduced ACPI Model cite:[ACPI] (Section 4.1).
+This means the hardware portion of cite:[ACPI] (Section 4) is not required or
+supported. All functionality is instead provided through equivalent
 software-defined interfaces and the complexity in supporting ACPI is reduced.
 
 The following additional BRS requirements apply:
 
+* No FACS table.
 * Both interrupt-signaled and GPIO-signaled ACPI Events are supported
   (cite:[ACPI] Section 5.6)
 * There is at least 1 wake event.
