@@ -17,8 +17,9 @@ A compliant system must:
 ** RISC-V Hart Capabilities Table (RHCT, cite:[ACPI] Section 5.2.36)
 * Meet the requirements in <<Minimum Hardware Requirements Imposed By ACPI>>
 * [[acpi-64bit-clean]]Be 64-bits clean.
-** RSDT must not be implemented, with RsdtAddress in RSDP be 0.
+** RSDT must not be implemented, with RsdtAddress in RSDP set to 0.
 ** 32-bit address fields must be 0.
+** <<acpi-guidance-64bit-clean, See additional guidance>>.
 * Implement a firmware-first APEI model (cite:[ACPI] Section 18.4)
 
 === ACPI-specific Hardware Requirements

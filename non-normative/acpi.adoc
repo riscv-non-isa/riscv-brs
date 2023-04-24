@@ -3,6 +3,15 @@ tables known as Root System Description Table (RSDP) passed to the OS
 via a EFI_ACPI_20_TABLE_GUID configuration table in the UEFI firmware.
 The Operating System uses this address to locate all other ACPI tables.
 
+[[acpi-guidance-64bit-clean]] ACPI started as a specification for 32-bit systems,
+so certain tables with physical address pointers (e.g. RSDP, FADT) allow for reporting
+either 32-bit or 64-bit values using different fields. For the sake of simplicity
+and consistency, the BRS disallows the use 32-bit address fields in such structures
+and disallows the use of 32-bit only structures (thus, RSDP must not be implemented,
+as the XSDT is a direct replacement). Thus, the ACPI tables are allowed to be
+located in any part of the physical address space.
+
+
 Certain implementations may make use of the RISC-V Functional Fixed hardware Specification cite:[FFH].
 
 <<acpi-guidance-tab-min>> defines a minimum set of structures that must exist to support basic booting of RISC-V system with ACPI support. <<acpi-guidance-tab-opt>> lists additional possibile ACPI tables based on the optional features that can be supported. The latter is not meant to be exhaustive and mostly focuses on tables that
