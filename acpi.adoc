@@ -87,6 +87,8 @@ not be decoded in a system-specific manner to divine CPU topology.
 The PPTT Processor Properties Topology Table (PPTT) is to be used to
 describe affinities.
 
+<<acpi-guidance-madt, See additional guidance>>.
+
 ==== PPTT
 
 The Processor Properties Table (PPTT, cite:[ACPI] Section 5.2.29)
@@ -102,10 +104,16 @@ For example, some systems may not have PCIe busses or a serial port.
 [[acpi-mcfg]]
 ===== MCFG
 
-The PCI Memory-mapped Configuration Space (MCFG) table cite:[PCIFW] must only be present if and only if cite:[PCIFW] compatible PCIe is made available to the OS.
+The PCI Memory-mapped Configuration Space (MCFG) table cite:[PCIFW] must only be present
+if and only if cite:[PCIFW] compatible non-hot-removable PCIe segments are made available
+to the OS.
 
 * PCIe configuration space must be exposed to the OS in an ECAM-compatible manner.
 * MCFG table must not require a custom vendor-specific PCIe root complex OS driver.
+
+Please see PCI Services in ACPI (cite:[ACPI], Section 4) for more ACPI requirements relating to PCIe support.
+
+<<acpi-guidance-pcie, See additional guidance>>.
 
 [[acpi-spcr]]
 ===== SPCR
@@ -125,11 +133,15 @@ Additional requirements:
 Generic Address Structure).
 ** There must be a matching AML device object.
 
+<<acpi-guidance-spcr, See additional guidance>>.
+
 [[acpi-aml]]
 === ACPI Methods and Objects
 
 This section lists additional BRS-specific requirements for ACPI
 methods and objects.
+
+<<acpi-guidance-aml, See additional guidance>>.
 
 ==== Global Methods and Objects
 
@@ -143,6 +155,9 @@ Harts must be defined under \_SB (System Bus) namespace and not in the deprecate
   can access CPU-visible memory. (cite:[ACPI] Section 6.2.17)
 * _PRS: Possible Resource Settings. Not supported.
 * _SRS: Set Resource Settings. Not supported.
+
+===== PCIe Root Complex Devices
+
 * _CRS: Current Resource Settings
 ** PCIe Root Complex descriptors must not contain resources of type DWordIO, QWordIO or ExtendedIO as the legacy PCI I/O port space is not supported.
 

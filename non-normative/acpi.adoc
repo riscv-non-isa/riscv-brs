@@ -11,7 +11,6 @@ and disallows the use of 32-bit only structures (thus, RSDP must not be implemen
 as the XSDT is a direct replacement). Thus, the ACPI tables are allowed to be
 located in any part of the physical address space.
 
-
 Certain implementations may make use of the RISC-V Functional Fixed hardware Specification cite:[FFH].
 
 <<acpi-guidance-tab-min>> defines a minimum set of structures that must exist to support basic booting of RISC-V system with ACPI support. <<acpi-guidance-tab-opt>> lists additional possibile ACPI tables based on the optional features that can be supported. The latter is not meant to be exhaustive and mostly focuses on tables that
@@ -67,6 +66,8 @@ may choose to use SSDTs to:
 
 // Provide guidance here for describing NS16550-compatible UARTs.
 
+// Provide guidance here for PCIe RCs, perhaps leverage some of https://www.infradead.org/~mchehab/rst_conversion/PCI/acpi-info.html
+
 [[acpi-guidance-fadt]]
 ===== FADT
 
@@ -88,8 +89,8 @@ using specification-defined ACPI tables and objects. RISC-V systems compliant to
 MCFG and the standard AML Hardware ID (HID) PNP0A08 and Compatible ID (CID) PNP0A03, and must not rely on ACPI table header information or other out-of-band
 means of detecting quirked behavior.
 
-Some minor incompatibilities, such as split PCIe configuration spaces or incorrect CFG0 filtering, can be handled by emulating ECAM accesses in privileged firmware
-(e.g. M-mode) or similar facilities (e.g. a hypervisor).
+Some minor incompatibilities, such as incorrect CFG0 filtering, broken BARs/capabilities for RCs, embedded switches/bridges
+or embedded endpoints can be handled by emulating ECAM accesses in privileged firmware (e.g. M-mode) or similar facilities (e.g. a hypervisor).
 
 Non-compliant implementations must be exposed using vendor-specific mechanisms (e.g. AML object with custom HID, custom vendor-specific ACPI table if necessary).
 In cases where such PCIe implementations are only used to expose a fixed non-removable device (e.g. USB host controller or NVMe), the device could be exposed via
