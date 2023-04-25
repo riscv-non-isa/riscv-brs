@@ -3,7 +3,7 @@
 
 The Advanced Configuration and Power Interface specification provides the OS-centric view of system configuration, various hardware resources, events and power management.
 
-This section defines mandatory and optional ACPI requirements on top of the ACPI specification cite:[ACPI]. Additional non-normative guidance may be found in <<ACPI Implementation Guidance>>.
+This section defines mandatory and optional ACPI requirements on top of the ACPI specification cite:[ACPI]. Additional non-normative guidance may be found in the <<acpi-guidance, appendix>>.
 
 === ACPI High-Level Requirements
 
@@ -16,9 +16,10 @@ A compliant system must:
 ** Multiple APIC Description Table (MADT, cite:[ACPI] Section 5.2.12)
 ** RISC-V Hart Capabilities Table (RHCT, cite:[ACPI] Section 5.2.36)
 * Meet the requirements in <<Minimum Hardware Requirements Imposed By ACPI>>
-* Be 64-bits clean.
-** RSDT must not be implemented.
+* [[acpi-64bit-clean]]Be 64-bits clean.
+** RSDT must not be implemented, with RsdtAddress in RSDP set to 0.
 ** 32-bit address fields must be 0.
+** <<acpi-guidance-64bit-clean, See additional guidance>>.
 * Implement a firmware-first APEI model (cite:[ACPI] Section 18.4)
 
 === ACPI-specific Hardware Requirements
@@ -26,6 +27,7 @@ A compliant system must:
 This section lists the BRS-specific hardware requirements imposed by
 ACPI support.
 
+[[acpi-hw-reduced]]
 ==== HW-Reduced ACPI Model
 
 Compliant RISC-V systems only implement the HW-Reduced ACPI Model cite:[ACPI] (Section 4.1).
@@ -75,6 +77,7 @@ requirements.
 All ACPI tables not listed here may be used, if they comply with the
 syntax and semantics of the ACPI or other relevant firmware specification.
 
+[[acpi-madt]]
 ==== MADT
 
 Entry ordering can be correlated with initialization order by an OS, but
@@ -83,6 +86,8 @@ e.g. sockets, caches, etc. RINTC hart ID and ACPI Processor UID should
 not be decoded in a system-specific manner to divine CPU topology.
 The PPTT Processor Properties Topology Table (PPTT) is to be used to
 describe affinities.
+
+<<acpi-guidance-madt, See additional guidance>>.
 
 ==== PPTT
 
@@ -96,14 +101,21 @@ This section lists BRS-specific requirements for ACPI tables that depend
 on hardware features that may not be present in compliant systems.
 For example, some systems may not have PCIe busses or a serial port.
 
+[[acpi-mcfg]]
 ===== MCFG
 
-The PCI Memory-mapped Configuration Space (MCFG) table cite:[PCIFW] is
-required if PCIe is made available to the OS.
+The PCI Memory-mapped Configuration Space (MCFG) table cite:[PCIFW] must only be present
+if and only if cite:[PCIFW] compatible non-hot-removable PCIe segments are made available
+to the OS.
 
 * PCIe configuration space must be exposed to the OS in an ECAM-compatible manner.
 * MCFG table must not require a custom vendor-specific PCIe root complex OS driver.
 
+Please see PCI Services in ACPI (cite:[ACPI], Section 4) for more ACPI requirements relating to PCIe support.
+
+<<acpi-guidance-pcie, See additional guidance>>.
+
+[[acpi-spcr]]
 ===== SPCR
 
 The Serial Port Console Redirection Table cite:[SPCR] is required on
@@ -121,10 +133,15 @@ Additional requirements:
 Generic Address Structure).
 ** There must be a matching AML device object.
 
+<<acpi-guidance-spcr, See additional guidance>>.
+
+[[acpi-aml]]
 === ACPI Methods and Objects
 
 This section lists additional BRS-specific requirements for ACPI
 methods and objects.
+
+<<acpi-guidance-aml, See additional guidance>>.
 
 ==== Global Methods and Objects
 
@@ -138,6 +155,9 @@ Harts must be defined under \_SB (System Bus) namespace and not in the deprecate
   can access CPU-visible memory. (cite:[ACPI] Section 6.2.17)
 * _PRS: Possible Resource Settings. Not supported.
 * _SRS: Set Resource Settings. Not supported.
+
+===== PCIe Root Complex Devices
+
 * _CRS: Current Resource Settings
 ** PCIe Root Complex descriptors must not contain resources of type DWordIO, QWordIO or ExtendedIO as the legacy PCI I/O port space is not supported.
 
