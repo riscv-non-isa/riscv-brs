@@ -1,6 +1,21 @@
 [[recipes]]
 == Recipes
+
+In this context, a recipe is a collection of firmware specification
+requirements that hardware, firmware, and software providers can
+implement to increase the likelihood that software written to the
+recipe will run predictably on all conforming devices.
+
+The BRS specification defines two recipes: BRS-I (for "Interoperable")
+and BRS-B (for "Bespoke").
+
 === BRS-I Recipe
+
+To simplify software testing and distribution, many operating system
+providers wish to build a single ACPI-based operating system image
+that can be booted and run on platforms supporting a common
+specification base.  The BRS-I recipe documents a standard runtime
+firmware interface to facilitate this.
 
 .BRS-I Recipe Overview
 [width=90%]
@@ -11,6 +26,14 @@
 |===
 
 === BRS-B Recipe
+
+BRS-B is intended for cases where only a minimal level of firmware
+interaction is mandated, focusing primarily on the boot process.  The
+BRS-B recipe is the simpler of the two BRS recipes.  It is expected to
+be used by software that is tailored to specific devices.  Examples
+include many types of mobile devices, devices with real time response
+requirements, or embedded devices running rich operating systems with
+custom distributions.
 
 .BRS-B Recipe Overview
 [width=90%]
