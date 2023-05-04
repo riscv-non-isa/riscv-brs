@@ -11,11 +11,35 @@ and BRS-B (for "Bespoke").
 
 === BRS-I Recipe
 
-To simplify software testing and distribution, many operating system
-providers wish to build a single ACPI-based operating system image
-that can be booted and run on platforms supporting a common
-specification base.  The BRS-I recipe documents a standard runtime
-firmware interface to facilitate this.
+The BRS-I recipe aims to simplify end-user experiences, software
+compatibility and OS distribution, by definining a common specification
+for boot and runtime interfaces. BRS-I is expected to be used by
+general-purpose compute devices such as servers, desktops, laptops and
+other devices with industry expectations on silicon vendor, OS and software
+ecosystem interoperatbility. BRS-I enables operating system
+providers to build a single *generic* operating system image that can be
+*successfully booted* on compliant systems. *Generic* means not requiring
+system-specific customizations - only an implementation of BRS-I
+requirements. *Successfully boot* means basic system configuration,
+sufficient for detecting the need for system-specific drivers and
+loading such drivers.
+
+It is understood that systems will deliver features beyond those covered
+by BRS-I. However, software written against a specific version of BRS-I
+must run, unaltered, without *anomalous and unexpected behavior* on
+systems that include such features and that are compliant to that specific
+version of BRS-I. Such behavior, caused by factors entirely unknown to
+a generic OS, is hard to diagnose and always results in a terrible user
+experience that negatively affects the value of the whole RISC-V
+standards-based ecosystem. *Anomalous and unexpected behavior* is taken
+to mean system instability and worst-case behavior for non-specialized
+workloads, but does not include suboptimal/unoptimized behavior or
+missing I/O or accelerator drivers.
+
+A key tenet of BRS-I is constraining behavior outside the scope of BRS-I.
+Features violating the principle of least surprise and causing anomalous and
+unexpected behavior in a generic OS must be configured by firmware as opt-in.
+<<recipe-brs-i-guidance, See additional guidance>>.
 
 .BRS-I Recipe Overview
 [width=90%]
