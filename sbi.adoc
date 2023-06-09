@@ -1,3 +1,37 @@
 [[sbi]]
 == SBI Requirements
 
+The supervisor binary interface (SBI) cite: [SBI] specification defines the interface
+between the supervisor mode and the next higher privilege mode. This section
+defines the mandatory SBI version and extensions implemented by the higher
+privilege mode in order to be compatible with this specification.
+
+=== Minimum SBI version
+The SBI implementation must conform to SBI v1.0. 
+
+=== Mandatory SBI extensions
+
+The SBI v1.0 specification allows optional SBI extensions. However, the
+following optional extensions are mandatory for a compliant system. 
+
+* SBI Hart State Management (HSM)
+
+* SBI System Reset (SRST)
+* SBI System Suspend (SUSP)
+** The supervisor operating system should preferably use UEFI interfaces for system
+   reset/suspend instead of invoking System Reset/Suspend SBI extensions directly.
+
+* SBI Performance Monitoring (PMU)
+
+In addition to this, the following SBI extensions are only mandatory if required
+ISA extension is not available in the platform. 
+
+* SBI TIME 
+** This extension is mandatory only if SSTC ISA extension is not available.
+* SBI IPI
+** This extension is mandatory only if the platform doesn't implement 
+   Incomning MSI Controller (IMSIC).
+* SBI RFENCE 
+** This extension is mandatory only if the platform doesn't implement
+   Incomning MSI Controller (IMSIC).
+
