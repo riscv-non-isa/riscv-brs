@@ -42,11 +42,11 @@ unexpected behavior in a generic OS must be configured by firmware as opt-in.
 <<recipe-brs-i-guidance, See additional guidance>>.
 
 .BRS-I Recipe Overview
-[width=90%]
-[%header, cols="20,10,10,10,10,10"]
+[width=100%]
+[%header, cols="10,10,10,10,10,10"]
 |===
-| Minimum Profile        ^| UEFI | ACPI | DT | SBI | SMBIOS
-| RVA20 | >= 2.10 | >= 6.5 | N/A | >= 1.0 | >= 3.6.0
+| Profile | UEFI | ACPI | DT | SBI | SMBIOS
+| >= RVA20 | >= 2.10 | >= 6.6 | N/A | >= 2.0 | >= 3.6.0
 |===
 
 === BRS-B Recipe
@@ -60,9 +60,9 @@ requirements, or embedded devices running rich operating systems with
 custom distributions.
 
 .BRS-B Recipe Overview
-[width=90%]
-[%header, cols="20,10,10,10,10,10"]
+[width=100%]
+[%header, cols="10,10,20,20,10,20"]
 |===
-| Minimum Profile        ^| UEFI | ACPI | DT | SBI | SMBIOS
-| RVA20 | EBBR cite:[EBBR] | optional | optional | >= 1.0 | >= 3.6.0
+| Profile | UEFI | ACPI | DT | SBI | SMBIOS
+| >= RVA20 | EBBR cite:[EBBR] | optional, >= 6.6 | optional, >= v0.3 | >= 2.0 | optional, >= 3.6.0
 |===
