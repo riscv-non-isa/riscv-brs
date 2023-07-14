@@ -16,7 +16,7 @@ compatibility and OS distribution, by definining a common specification
 for boot and runtime interfaces. BRS-I is expected to be used by
 general-purpose compute devices such as servers, desktops, laptops and
 other devices with industry expectations on silicon vendor, OS and software
-ecosystem interoperatbility. BRS-I enables operating system
+ecosystem interoperability. BRS-I enables operating system
 providers to build a single *generic* operating system image that can be
 *successfully booted* on compliant systems. *Generic* means not requiring
 system-specific customizations - only an implementation of BRS-I
