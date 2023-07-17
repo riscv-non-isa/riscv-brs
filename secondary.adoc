@@ -1,3 +1,5 @@
 [[secondary]]
 == Secondary Core Boot
-
+The secondary cores must boot in an ordered fashion using SBI HSM extension. The
+primary booting hart must bring all the secondary non-booting harts online by
+invoking sbi_hsm_hart_start one by one.
