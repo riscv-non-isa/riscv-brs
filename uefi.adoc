@@ -2,6 +2,18 @@
 == UEFI Requirements
 === UEFI Version
 === UEFI Compliance
+=== UEFI Platform Initialization
+The RISC-V Boot and Runtime Services Specification does not require following
+the UEFI Platform Initialization Specification cite:[UEFI-PI].
+
+Implementing the following elements is recommended:
+
+* Security Architectural Protocol (EFI_SECURITY_ARCH_PROTOCOL)
+* Security2 Architectural Protocol (EFI_SECURITY2_ARCH_PROTOCOL)footnote:[The
+Security and Security2 Architectural Protocols are overridden by some
+bootloaders (e.g. systemd-boot) to validate EFI binaries that cannot be
+validated against the UEFI security database.]
+
 === UEFI System Environment and Configuration
 ==== Privilege Levels
 ===== UEFI Boot in HS-Mode
