@@ -23,4 +23,12 @@
 ==== Real-Time Clock (RTC)
 ==== UEFI Reset and Shutdown
 ==== Variable Services
+=== UEFI Protocols
+==== EFI TPM2 Protocol
+The EFI TPM2 Protocol (EFI_TCG2_PROTOCOL) let's an UEFI software communicate
+with a TPM v2 implementation.
+
+If a system provides a TPM v2, the firmware should implement the
+EFI TPM2 Protocol (EFI_TCG2_PROTOCOL) cite:[TcgEfiProt].
+
 === Firmware Update
