@@ -11,7 +11,7 @@ It is expected that the Boot and Runtime Services specification will periodicall
 
 === Approach to Solutions
 
-The Boot and Runtime Services specification focuses on two solutions in the form of what is deemed a recipe. Each recipe contains the requirements needed to fulfill each solution. The requirements of each recipe will be marked accordingly with an unique identifer. The recipe names are named BRS-I and BRS-B, Interoperable and Bespoke, repsectively.
+The Boot and Runtime Services specification focuses on two solutions in the form of what is deemed a recipe. Each recipe contains the requirements needed to fulfill each solution. The requirements of each recipe will be marked accordingly with an unique identifer. The recipe names are named BRS-I and BRS-B, Interoperable and Bespoke, respectively.
 
 === Testing and Conformance
 
