@@ -12,7 +12,7 @@ and BRS-B (for "Bespoke").
 === BRS-I Recipe
 
 The BRS-I recipe aims to simplify end-user experiences, software
-compatibility and OS distribution, by definining a common specification
+compatibility and OS distribution, by defining a common specification
 for boot and runtime interfaces. BRS-I is expected to be used by
 general-purpose compute devices such as servers, desktops, laptops and
 other devices with industry expectations on silicon vendor, OS and software
