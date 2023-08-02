@@ -30,8 +30,8 @@ ISA extension is not available in the platform.
 ** This extension is mandatory only if SSTC ISA extension is not available.
 * SBI IPI
 ** This extension is mandatory only if the platform doesn't implement 
-   Incomning MSI Controller (IMSIC).
+   Incoming MSI Controller (IMSIC).
 * SBI RFENCE 
 ** This extension is mandatory only if the platform doesn't implement
-   Incomning MSI Controller (IMSIC).
+   Incoming MSI Controller (IMSIC).
 

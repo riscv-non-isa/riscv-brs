@@ -4,7 +4,7 @@
 ==== SMBIOS Requirements on UEFI
 === SMBIOS Structures
 ==== Type 00: BIOS Information (Required)
-==== Type 01: System Informatio (Required)
+==== Type 01: System Information (Required)
 ==== Type 02: Baseboard/Module Information (Recommended)
 ==== Type 03: System Enclosure/Chassis (Recommended)
 ==== Type 04: Processor Information (Required)
