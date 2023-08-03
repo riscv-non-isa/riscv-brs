@@ -1,10 +1,8 @@
-= RISC-V docs-spec-template
+= RISC-V Boot and Runtime Services (BRS) Specification
 
-This repository is used to prime GitHub repos for the RISC-V organization which will be used 
-to create specifications.  
+The Boot and Runtime Services (BRS) specification provides the software requirements for system vendors and Operating System Vendors (OSVs) to interoperate with one another by providing expectations for the Operating System (OS) to utilize in acts of device discovery, system management, and other rich operations provided in this specification.
 
-**If you are reading this in a specification repo, please update the title for this section and 
-provide your introduction to your repository.**
+This specification is still a work in progress, based on an earlier draft available at https://docs.google.com/document/d/1X0TSbheEJjRGWhG2nzUnfIl_QcHWSuvd
 
 = License
 
