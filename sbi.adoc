@@ -17,9 +17,9 @@ following optional extensions are mandatory for a compliant system.
 * SBI Hart State Management (HSM)
 
 * SBI System Reset (SRST)
+** See <<uefi-resetsystem>> for additional notes on SRST use by a UEFI implementation and by an OS.
+
 * SBI System Suspend (SUSP)
-** The supervisor operating system should preferably use UEFI interfaces for system
-   reset/suspend instead of invoking System Reset/Suspend SBI extensions directly.
 
 * SBI Performance Monitoring (PMU)
 

@@ -33,7 +33,33 @@ validated against the UEFI security database.]
 ==== Runtime Exception Level
 ==== Runtime Memory Map
 ==== Real-Time Clock (RTC)
+
+[[uefi-resetsystem]]
 ==== UEFI Reset and Shutdown
+
+The UEFI ResetSystem() runtime service must be implemented using the SBI System Reset (SRST) extension. The following table maps the UEFI RT and SRST call parameters:
+
+[%autowidth]
+|===
+|ResetSystem() ResetType|sbi_system_reset type
+
+|EfiResetShutdown
+|0x00000000 (Shutdown)
+
+|EfiResetCold
+|0x00000001 (Cold reboot)
+
+|EfiResetWarm
+|0x00000002 (Warm reboot)
+
+|EfiResetPlatformSpecific
+|0xF0000000 - 0xFFFFFFFF (Vendor or platform specific reset type)
+|===
+
+The OS must call the ResetSystem() runtime service call to reset the system,
+preferring this to SBI SRST or other platform-specific mechanisms. This
+allows for UEFI implementations to perform any required platform tasks on the way out (e.g. servicing UpdateCapsule() or persisting non-volatile variables in some implementations).
+
 ==== Variable Services
 === UEFI Protocols
 ==== EFI TPM2 Protocol
