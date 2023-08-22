@@ -32,7 +32,24 @@ validated against the UEFI security database.]
 === UEFI Runtime Services
 ==== Runtime Exception Level
 ==== Runtime Memory Map
+
+[[uefi-rtc]]
 ==== Real-Time Clock (RTC)
+
+The RTC is usually exposed via the UEFI GetTime and SetTime runtime services.
+
+===== Systems without an RTC
+
+* GetTime must be implemented (e.g. in terms of CPU cycle counter).
+* SetTime must return EFI_UNSUPPORTED, and be appropriately described in EFI_RT_PROPERTIES_TABLE.
+
+===== Systems with an RTC
+
+Where the RTC is on an OS-managed bus (e.g. I2C, subject to arbiration issues due to access to the bus by the OS):
+
+* The ACPI Time and Alarm Device <<acpi-tad, must be implemented>>.
+* GetTime and SetTime must return EFI_UNSUPPORTED, when called after the UEFI boot services have been exited.
+* GetTime and SetTime must be appropriately described in EFI_RT_PROPERTIES_TABLE.
 
 [[uefi-resetsystem]]
 ==== UEFI Reset and Shutdown
