@@ -8,6 +8,7 @@ This section defines mandatory and optional ACPI requirements on top of the ones
 === ACPI High-Level Requirements
 
 A compliant system must:
+
 * [[acpi-64bit-clean]]Be 64-bits clean.
 ** RSDT must not be implemented, with RsdtAddress in RSDP set to 0.
 ** 32-bit address fields must be 0.
@@ -57,25 +58,10 @@ through the driver-backed OperationRegion.
 This section lists additional requirements for the mandatory and
 conditionally-required ACPI tables in a compliant system.
 
-[[acpi-madt]]
-==== MADT (Multiple APIC Description Table)
-
-Entry ordering can be correlated with initialization order by an OS, but
-should not be taken to reflect affinity in resource sharing,
-e.g. sockets, caches, etc. RINTC hart ID and ACPI Processor UID should
-not be decoded in a system-specific manner to divine CPU topology.
-The PPTT Processor Properties Topology Table (PPTT) is to be used to
-describe affinities.
-
-<<acpi-guidance-madt, See additional guidance>>.
-
-==== RHCT (RISC-V Hart Capabilities Table)
-
-The RHCT table is mandatory.
-
+[[acpi-pptt]]
 ==== PPTT (Processor Properties Table).
 
-The PPTT table is mandatory, even for systems with a simple hart topology.
+The PPTT is mandatory even for systems with a simple hart topology.
 
 ==== Conditionally Required ACPI Tables
 
