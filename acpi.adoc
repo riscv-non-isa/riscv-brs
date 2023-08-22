@@ -106,7 +106,7 @@ The PCI Memory-mapped Configuration Space (MCFG) table cite:[PCIFW] must only be
 if and only if cite:[PCIFW] compatible non-hot-removable PCIe segments are made available
 to the OS.
 
-* PCIe configuration space must be exposed to the OS in an ECAM-compatible manner.
+* PCIe configuration space must be exposed to the OS in an ECAM-compatible (Enhanced Configuration Access Mechanism) manner.
 * MCFG table must not require a custom vendor-specific PCIe root complex OS driver.
 
 Please see PCI Services in ACPI (cite:[ACPI], Section 4) for more ACPI requirements relating to PCIe support.
