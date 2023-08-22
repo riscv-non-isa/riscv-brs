@@ -19,8 +19,6 @@ following optional extensions are mandatory for a compliant system.
 * SBI System Reset (SRST)
 ** See <<uefi-resetsystem>> for additional notes on SRST use by a UEFI implementation and by an OS.
 
-* SBI System Suspend (SUSP)
-
 * SBI Performance Monitoring (PMU)
 
 In addition to this, the following SBI extensions are only mandatory if required
