@@ -1,0 +1,1 @@
+If the harts are being started or stopped internally by a firmware implementation, this should happen before completing the EFI_EVENT_GROUP_READY_TO_BOOT event, and all secondary harts should remain offline from that point on. This ensures an OS loader is entered with an OS-compatible state for the harts.
