@@ -1,5 +1,6 @@
 [[secondary]]
-== Secondary Core Boot
-The secondary cores must boot in an ordered fashion using SBI HSM extension. The
-primary booting hart must bring all the secondary non-booting harts online by
-invoking sbi_hsm_hart_start one by one.
+== Secondary Hart Boot
+
+The SBI Hart State Management (HSM) extension is used by an OS for starting up, stopping, suspending and querying the status of secondary harts.
+
+<<secondary-guidance, See additional guidance>>.

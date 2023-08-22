@@ -125,10 +125,6 @@ objects.
 
 <<acpi-guidance-aml, See additional guidance>>.
 
-==== Global Methods and Objects
-
-Harts must be defined under \_SB (System Bus) namespace and not in the deprecated \_PR (Processors) namespace.
-
 ==== Device Methods and Objects
 
 * _CCA: Cache Coherency Attribute. This object provides information
@@ -137,6 +133,12 @@ Harts must be defined under \_SB (System Bus) namespace and not in the deprecate
   can access CPU-visible memory. (cite:[ACPI] Section 6.2.17)
 * _PRS: Possible Resource Settings. Not supported.
 * _SRS: Set Resource Settings. Not supported.
+
+===== Harts
+
+Harts must be defined under \_SB (System Bus) namespace and not in the deprecated \_PR (Processors) namespace.
+
+_LPI objects must be provided.
 
 ===== PCIe Root Complex Devices
 
