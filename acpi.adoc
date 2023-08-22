@@ -39,12 +39,12 @@ If the platform provides support for OS-directed hart performance control and po
 then it must be exposed using Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8.4.6).
 Processor idle states must be described using Low Power Idle (LPI, cite:[ACPI] Section 8.4.3).
 
+[[acpi-tad]]
 ==== Time and Alarm Device
 
 UEFI Runtime Service should be used to provide time services to the
 OS, unless the RTC is subject to arbitration issues between concurrent
-OS and UEFI accesses to the underlying hardware. See <<<UEFI Real-Time
-Clock>>>.
+OS and UEFI accesses to the underlying hardware. See <<uefi-rtc>>.
 
 In situations where the Time and Alarm Device (TAD) depends on a
 vendor-specific OS driver for correct function (SPI, I2C, etc), the TAD must
