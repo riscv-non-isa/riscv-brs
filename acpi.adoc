@@ -3,19 +3,11 @@
 
 The Advanced Configuration and Power Interface specification provides the OS-centric view of system configuration, various hardware resources, events and power management.
 
-This section defines mandatory and optional ACPI requirements on top of the ACPI specification cite:[ACPI]. Additional non-normative guidance may be found in the <<acpi-guidance, appendix>>.
+This section defines mandatory and optional ACPI requirements on top of the ones in the ACPI cite:[ACPI] and UEFI cite:[UEFI] specifications. Additional non-normative guidance may be found in the <<acpi-guidance, appendix>>.
 
 === ACPI High-Level Requirements
 
 A compliant system must:
-
-* Conform to UEFI specification requirements for ACPI:
-** RISC-V Platforms (cite:[UEFI] Section 2.3.7)
-** Industry Standard Configuration Tables (cite:[UEFI] Section 4.6.1.1)
-* Conform to version 6.6 of the ACPI specification, including RISC-V requirements listed in:
-** Multiple APIC Description Table (MADT, cite:[ACPI] Section 5.2.12)
-** RISC-V Hart Capabilities Table (RHCT, cite:[ACPI] Section 5.2.36)
-* Meet the requirements in <<Minimum Hardware Requirements Imposed By ACPI>>
 * [[acpi-64bit-clean]]Be 64-bits clean.
 ** RSDT must not be implemented, with RsdtAddress in RSDP set to 0.
 ** 32-bit address fields must be 0.
@@ -37,10 +29,6 @@ software-defined interfaces and the complexity in supporting ACPI is reduced.
 The following additional requirements apply:
 
 * No FACS table.
-* Both interrupt-signaled and GPIO-signaled ACPI Events are supported
-  (cite:[ACPI] Section 5.6)
-* There is at least 1 wake event.
-** Note: for systems that do not support Sx states except S5 soft off, this can be just the power button.
 * For the ACPI Platform Error Interfaces (APEI) support:
 ** There is 1 event for non-fatal error signaling (cite:[ACPI] Section 18.3.2.7.2)
 ** There is 1 NMI-equivalent signal for use in fatal errors (cite:[ACPI] Section 18)
@@ -69,14 +57,8 @@ through the driver-backed OperationRegion.
 This section lists additional requirements for the mandatory and
 conditionally-required ACPI tables in a compliant system.
 
-This section does not list ACPI tables without additional
-requirements.
-
-All ACPI tables not listed here may be used, if they comply with the
-syntax and semantics of the ACPI or other relevant firmware specification.
-
 [[acpi-madt]]
-==== MADT
+==== MADT (Multiple APIC Description Table)
 
 Entry ordering can be correlated with initialization order by an OS, but
 should not be taken to reflect affinity in resource sharing,
@@ -87,11 +69,13 @@ describe affinities.
 
 <<acpi-guidance-madt, See additional guidance>>.
 
-==== PPTT
+==== RHCT (RISC-V Hart Capabilities Table)
 
-The Processor Properties Table (PPTT, cite:[ACPI] Section 5.2.29)
-describes the hart affinities and shared resources, such as caches.
-It is mandatory, even for systems with a simple hart topology.
+The RHCT table is mandatory.
+
+==== PPTT (Processor Properties Table).
+
+The PPTT table is mandatory, even for systems with a simple hart topology.
 
 ==== Conditionally Required ACPI Tables
 
