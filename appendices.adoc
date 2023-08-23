@@ -40,6 +40,10 @@ implementation choices, suggestions, historical context, etc.
 ==== Recipes Guidance
 include::non-normative/recipes.adoc[]
 
+[[secondary-guidance]]
+==== Secondary Hart Boot Guidance
+include::non-normative/secondary.adoc[]
+
 [[acpi-guidance]]
 ==== ACPI Implementation Guidance
 include::non-normative/acpi.adoc[]
