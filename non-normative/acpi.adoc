@@ -13,7 +13,7 @@ located in any part of the physical address space.
 
 Certain implementations may make use of the RISC-V Functional Fixed hardware Specification cite:[FFH].
 
-<<acpi-guidance-tab-min>> defines a minimum set of structures that must exist to support basic booting of RISC-V system with ACPI support. <<acpi-guidance-tab-opt>> lists additional possibile ACPI tables based on the optional features that can be supported. The latter is not meant to be exhaustive and mostly focuses on tables that
+<<acpi-guidance-tab-min>> summarizes the minimum set of structures that must exist to support basic booting of RISC-V system with ACPI support. <<acpi-guidance-tab-opt>> lists additional possible ACPI tables based on the optional features that can be supported. The latter is not meant to be exhaustive and mostly focuses on tables that
 have specific guidance or that expected to be frequently implemented.
 
 .*Minimum required ACPI System Description Tables*
@@ -25,12 +25,10 @@ have specific guidance or that expected to be frequently implemented.
 |Extended System Description Table (XSDT)      |5.2.8      | Contains pointers to other tables.
 |Fixed ACPI Description Table (FADT)           |5.2.9      | See <<acpi-hw-reduced>> and <<acpi-guidance-fadt, the notes below>>.
 |Differentiated System Description Table (DSDT)|5.2.11.1   | See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
-|Multiple APIC Description Table (MADT)        |5.2.12     | See <<acpi-madt>> and <<acpi-guidance-madt, the notes below>>
+|Multiple APIC Description Table (MADT)        |5.2.12     | See <<acpi-guidance-madt, the notes below>>
 |RISC-V Hart Capabilities Table (RHCT)         |New        | Communicates
 information about certain capabilities like ISA string, cache and MMU info.
-|Processor Properties Topology Table (PPTT)    |5.2.29     |CPU and Cache 
-                                                            topology
-                                                            information
+|Processor Properties Topology Table (PPTT)    |5.2.29     | See <<acpi-pptt>>
 |===
 
 // Add RIMT for IOMMU here.
@@ -40,7 +38,7 @@ information about certain capabilities like ISA string, cache and MMU info.
 [cols="3,2,2", width=95%, align="center", options="header"]
 |===
 |ACPI Table                                    |ACPI Section  |Note
-|Memory-mapped Configuration space (MCFG)      |cite:[PCIFW]  |See <<acpi-guidance-pcie, the notes below>>
+|Memory-mapped Configuration space (MCFG)      |cite:[PCIFW]  |See <<acpi-mcfg>> and <<acpi-guidance-pcie, the notes below>>
 | Secondary System Description Table (SSDT)    |5.2.11.2      |See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
 |Serial Port Console Redirection (SPCR)        |cite:[SPCR]   |See <<acpi-spcr>> and <<acpi-guidance-spcr, the notes below>>
 |System Resource Affinity Table (SRAT)         |5.2.16        |If the platform supports NUMA
@@ -80,6 +78,13 @@ Don't forget to select an appropriate Preferred PM Profile.
 ===== MADT
 
 RINTC (per-hart) structures are mandatory. Depending on the interrupt controller implemented by the system, the MADT will also contain either PLIC or IMSIC/APLIC structures.
+
+Entry ordering can be correlated with initialization order by an OS, but
+should not be taken to reflect affinity in resource sharing,
+e.g. sockets, caches, etc. RINTC hart ID and ACPI Processor UID should
+not be decoded in a system-specific manner to divine CPU topology.
+The PPTT Processor Properties Topology Table (PPTT) is to be used to
+describe affinities.
 
 [[acpi-guidance-pcie]]
 ===== PCIe
