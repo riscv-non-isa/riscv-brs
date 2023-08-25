@@ -1,0 +1,50 @@
+UEFI implementations run in 64-bit S-Mode, VS-Mode or HS-Mode,
+depending on whether virtualization is supported or used.
+
+===== Privilege Levels
+
+Different portions of system firmware might target a specific
+privilege level. In contrast, UEFI drivers, OS loaders and
+applications must not contain any assumptions of the privilege
+level at boot time. This is because UEFI-compliant executable
+images need to operate correctly in both (V)S-Mode or HS-Mode.
+
+As an implementation choice, a UEFI firmware implementation may
+start execution in M-Mode. However it must switch to supervisor
+mode as part of initializing boot and runtime services for UEFI
+drivers and applications.
+
+[[uefi-guidance-security]]
+===== Security Requirements
+
+The Security and Security2 Architectural Protocols are overridden by some
+bootloaders (e.g. systemd-boot) to validate EFI binaries that cannot be
+validated against the UEFI security database.
+
+[[uefi-guidance-firmware-update]]
+===== Firmware Update
+
+UpdateCapsule() is only required before ExitBootServices() is called.
+The UpdateCapsule() implementation is expected to be suitable for use by generic firmware update services like fwupd and Windows Update. Both fwupd and Windows Update read the ESRT table to determine what firmware can be updated and use an EFI helper application to call UpdateCapsule() before ExitBootServices() is called.
+
+[[uefi-guidance-pcie]]
+====== PCIe
+
+The implementation of the EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL provides the
+correct Address Translation Offset field to translate between the hart
+MMIO and bus addresses.
+
+EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL_CONFIGURATION reports resources
+produced by the PCIe root bridge, not resources consumed by its
+register maps. In the cases where there are unpopulated PCIe slots
+behind the root bridge, EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL_CONFIGURATION
+reports valid resources assigned (e.g. for hot plug), or reports no
+resources assigned.
+
+====== Graphics Output Protocol
+
+EFI_GRAPHICS_OUTPUT_PROTOCOL is recommended to be implemented with the
+frame buffer of the graphics adapters directly accessible (i.e.
+EFI_GRAPHICS_PIXEL_FORMAT is not PixelBltOnly). The
+FrameBufferBase must be reported as a hart MMIO address, not as a
+bus address (e.g. for a PCIe video device).

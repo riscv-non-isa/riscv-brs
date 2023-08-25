@@ -1,36 +1,5 @@
 [[appendices]]
 == Appendices
-=== Required UEFI Boot Services
-=== Required UEFI Runtime Services
-=== UEFI Configuration Table
-==== Required Table Entries
-==== Optional and Conditionally Required Table Entries
-=== UEFI Protocols
-==== Required Protocols
-===== Core Protocols
-===== Media I/O Protocols
-===== Console Protocols
-===== Driver Configuration Protocols
-===== Random Number Generator Protocols
-===== RISC-V Protocols
-==== Optional and Conditionally Required Protocols
-===== Basic Networking Support
-===== Networking Boot Protocols
-===== IPv4 Network Support
-===== IPv6 Networking Support
-===== VLAN Protocols
-===== iSCSI Protocols
-===== REST Protocols
-===== HTTP Protocols
-===== Firmware Update
-===== CXL Protocols
-===== PCIe Protocols
-===== Graphics Protocols
-=== CXL Requirements
-==== CXL Host Bridge
-==== CXL Root Device
-===== ACPI Device Object for CXL Root Device
-==== NUMA
 === Firmware Implementation Guidance
 
 The guidance section is non-normative, and covers certain
@@ -43,6 +12,10 @@ include::non-normative/recipes.adoc[]
 [[secondary-guidance]]
 ==== Secondary Hart Boot Guidance
 include::non-normative/secondary.adoc[]
+
+[[uefi-guidance]]
+==== UEFI Implementation Guidance
+include::non-normative/uefi.adoc[]
 
 [[acpi-guidance]]
 ==== ACPI Implementation Guidance
