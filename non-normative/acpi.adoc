@@ -3,7 +3,12 @@ tables known as Root System Description Table (RSDP) passed to the OS
 via a EFI_ACPI_20_TABLE_GUID configuration table in the UEFI firmware.
 The Operating System uses this address to locate all other ACPI tables.
 
-[[acpi-guidance-64bit-clean]] ACPI started as a specification for 32-bit systems,
+Certain implementations may make use of the RISC-V Functional Fixed hardware Specification cite:[FFH].
+
+[[acpi-guidance-64bit-clean]]
+===== 64-bits Clean
+
+ACPI started as a specification for 32-bit systems,
 so certain tables with physical address pointers (e.g. RSDP, FADT) allow for reporting
 either 32-bit or 64-bit values using different fields. For the sake of simplicity
 and consistency, the BRS disallows the use 32-bit address fields in such structures
@@ -11,10 +16,22 @@ and disallows the use of 32-bit only structures (thus, RSDP must not be implemen
 as the XSDT is a direct replacement). Thus, the ACPI tables are allowed to be
 located in any part of the physical address space.
 
-Certain implementations may make use of the RISC-V Functional Fixed hardware Specification cite:[FFH].
+[[acpi-guidance-hw-reduced]]
+===== Hardware-Reduced ACPI
 
-<<acpi-guidance-tab-min>> summarizes the minimum set of structures that must exist to support basic booting of RISC-V system with ACPI support. <<acpi-guidance-tab-opt>> lists additional possible ACPI tables based on the optional features that can be supported. The latter is not meant to be exhaustive and mostly focuses on tables that
-have specific guidance or that expected to be frequently implemented.
+Compliant RISC-V systems only implement the HW-Reduced ACPI Model cite:[ACPI] (Section 4.1).
+This means the hardware portion of cite:[ACPI] (Section 4) is not required or
+supported. All functionality is instead provided through equivalent
+software-defined interfaces and the complexity in supporting ACPI is reduced.
+
+===== Table Guidance
+<<acpi-guidance-tab-min>> summarizes the minimum set of structures
+that must exist to support basic booting of RISC-V system with ACPI
+support. <<acpi-guidance-tab-opt>> lists additional possible ACPI
+tables based on the optional features that can be supported. The
+latter is not meant to be exhaustive and mostly focuses on tables that
+have specific guidance or that are expected to be frequently
+implemented.
 
 .*Minimum required ACPI System Description Tables*
 [[acpi-guidance-tab-min]]
@@ -23,7 +40,7 @@ have specific guidance or that expected to be frequently implemented.
 |ACPI Table                                    |ACPI Section|Note
 |Root System Description Pointer (RSDP)        |5.2.5      | See <<acpi-64bit-clean, high-level requirements>>.
 |Extended System Description Table (XSDT)      |5.2.8      | Contains pointers to other tables.
-|Fixed ACPI Description Table (FADT)           |5.2.9      | See <<acpi-hw-reduced>> and <<acpi-guidance-fadt, the notes below>>.
+|Fixed ACPI Description Table (FADT)           |5.2.9      | See <<acpi-hw-reduced>>, <<acpi-guidance-hw-reduced>> and <<acpi-guidance-fadt, the notes below>>.
 |Differentiated System Description Table (DSDT)|5.2.11.1   | See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
 |Multiple APIC Description Table (MADT)        |5.2.12     | See <<acpi-guidance-madt, the notes below>>
 |RISC-V Hart Capabilities Table (RHCT)         |New        | Communicates
@@ -39,8 +56,9 @@ information about certain capabilities like ISA string, cache and MMU info.
 |===
 |ACPI Table                                    |ACPI Section  |Note
 |Memory-mapped Configuration space (MCFG)      |cite:[PCIFW]  |See <<acpi-mcfg>> and <<acpi-guidance-pcie, the notes below>>
-| Secondary System Description Table (SSDT)    |5.2.11.2      |See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
+|Secondary System Description Table (SSDT)     |5.2.11.2      |See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
 |Serial Port Console Redirection (SPCR)        |cite:[SPCR]   |See <<acpi-spcr>> and <<acpi-guidance-spcr, the notes below>>
+|ACPI Table for TPM 2.0 (TPM2)                 |cite:[TcgAcpi]|If the platform supports TPM 2.0
 |System Resource Affinity Table (SRAT)         |5.2.16        |If the platform supports NUMA
 |System Locality Information Table (SLIT)      |5.2.17        |If the platform supports NUMA
 |Boot Error Record Table (BERT)                |18.3.1        |If ACPI RAS is supported
