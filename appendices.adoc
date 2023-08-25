@@ -9,10 +9,6 @@ implementation choices, suggestions, historical context, etc.
 ==== Recipes Guidance
 include::non-normative/recipes.adoc[]
 
-[[secondary-guidance]]
-==== Secondary Hart Boot Guidance
-include::non-normative/secondary.adoc[]
-
 [[uefi-guidance]]
 ==== UEFI Implementation Guidance
 include::non-normative/uefi.adoc[]
