@@ -5,22 +5,17 @@ The Advanced Configuration and Power Interface specification provides the OS-cen
 
 This section defines mandatory and optional ACPI requirements on top of the ones in the ACPI cite:[ACPI] and UEFI cite:[UEFI] specifications. Additional non-normative guidance may be found in the <<acpi-guidance, appendix>>.
 
-=== ACPI High-Level Requirements
-
 A compliant system must:
 
 * [[acpi-64bit-clean]]Be 64-bits clean.
 ** RSDT must not be implemented, with RsdtAddress in RSDP set to 0.
 ** 32-bit address fields must be 0.
 ** <<acpi-guidance-64bit-clean, See additional guidance>>.
-* Implement a firmware-first APEI model (cite:[ACPI] Section 18.4)
-
-=== ACPI-specific Hardware Requirements
-
-This section lists the requirements imposed by ACPI support.
+* <<acpi-hw-reduced, Implement a hardware-reduced ACPI model>>.
+* Implement a firmware-first APEI model. (cite:[ACPI] Section 18.4)
 
 [[acpi-hw-reduced]]
-==== HW-Reduced ACPI Model
+=== Hardware-Reduced ACPI Model
 
 Compliant RISC-V systems only implement the HW-Reduced ACPI Model cite:[ACPI] (Section 4.1).
 This means the hardware portion of cite:[ACPI] (Section 4) is not required or
@@ -33,25 +28,6 @@ The following additional requirements apply:
 * For the ACPI Platform Error Interfaces (APEI) support:
 ** There is 1 event for non-fatal error signaling (cite:[ACPI] Section 18.3.2.7.2)
 ** There is 1 NMI-equivalent signal for use in fatal errors (cite:[ACPI] Section 18)
-
-==== Hart Performance Control
-
-If the platform provides support for OS-directed hart performance control and power management,
-then it must be exposed using Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8.4.6).
-Processor idle states must be described using Low Power Idle (LPI, cite:[ACPI] Section 8.4.3).
-
-[[acpi-tad]]
-==== Time and Alarm Device
-
-UEFI Runtime Service should be used to provide time services to the
-OS, unless the RTC is subject to arbitration issues between concurrent
-OS and UEFI accesses to the underlying hardware. See <<uefi-rtc>>.
-
-In situations where the Time and Alarm Device (TAD) depends on a
-vendor-specific OS driver for correct function (SPI, I2C, etc), the TAD must
-be functional if the OS driver is not loaded. That is, when a dependent
-driver is loaded, an AML method switches further accesses to go
-through the driver-backed OperationRegion.
 
 === Additional ACPI Table Requirements
 
@@ -120,15 +96,28 @@ objects.
 * _PRS: Possible Resource Settings. Not supported.
 * _SRS: Set Resource Settings. Not supported.
 
-===== Harts
+===== Harts and Hart Performance Control
 
 Harts must be defined under \_SB (System Bus) namespace and not in the deprecated \_PR (Processors) namespace.
 
-_LPI objects must be provided.
+If the platform provides support for OS-directed hart performance control and power management,
+then it must be exposed using Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8.4.6).
+Processor idle states must be described using Low Power Idle (LPI, cite:[ACPI] Section 8.4.3).
 
 ===== PCIe Root Complex Devices
 
 * _CRS: Current Resource Settings
 ** PCIe Root Complex descriptors must not contain resources of type DWordIO, QWordIO or ExtendedIO as the legacy PCI I/O port space is not supported.
 
+[[acpi-tad]]
+===== Time and Alarm Device
 
+UEFI Runtime Service should be used to provide time services to the
+OS, unless the RTC is subject to arbitration issues between concurrent
+OS and UEFI accesses to the underlying hardware. See <<uefi-rtc>>.
+
+In situations where the Time and Alarm Device (TAD) depends on a
+vendor-specific OS driver for correct function (SPI, I2C, etc), the TAD must
+be functional if the OS driver is not loaded. That is, when a dependent
+driver is loaded, an AML method switches further accesses to go
+through the driver-backed OperationRegion.
