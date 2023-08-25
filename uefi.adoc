@@ -1,37 +1,52 @@
 [[uefi]]
 == UEFI Requirements
-=== UEFI Version
-=== UEFI Compliance
-=== UEFI Platform Initialization
-The RISC-V Boot and Runtime Services Specification does not require following
-the UEFI Platform Initialization Specification cite:[UEFI-PI].
 
-Implementing the following elements is recommended:
+The Unified Extensible Firmware Interface (UEFI) specification describes the interface between the OS and the supervisor-mode firmware.
 
-* Security Architectural Protocol (EFI_SECURITY_ARCH_PROTOCOL)
-* Security2 Architectural Protocol (EFI_SECURITY2_ARCH_PROTOCOL)footnote:[The
-Security and Security2 Architectural Protocols are overridden by some
-bootloaders (e.g. systemd-boot) to validate EFI binaries that cannot be
-validated against the UEFI security database.]
+This section defines the BRS-I mandatory and optional UEFI requirements on top of cite:[UEFI], and is optional and recommended for BRS-B. Additional non-normative guidance may be found in the <<uefi-guidance, appendix>>.
 
-=== UEFI System Environment and Configuration
-==== Privilege Levels
-===== UEFI Boot in HS-Mode
-===== UEFI Boot in (V)S-Mode
-==== System Volume Format
-==== UEFI Image Format
-===== UEFI Drivers
-===== UEFI Applications
-===== PE/COFF Images
-==== Graphics Output (GOP) Protocol
-==== Address Translation Support
-=== UEFI Boot Services
-==== Memory Map
-==== UEFI Loaded Images
-==== Configuration Tables
+A compliant system must:
+
+* Implement a 64-bit UEFI firmware.
+* Meet the 3rd Party UEFI Certificate Authority (CA) requirements on UEFI memory mitigations cite:[MSUefiCaRequirements].
+* Meet the following UEFI memory map requirements:
+** The default memory space attribute must be EFI_MEMORY_WB.
+** Enable address translation.
+*** Any memory space defined by the UEFI memory map must be identity mapped (virtual address equals physical address), although the attributes of certain regions may not have all read, write and execute attributes or be unmarked for purposes of platform protection.
+*** The mappings to other regions are undefined and may vary from implementation to implementation.
+*** The highest hart-supported MMU configuration must be used. E.g., Sv39 should not be used on an Sv48-capable chip.
+* Declare a EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID conformance profile, as the BRS requirements are a superset of UEFI cite:[UEFI] (Section 2.6).
+* Declare EFI_CONFORMANCE_PROFILE_BRS_1_0_SPEC_GUID conformance profile ({ 0x05453310, 0x0545, 0x0545, { 0x05, 0x45, 0x33, 0x05, 0x45, 0x33, 0x05, 0x45 }}).
+
+The BRS does not require complying with the UEFI Platform Initialization Specification cite:[UEFI-PI].
+
+Only a system fully compliant to the requirements in this section
+may declare the EFI_CONFORMANCE_PROFILE_BRS_1_0_SPEC_GUID conformance profile.
+
+=== Security Requirements
+
+Systems implementing secure boot must support the following UEFI Platform Initialization Specification cite:[UEFI-PI] protocols:
+
+* EFI_SECURITY_ARCH_PROTOCOL
+* EFI_SECURITY2_ARCH_PROTOCOL
+
+Systems implementing a TPM must implement the TCG
+EFI Protocol Specification cite:[TcgEfiPlat].
+
+<<uefi-guidance-security, See additional guidance>>.
+
+=== PCIe
+
+Systems implementing PCIe must always initialize all root complex
+hardware and perform resource assignment for all endpoints and usable
+hotplug-capable switches in the system, even in a "rapid boot"
+scenario from a non-PCIe boot device. This is a stronger requirement
+than the PCI Firmware Specification firmware/OS device hand-off state
+(cite:[PCIFW] Section 3.5).
+
+<<uefi-guidance-pcie, See additional guidance>>.
+
 === UEFI Runtime Services
-==== Runtime Exception Level
-==== Runtime Memory Map
 
 [[uefi-rtc]]
 ==== Real-Time Clock (RTC)
@@ -78,12 +93,19 @@ preferring this to SBI SRST or other platform-specific mechanisms. This
 allows for UEFI implementations to perform any required platform tasks on the way out (e.g. servicing UpdateCapsule() or persisting non-volatile variables in some implementations).
 
 ==== Variable Services
-=== UEFI Protocols
-==== EFI TPM2 Protocol
-The EFI TPM2 Protocol (EFI_TCG2_PROTOCOL) let's an UEFI software communicate
-with a TPM v2 implementation.
 
-If a system provides a TPM v2, the firmware should implement the
-EFI TPM2 Protocol (EFI_TCG2_PROTOCOL) cite:[TcgEfiProt].
+* Non-volatile UEFI variables must persist across EFI ResetSystem() calls.
+* The UEFI Runtime Services must be able to update the variables directly without the aid of the operating system.
 
 === Firmware Update
+
+Systems with updatable firmware must implement either an in-band (firmware on hart updates itself) or an out-of-band firmware update mechanism (for example, by a Base Management Controller, BMC)).
+
+In-band firmware updates must be implemented in one of two ways:
+
+* UpdateCapsule() UEFI runtime service (cite:[UEFI] Section 8.5.3).
+** Firmware must accept updates in the "Firmware Management Protocol Data Capsule Structure" format as described in "Delivering Capsules Containing Updates to Firmware Management Protocol" cite:[UEFI] (Section 23.3).
+** Must provide an ESRT cite:[UEFI] (Section 23.4) describing every firmware image that is updated in-band.
+** UpdateCapsule() is allowed to return EFI_UNSUPPORTED, when called after the UEFI boot services have been exited. <<uefi-guidance-firmware-update, See additional guidance>>.
+* Delivery of Capsules via file on Mass Storage Device (cite:[UEFI] Section 8.5.5).
+
