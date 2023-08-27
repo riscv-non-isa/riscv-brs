@@ -7,11 +7,9 @@ This section defines mandatory and optional ACPI requirements on top of the ones
 
 === ACPI High-Level Requirements
 
-A compliant system must:
+A compliant system must meet the following requirements:
 
-* [[acpi-64bit-clean]]Be 64-bits clean.
-** RSDT must not be implemented, with RsdtAddress in RSDP set to 0.
-** 32-bit address fields must be 0.
+* All 32-bit address fields must be 0.
 ** <<acpi-guidance-64bit-clean, See additional guidance>>.
 * Implement a firmware-first APEI model (cite:[ACPI] Section 18.4)
 
