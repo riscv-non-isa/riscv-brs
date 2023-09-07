@@ -3,7 +3,7 @@
 
 The Advanced Configuration and Power Interface specification provides the OS-centric view of system configuration, various hardware resources, events and power management.
 
-This section defines mandatory and optional ACPI requirements on top of the ones in the ACPI cite:[ACPI] and UEFI cite:[UEFI] specifications. Additional non-normative guidance may be found in the <<acpi-guidance, appendix>>.
+This section defines the BRS-I mandatory and optional ACPI requirements on top of cite:[ACPI] and cite:[UEFI]. Additional non-normative guidance may be found in the <<acpi-guidance, appendix>>.
 
 A compliant system must:
 
@@ -11,23 +11,12 @@ A compliant system must:
 ** RSDT must not be implemented, with RsdtAddress in RSDP set to 0.
 ** 32-bit address fields must be 0.
 ** <<acpi-guidance-64bit-clean, See additional guidance>>.
-* <<acpi-hw-reduced, Implement a hardware-reduced ACPI model>>.
-* Implement a firmware-first APEI model. (cite:[ACPI] Section 18.4)
-
-[[acpi-hw-reduced]]
-=== Hardware-Reduced ACPI Model
-
-Compliant RISC-V systems only implement the HW-Reduced ACPI Model cite:[ACPI] (Section 4.1).
-This means the hardware portion of cite:[ACPI] (Section 4) is not required or
-supported. All functionality is instead provided through equivalent
-software-defined interfaces and the complexity in supporting ACPI is reduced.
-
-The following additional requirements apply:
-
-* No FACS table.
-* For the ACPI Platform Error Interfaces (APEI) support:
-** There is 1 event for non-fatal error signaling (cite:[ACPI] Section 18.3.2.7.2)
-** There is 1 NMI-equivalent signal for use in fatal errors (cite:[ACPI] Section 18)
+* [[acpi-hw-reduced]]Implement the HW-Reduced ACPI Mode.
+** No FACS table.
+** <<acpi-guidance-hw-reduced, See additional guidance>>.
+* Implement a firmware-first ACPI Platform Error Interface (APEI) model (cite:[ACPI] Section 18.4).
+** 1 event for non-fatal error signaling (cite:[ACPI] Section 18.3.2.7.2)
+** 1 NMI-equivalent signal for use in fatal errors (cite:[ACPI] Section 18)
 
 === Additional ACPI Table Requirements
 

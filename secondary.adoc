@@ -1,6 +1,0 @@
-[[secondary]]
-== Secondary Hart Boot
-
-The SBI Hart State Management (HSM) extension is used by an OS for starting up, stopping, suspending and querying the status of secondary harts.
-
-<<secondary-guidance, See additional guidance>>.
