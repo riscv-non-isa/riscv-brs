@@ -6,8 +6,8 @@ requirements that hardware, firmware, and software providers can
 implement to increase the likelihood that software written to the
 recipe will run predictably on all conforming devices.
 
-The BRS specification defines two recipes: BRS-I (for "Interoperable")
-and BRS-B (for "Bespoke").
+The BRS specification defines three recipes: BRS-I (for "Interoperable"),
+BRS-B (for "Bespoke") and BRS-M (for "Minimal").
 
 === BRS-I Recipe
 
@@ -65,4 +65,21 @@ custom distributions.
 |===
 | Profile | UEFI | ACPI | DT | SBI | SMBIOS
 | >= RVA20 | EBBR cite:[EBBR] | optional, >= 6.6 | optional, >= v0.3 | >= 2.0 | optional, >= 3.6.0
+|===
+
+=== BRS-M Recipe
+
+BRS-M is used for cases that do not require UEFI. BRS-M is the
+smallest recipe. This recipe does not require UEFI boot and runtime
+service implementations. In some boot scenarios, non-UEFI firmware
+can also support boot, they only focus on the boot process and support
+the necessary interaction interfaces.
+<<recipe-brs-m-guidance, See additional guidance>>.
+
+.BRS-M Recipe Overview
+[width=100%]
+[%header, cols="10,20,20,10,20"]
+|===
+| Profile | ACPI | DT | SBI | SMBIOS
+| >= RVA20 | optional, >= 6.6 | optional, >= v0.3 | >= 2.0 | optional, >= 3.6.0
 |===
