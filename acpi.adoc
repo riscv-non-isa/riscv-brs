@@ -14,9 +14,6 @@ A compliant system must:
 * [[acpi-hw-reduced]]Implement the HW-Reduced ACPI Mode.
 ** No FACS table.
 ** <<acpi-guidance-hw-reduced, See additional guidance>>.
-* Implement a firmware-first ACPI Platform Error Interface (APEI) model (cite:[ACPI] Section 18.4).
-** 1 event for non-fatal error signaling (cite:[ACPI] Section 18.3.2.7.2)
-** 1 NMI-equivalent signal for use in fatal errors (cite:[ACPI] Section 18)
 
 === Additional ACPI Table Requirements
 
