@@ -14,7 +14,6 @@ A compliant system must:
 ** Enable address translation.
 *** Any memory space defined by the UEFI memory map must be identity mapped (virtual address equals physical address), although the attributes of certain regions may not have all read, write and execute attributes or be unmarked for purposes of platform protection.
 *** The mappings to other regions are undefined and may vary from implementation to implementation.
-*** The highest hart-supported MMU configuration must be used. E.g., Sv39 should not be used on an Sv48-capable chip.
 * Declare a EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID conformance profile, as the BRS requirements are a superset of UEFI cite:[UEFI] (Section 2.6).
 * Declare EFI_CONFORMANCE_PROFILE_BRS_1_0_SPEC_GUID conformance profile ({ 0x05453310, 0x0545, 0x0545, { 0x05, 0x45, 0x33, 0x05, 0x45, 0x33, 0x05, 0x45 }}).
 
