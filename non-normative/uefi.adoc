@@ -30,14 +30,14 @@ The UpdateCapsule() implementation is expected to be suitable for use by generic
 [[uefi-guidance-pcie]]
 ====== PCIe
 
-The implementation of the EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL provides the
+Every implementation of the EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL provides the
 correct Address Translation Offset field to translate between the hart
 MMIO and bus addresses.
 
-EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL_CONFIGURATION reports resources
-produced by the PCIe root bridge, not resources consumed by its
+EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL_CONFIGURATION strutures report resources
+produced by the PCIe root bridges, not resources consumed by their
 register maps. In the cases where there are unpopulated PCIe slots
-behind the root bridge, EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL_CONFIGURATION
+behind a root bridge, EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL_CONFIGURATION
 reports valid resources assigned (e.g. for hot plug), or reports no
 resources assigned.
 
