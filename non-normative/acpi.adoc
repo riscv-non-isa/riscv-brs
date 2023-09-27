@@ -12,7 +12,7 @@ ACPI started as a specification for 32-bit systems,
 so certain tables with physical address pointers (e.g. RSDP, FADT) allow for reporting
 either 32-bit or 64-bit values using different fields. For the sake of simplicity
 and consistency, the BRS disallows the use 32-bit address fields in such structures
-and disallows the use of 32-bit only structures (thus, RSDP must not be implemented,
+and disallows the use of 32-bit only structures (thus, RSDT must not be implemented,
 as the XSDT is a direct replacement). Thus, the ACPI tables are allowed to be
 located in any part of the physical address space.
 
