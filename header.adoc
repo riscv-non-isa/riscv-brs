@@ -61,7 +61,6 @@ Copyright 2023 by RISC-V International.
 include::contributors.adoc[]
 
 include::about.adoc[]
-include::background.adoc[]
 include::intro.adoc[]
 include::recipes.adoc[]
 include::hart.adoc[]
