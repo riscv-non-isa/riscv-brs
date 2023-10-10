@@ -5,11 +5,9 @@ The Advanced Configuration and Power Interface specification provides the OS-cen
 
 This section defines the BRS-I mandatory and optional ACPI requirements on top of cite:[ACPI] and cite:[UEFI]. Additional non-normative guidance may be found in the <<acpi-guidance, appendix>>.
 
-A compliant system must:
+A compliant system must meet the following requirements:
 
-* [[acpi-64bit-clean]]Be 64-bits clean.
-** RSDT must not be implemented, with RsdtAddress in RSDP set to 0.
-** 32-bit address fields must be 0.
+* All 32-bit address fields must be 0.
 ** <<acpi-guidance-64bit-clean, See additional guidance>>.
 * [[acpi-hw-reduced]]Implement the HW-Reduced ACPI Mode.
 ** No FACS table.
