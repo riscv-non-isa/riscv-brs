@@ -1,0 +1,127 @@
+[[trap-handlers]]
+== Machine-Level Interrupts and Exceptions
+
+=== Delegation
+
+A RISC-V Machine mode execution environment may delegate handling interrupts and exceptions to the Supervisor or Hypervisor mode execution environment.
+
+For reference, see https://github.com/riscv/riscv-isa-manual/blob/main/src/machine.adoc#machine-cause-register-mcause[the definitions in the RISC-V ISA spec].
+
+==== Interrupts
+[%autowidth,float="center",align="center",cols=">,>,<",options="header",]
+|===
+| Code / Description |OpenSBI |oreboot SBI
+|0 _Reserved_ +
+1 Supervisor software interrupt +
+2 _Reserved_ +
+3 Machine software interrupt +
+4 _Reserved_ +
+5 Supervisor timer interrupt +
+6 _Reserved_ +
+7 Machine timer interrupt +
+8 _Reserved_ +
+9 Supervisor external interrupt +
+10 _Reserved_ +
+11 Machine external interrupt 
+12-15 _Reserved_ +
+&#8805;16 _Designated for platform use_ 
+| O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O
+| O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O
+|===
+
+X = explicitly set
+O = explicitly unset
+I = initial value unchanged
+
+==== Exceptions
+[%autowidth,float="center",align="center",cols=">,>,<",options="header",]
+|===
+| Code / Description |OpenSBI |oreboot SBI
+|0 Instruction address misaligned +
+1 Instruction access fault +
+2 Illegal instruction +
+3 Breakpoint +
+4 Load address misaligned +
+5 Load access fault +
+6 Store/AMO address misaligned +
+7 Store/AMO access fault +
+8 Environment call from U-mode +
+9 Environment call from S-mode +
+10 _Reserved_ +
+11 Environment call from M-mode +
+12 Instruction page fault +
+13 Load page fault +
+14 _Reserved_ +
+15 Store/AMO page fault +
+16-23 _Reserved_ +
+24-31 _Designated for custom use_ +
+32-47 _Reserved_ +
+48-63 _Designated for custom use_ +
+&#8805;64 _Reserved_ 
+|O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O
+|O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O +
+O
+|===
