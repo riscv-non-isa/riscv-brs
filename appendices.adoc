@@ -17,4 +17,6 @@ include::non-normative/uefi.adoc[]
 ==== ACPI Implementation Guidance
 include::non-normative/acpi.adoc[]
 
-
+[[smbios-guidance]]
+==== SMBIOS Implementation Guidance
+include::non-normative/smbios.adoc[]
