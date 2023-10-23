@@ -21,8 +21,6 @@ following optional extensions are mandatory for a compliant system.
 * SBI System Reset (SRST)
 ** See <<uefi-resetsystem>> for additional notes on SRST use by a UEFI implementation and by an OS.
 
-* SBI Performance Monitoring (PMU)
-
 In addition to this, the following SBI extensions are only mandatory if required
 ISA extension is not available in the platform. 
 
@@ -34,4 +32,10 @@ ISA extension is not available in the platform.
 * SBI RFENCE 
 ** This extension is mandatory only if the platform doesn't implement
    Incoming MSI Controller (IMSIC).
+* SBI Performance Monitoring (PMU)
+** This extension is mandatory only if the counter delegation related extensions
+(S*csrind, Smcdeleg, Ssccfg) are not present.
+
+NOTE: The above extension are currently being developed by the performance
+analsys TG.
 
