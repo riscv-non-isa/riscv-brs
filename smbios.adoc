@@ -1,44 +1,28 @@
 [[smbios]]
 == SMBIOS Requirements
-=== SMBIOS Version
-==== SMBIOS Requirements on UEFI
-=== SMBIOS Structures
-==== Type 00: BIOS Information (Required)
-==== Type 01: System Information (Required)
-==== Type 02: Baseboard/Module Information (Recommended)
-==== Type 03: System Enclosure/Chassis (Recommended)
-==== Type 04: Processor Information (Required)
-==== Type 07: Cache Information (Required)
-==== Type 08: Port Connector Information (Recommended)
-Recommended for systems with physical ports.
 
-==== Type 09: System Slots (Conditionally Required)
-Required for systems with expansion slots.
+The System Management BIOS (SMBIOS) specification defines a standard format for presenting management information about an implentation, mostly focusing on hardware components.
 
-==== Type 11: OEM Strings (Recommended)
-==== Type 13: BIOS Language Information (Recommended)
-==== Type 14: Group Associations (Recommended)
-Recommended for systems to describe associations between SMBIOS types.
+This section defines the BRS-I mandatory and optional SMBIOS requirements
+on top of cite:[SMBIOS], and is optional and recommended for BRS-B. Additional non-normative guidance may be found in the <<smbios-guidance, appendix>>.
 
-==== Type 16: Physical Memory Array (Required)
-==== Type 17: Memory Device (Required)
-==== Type 19: Memory Array Mapped Address (Required)
-==== Type 32: System Boot Information (Required)
-==== Type 38: IPMI Device Information (Conditionally Required)
-Required for systems with an IPMIv1.0 BMC Host Interface.
-
-==== Type 39: System Power Supplies (Recommended)
-Recommended for servers.
-
-==== Type 41: Onboard Devices Extended Information (Recommended)
-==== Type 42: Redfish Host Interface (Conditionally Required)
-Required for systems supporting the Redfish Host Interface.
-
-==== Type 43: TPM Device (Conditionally Required)
-Required for systems with a TPM.
-
-==== Type 44: Standard Processor Additional Information (Required)
-==== Type 45: Firmware Inventory Information (Recommended)
-==== Type 46: String Property (Recommended)
-
-
+.*SMBIOS structures in a conforming implementation*
+[cols="1,3,2,4", width=95%, align="center", options="header"]
+|===
+| Type | SMBIOS Structure                          | Status      | Note
+| 02   | Baseboard/Module Information              | Recommended |
+| 03   | System Enclosure/Chassis                  | Recommended | Relaxes DMTF requirement.
+| 08   | Port Connector Information                | Recommended | When physical ports present.
+| 09   | System Slots                              | Conditional | Required when expansion slots present.
+| 11   | OEM Strings                               | Recommended |
+| 13   | BIOS Language Information                 | Recommended |
+| 14   | Group Associations                        | Recommended | To describe associations between SMBIOS types.
+| 38   | IPMI Device Information                   | Conditional | Required when IPMIv1.0 host interface present.
+| 39   | System Power Supplies                     | Recommended | For servers.
+| 41   | Onboard Devices Extended Information      | Recommended |
+| 42   | Redfish Host Interface                    | Conditional | Required when Redfish host interface present.
+| 43   | TPM Device                                | Conditional | Required when TPM present.
+| 44   | Standard Processor Additional Information | Required    |
+| 45   | Firwmare Inventory Information            | Recommended |
+| 46   | String Property                           | Recommended |
+|===

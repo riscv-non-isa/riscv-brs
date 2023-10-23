@@ -1,0 +1,2 @@
+Note the DMTF requirements on the 64-bit SMBIOS 3.0 entry point (cite:[SMBIOS] Section 5.2.2) and data structures (cite:[SMBIOS] Section 6.2).
+

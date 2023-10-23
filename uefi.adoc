@@ -12,6 +12,7 @@ A compliant system must:
 * Meet the following UEFI memory map requirements:
 ** The default memory space attribute must be EFI_MEMORY_WB.
 ** Enable address translation.
+** Only use EfiRuntimeServicesData memory type for describing any SMBIOS data structures.
 * Declare a EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID conformance profile, as the BRS requirements are a superset of UEFI cite:[UEFI] (Section 2.6).
 * Declare EFI_CONFORMANCE_PROFILE_BRS_1_0_SPEC_GUID conformance profile ({ 0x05453310, 0x0545, 0x0545, { 0x05, 0x45, 0x33, 0x05, 0x45, 0x33, 0x05, 0x45 }}).
 
