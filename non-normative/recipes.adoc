@@ -30,3 +30,16 @@ configuration utilities. The actual meaning of the default (compatible to
 BRS-I) configuration would be highly specific to the vendor. In this example,
 it could capping all harts at the same performance level, or it could mean
 disabling efficiency harts.
+
+[[recipe-brs-m-guidance]]
+===== BRS-M Recipe Guidance
+
+In contrast to BRS-I and BRS-B, BRS-M has no implementation of UEFI related
+services. Non-UEFI firmware can also supports boot well. Although non-UEFI
+firmware does not support UEFI interface, it can also provide ACPI, SMBIOS
+and SBI services. ACPI and SMBIOS can be passed through DT.
+
+In general, Non-UEFI firmware can create ACPI and SMBIOS tables during boot,
+and then add their entry pointers to DT, respectively. After that, the
+operating system can obtain the ACPI and SMBIOS tables through DT to
+complete the system initialization.
