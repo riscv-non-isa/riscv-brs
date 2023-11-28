@@ -52,18 +52,6 @@ ID should uniquely identify the type of hart microarchitecture that is implement
 of the version of the processor implementation. Value of 0 is possible to indicate
 the field is not implemented. The Implementation value should reflect the design of
 the RISC-V Hart.
-| 23h| 0100h| Instruction set supported| DWORD| Bit-field | Bits [25:0]
-encodes the presence of RISC-V standard extensions, which is equivalent to bits
-[25:0] in RISC-V Machine ISA Register (**misa** CSR). Bits set to one mean the
-certain extensions of instruction set are supported on this hart.
-| 27h| 0100h| Machine Exception Trap Delegation Information| QWORD| Varies|
-Bit set to one means the corresponding exception is delegated to supervisor execution
-environment. Otherwise, supervisor execution environment must register the event
-handler in Machine-Mode for the certain exceptions through environment call.
-| 2fh| 0100h| Machine Interrupt Trap Delegation Information| QWORD| Varies|
-Bit set to one means the corresponding interrupt is delegated to supervisor execution
-environment. Otherwise, supervisor execution environment must register the event
-handler in Machine-Mode for the certain interrupts through environment.
 |===
 
 [[smbios-psd-ver]]
