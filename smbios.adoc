@@ -56,19 +56,11 @@ the RISC-V Hart.
 encodes the presence of RISC-V standard extensions, which is equivalent to bits
 [25:0] in RISC-V Machine ISA Register (**misa** CSR). Bits set to one mean the
 certain extensions of instruction set are supported on this hart.
-| 27h| 0100h| Privilege Level Supported| BYTE| Varies| The privilege levels
-supported by this RISC-V Hart. +
-Bit 0 Machine Mode +
-BIT 1 Reserved +
-BIT 2 Supervisor Mode +
-Bit 3 User Mode +
-BIT 6:4 Reserved +
-BIT 7 Debug Mode
-| 28h| 0100h| Machine Exception Trap Delegation Information| QWORD| Varies|
+| 27h| 0100h| Machine Exception Trap Delegation Information| QWORD| Varies|
 Bit set to one means the corresponding exception is delegated to supervisor execution
 environment. Otherwise, supervisor execution environment must register the event
 handler in Machine-Mode for the certain exceptions through environment call.
-| 30h| 0100h| Machine Interrupt Trap Delegation Information| QWORD| Varies|
+| 2fh| 0100h| Machine Interrupt Trap Delegation Information| QWORD| Varies|
 Bit set to one means the corresponding interrupt is delegated to supervisor execution
 environment. Otherwise, supervisor execution environment must register the event
 handler in Machine-Mode for the certain interrupts through environment.
