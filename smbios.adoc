@@ -72,17 +72,6 @@ handler in Machine-Mode for the certain exceptions through environment call.
 Bit set to one means the corresponding interrupt is delegated to supervisor execution
 environment. Otherwise, supervisor execution environment must register the event
 handler in Machine-Mode for the certain interrupts through environment.
-| 38h| 0100h| The register width (XLEN)| BYTE| ENUM| The width of register
-supported by this RISC-V Hart
-| 39h| 0100h| Machine Mode native base integer ISA width (M-XLEN)| BYTE| ENUM|
-The width (See below) of Machine Mode native base integer ISA supported by this RISC-V
-Hart
-| 3Ah| 0100h| Reserved| BYTE| ENUM| Placeholder for Hypervisor Mode
-| 3Bh| 0100h| Supervisor Mode native base integer ISA width (S-XLEN)| BYTE| ENUM|
-The width (See below) of Supervisor Mode native base integer ISA supported by this RISC-V
-Hart
-| 3Ch| 00100h| User Mode native base integer ISA width (U-XLEN)| BYTE| ENUM| The
-width (See below) of the User Mode native base integer ISA supported by this RISC-V Hart
 |===
 
 [[smbios-psd-ver]]
@@ -100,15 +89,4 @@ Major revision
 Minor revision
 | Combined | Description
 | v1.0 | 01h | 00h | 0100h | First BRS-defined definition
-|===
-
-=== Encoding of RISC-V Native Base Integer ISA Width
-
-[cols="1,1", width=80%, align="center", options="header"]
-|===
-| Byte Value | Meaning
-| 00h| Unsupported
-| 01h| 32-bit
-| 02h| 64-bit
-| 03h| Unsupported
 |===
