@@ -29,39 +29,34 @@ on top of cite:[SMBIOS], and is optional and recommended for BRS-B. Additional n
 
 === Type 44 Processor-Specific Data
 
-The following fields are defined to follow the standard processor-specific block fields (cite:[SMBIOS], Section 7.45.1).
+The processor-specific data structure fields are defined to follow the standard Processor-Specific Block fields (cite:[SMBIOS], Section 7.45.1).
 
 The structure is defined in a manner consistent with the DMTF specification
-language (cite:[SMBIOS]), and is valid for processors of architecture 07h (RV64) only.
-
-The structure begins with a version field to allow for future extensibility in a backwards-compatible
-manner. The version field is to be incremented any time fields are added. The current version of the structure is 000Ah (v0.10).
+language (cite:[SMBIOS]), and is valid for processors declared as
+architecture 07h (64-bit RISC-V) only.
 
 [cols="2,2,3,2,2,4", width=95%, align="center", options="header"]
 |===
 | Offset | Version | Name      | Length | Value   | Description
-| 00h|000Ah|Revision of RISC-V Processor-specific Block Structure|WORD|Varies|Bit 15:8 Major revision +
-Bit 7:0 Minor revision +
-The newer revision of RISC-V Processor-specific Block
-Structure is backward compatible with older version of this structure.
-| 02h| 000Ah| Hart ID| QWORD| Varies| The ID of this RISC-V Hart
-| 0Ah| 000Ah| Boot Hart| BYTE| Boolean| 1: This is boot hart to boot system +
+| 00h| 0100h|Revision|WORD|Varies|See <<smbios-psd-ver>>.
+| 02h| 0100h| Hart ID| QWORD| Varies| The ID of this RISC-V Hart
+| 0Ah| 0100h| Boot Hart| BYTE| Boolean| 1: This is boot hart to boot system +
 0: This is not the boot hart
-| 0Bh| 000Ah| Machine Vendor ID | QWORD| Varies| The vendor ID of this
+| 0Bh| 0100h| Machine Vendor ID | QWORD| Varies| The vendor ID of this
 RISC-V Hart
-| 13h| 000Ah| Machine Architecture ID| QWORD| Varies| Base
+| 13h| 0100h| Machine Architecture ID| QWORD| Varies| Base
 microarchitecture of the hart. Value of 0 is possible to indicate the field is
 not implemented. The combination of Machine Architecture ID and Machine Vendor
 ID should uniquely identify the type of hart microarchitecture that is implemented.
-| 1Bh| 000Ah| Machine Implementation ID| QWORD| Varies| Unique encoding
+| 1Bh| 0100h| Machine Implementation ID| QWORD| Varies| Unique encoding
 of the version of the processor implementation. Value of 0 is possible to indicate
 the field is not implemented. The Implementation value should reflect the design of
 the RISC-V Hart.
-| 23h| 000Ah| Instruction set supported| DWORD| Bit-field | Bits [25:0]
+| 23h| 0100h| Instruction set supported| DWORD| Bit-field | Bits [25:0]
 encodes the presence of RISC-V standard extensions, which is equivalent to bits
 [25:0] in RISC-V Machine ISA Register (**misa** CSR). Bits set to one mean the
 certain extensions of instruction set are supported on this hart.
-| 27h| 000Ah| Privilege Level Supported| BYTE| Varies| The privilege levels
+| 27h| 0100h| Privilege Level Supported| BYTE| Varies| The privilege levels
 supported by this RISC-V Hart. +
 Bit 0 Machine Mode +
 BIT 1 Reserved +
@@ -69,25 +64,42 @@ BIT 2 Supervisor Mode +
 Bit 3 User Mode +
 BIT 6:4 Reserved +
 BIT 7 Debug Mode
-| 28h| 000Ah| Machine Exception Trap Delegation Information| QWORD| Varies|
+| 28h| 0100h| Machine Exception Trap Delegation Information| QWORD| Varies|
 Bit set to one means the corresponding exception is delegated to supervisor execution
 environment. Otherwise, supervisor execution environment must register the event
 handler in Machine-Mode for the certain exceptions through environment call.
-| 30h| 000Ah| Machine Interrupt Trap Delegation Information| QWORD| Varies|
+| 30h| 0100h| Machine Interrupt Trap Delegation Information| QWORD| Varies|
 Bit set to one means the corresponding interrupt is delegated to supervisor execution
 environment. Otherwise, supervisor execution environment must register the event
 handler in Machine-Mode for the certain interrupts through environment.
-| 38h| 000Ah| The register width (XLEN)| BYTE| ENUM| The width of register
+| 38h| 0100h| The register width (XLEN)| BYTE| ENUM| The width of register
 supported by this RISC-V Hart
-| 39h| 000Ah| Machine Mode native base integer ISA width (M-XLEN)| BYTE| ENUM|
+| 39h| 0100h| Machine Mode native base integer ISA width (M-XLEN)| BYTE| ENUM|
 The width (See below) of Machine Mode native base integer ISA supported by this RISC-V
 Hart
-| 3Ah| 000Ah| Reserved| BYTE| ENUM| Placeholder for Hypervisor Mode
-| 3Bh| 000Ah| Supervisor Mode native base integer ISA width (S-XLEN)| BYTE| ENUM|
+| 3Ah| 0100h| Reserved| BYTE| ENUM| Placeholder for Hypervisor Mode
+| 3Bh| 0100h| Supervisor Mode native base integer ISA width (S-XLEN)| BYTE| ENUM|
 The width (See below) of Supervisor Mode native base integer ISA supported by this RISC-V
 Hart
-| 3Ch| 0000Ah| User Mode native base integer ISA width (U-XLEN)| BYTE| ENUM| The
+| 3Ch| 00100h| User Mode native base integer ISA width (U-XLEN)| BYTE| ENUM| The
 width (See below) of the User Mode native base integer ISA supported by this RISC-V Hart
+|===
+
+[[smbios-psd-ver]]
+=== Processor-Specific Data Structure Versioning
+
+The processor-specific data structure begins with a revision field to allow for future extensibility in a backwards-compatible manner.
+
+The minor revision is to be incremented anytime new fields are added in a backwards-compatible manner. The major revision is to be incremented on backwards-incompatible changes.
+
+[cols="1,1,1,1,3", width=95%, align="center", options="header"]
+|===
+| Version | Bits 15:8+
+Major revision
+| Bits 7:0+
+Minor revision
+| Combined | Description
+| v1.0 | 01h | 00h | 0100h | First BRS-defined definition
 |===
 
 === Encoding of RISC-V Native Base Integer ISA Width
