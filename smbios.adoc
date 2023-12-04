@@ -40,15 +40,13 @@ architecture 07h (64-bit RISC-V) only.
 | Offset | Version | Name      | Length | Value   | Description
 | 00h| 0100h|Revision|WORD|Varies|See <<smbios-psd-ver>>.
 | 02h| 0100h| Hart ID| QWORD| Varies| The ID of this RISC-V hart
-| 0Ah| 0100h| Boot hart| BYTE| Boolean| 1: This is the boot hart. +
-0: This is not the boot hart.
-| 0Bh| 0100h| Machine Vendor ID | QWORD| Varies| The vendor ID of this
+| 0Ah| 0100h| Machine Vendor ID | QWORD| Varies| The vendor ID of this
 RISC-V hart
-| 13h| 0100h| Machine Architecture ID| QWORD| Varies| Base
+| 12h| 0100h| Machine Architecture ID| QWORD| Varies| Base
 microarchitecture of the hart. Value of 0 is possible to indicate the field is
 not implemented. The combination of Machine Architecture ID and Machine Vendor
 ID should uniquely identify the type of hart microarchitecture that is implemented.
-| 1Bh| 0100h| Machine Implementation ID| QWORD| Varies| Unique encoding
+| 1Ah| 0100h| Machine Implementation ID| QWORD| Varies| Unique encoding
 of the version of the processor implementation. Value of 0 is possible to indicate
 the field is not implemented. The Implementation value should reflect the design of
 the RISC-V processor and not the surrounding system.
