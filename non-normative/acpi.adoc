@@ -1,7 +1,8 @@
 ACPI information is structured as tables with the address of the root of these
 tables known as Root System Description Table (RSDP) passed to the OS
-via a EFI_ACPI_20_TABLE_GUID configuration table in the UEFI firmware.
-The Operating System uses this address to locate all other ACPI tables.
+via a EFI_ACPI_20_TABLE_GUID configuration table in the UEFI firmware. In
+addition, RSDP can be obtained in other ways, such as DT. The Operating System
+uses this address to locate all other ACPI tables.
 
 Certain implementations may make use of the RISC-V Functional Fixed hardware Specification cite:[FFH].
 
