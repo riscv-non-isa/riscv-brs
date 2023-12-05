@@ -31,6 +31,8 @@ Systems implementing secure boot must support the following UEFI Platform Initia
 Systems implementing a TPM must implement the TCG
 EFI Protocol Specification cite:[TcgEfiPlat].
 
+<<uefi-variable, See additional requirements under Variable Services>>
+
 <<uefi-guidance-security, See additional guidance>>.
 
 === PCIe
@@ -90,10 +92,20 @@ The OS must call the ResetSystem() runtime service call to reset the system,
 preferring this to SBI SRST or other platform-specific mechanisms. This
 allows for UEFI implementations to perform any required platform tasks on the way out (e.g. servicing UpdateCapsule() or persisting non-volatile variables in some implementations).
 
+[[uefi-variable]]
 ==== Variable Services
 
 * Non-volatile UEFI variables must persist across EFI ResetSystem() calls.
 * The UEFI Runtime Services must be able to update the variables directly without the aid of the operating system.
+* For systems implementing secure boot:
+** Must support a minimum of 128 KB of non-volatile storage for UEFI variables.
+** The maximum supported variable size must be at least 64 KB.
+** The 'db' signature database variable EFI_IMAGE_SECURITY_DATABASE must
+be created with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS, to
+prevent rollback attacks.
+** The dbx signature database variable EFI_IMAGE_SECURITY_DATABASE1
+must be created with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS,
+to prevent rollback.
 
 === Firmware Update
 
@@ -106,4 +118,3 @@ In-band firmware updates must be implemented in one of two ways:
 ** Must provide an ESRT cite:[UEFI] (Section 23.4) describing every firmware image that is updated in-band.
 ** UpdateCapsule() is allowed to return EFI_UNSUPPORTED, when called after the UEFI boot services have been exited. <<uefi-guidance-firmware-update, See additional guidance>>.
 * Delivery of Capsules via file on Mass Storage Device (cite:[UEFI] Section 8.5.5).
-
