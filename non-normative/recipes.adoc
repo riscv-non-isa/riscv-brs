@@ -30,3 +30,18 @@ configuration utilities. The actual meaning of the default (compatible to
 BRS-I) configuration would be highly specific to the vendor. In this example,
 it could capping all harts at the same performance level, or it could mean
 disabling efficiency harts.
+
+[[recipe-brs-m-guidance]]
+===== BRS-M Recipe Guidance
+
+In contrast to BRS-I and BRS-B, BRS-M has no implementation of UEFI related
+services. Non-UEFI firmware, such as *coreboot*, can also supports boot well.
+Although non-UEFI firmware does not support UEFI interface, it can also
+provide ACPI, SMBIOS and SBI services. ACPI and SMBIOS can be passed through
+DT.
+
+The introduction of coreboot can refer to https://www.coreboot.org/[coreboot].
+This solution is the startup mode for coreboot plus payload. coreboot does the
+basic and necessary hardware initialization, where ACPI and SMBIOS tables are
+created, and then loads and executes payload, which completes the boot and
+additional functions. linuxboot is a common payload.
