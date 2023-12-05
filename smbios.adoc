@@ -22,7 +22,49 @@ on top of cite:[SMBIOS], and is optional and recommended for BRS-B. Additional n
 | 41   | Onboard Devices Extended Information      | Recommended |
 | 42   | Redfish Host Interface                    | Conditional | Required when Redfish host interface present.
 | 43   | TPM Device                                | Conditional | Required when TPM present.
-| 44   | Standard Processor Additional Information | Required    |
+| 44   | Processor Additional Information | Required    |
 | 45   | Firwmare Inventory Information            | Recommended |
 | 46   | String Property                           | Recommended |
+|===
+
+=== Type 44 Processor-Specific Data
+
+The processor-specific data structure fields are defined to follow the standard Processor-Specific Block fields (cite:[SMBIOS], Section 7.45.1).
+
+The structure is defined in a manner consistent with the DMTF specification
+language (cite:[SMBIOS]), and is valid for processors declared as
+architecture 07h (64-bit RISC-V) only.
+
+[cols="2,2,3,2,2,4", width=95%, align="center", options="header"]
+|===
+| Offset | Version | Name      | Length | Value   | Description
+| 00h| 0100h|Revision|WORD|Varies|See <<smbios-psd-ver>>.
+| 02h| 0100h| Hart ID| QWORD| Varies| The ID of this RISC-V hart
+| 0Ah| 0100h| Machine Vendor ID | QWORD| Varies| The vendor ID of this
+RISC-V hart
+| 12h| 0100h| Machine Architecture ID| QWORD| Varies| Base
+microarchitecture of the hart. Value of 0 is possible to indicate the field is
+not implemented. The combination of Machine Architecture ID and Machine Vendor
+ID should uniquely identify the type of hart microarchitecture that is implemented.
+| 1Ah| 0100h| Machine Implementation ID| QWORD| Varies| Unique encoding
+of the version of the processor implementation. Value of 0 is possible to indicate
+the field is not implemented. The Implementation value should reflect the design of
+the RISC-V processor and not the surrounding system.
+|===
+
+[[smbios-psd-ver]]
+=== Processor-Specific Data Structure Versioning
+
+The processor-specific data structure begins with a revision field to allow for future extensibility in a backwards-compatible manner.
+
+The minor revision is to be incremented anytime new fields are added in a backwards-compatible manner. The major revision is to be incremented on backwards-incompatible changes.
+
+[cols="1,1,1,1,3", width=95%, align="center", options="header"]
+|===
+| Version | Bits 15:8+
+Major revision
+| Bits 7:0+
+Minor revision
+| Combined | Description
+| v1.0 | 01h | 00h | 0100h | First BRS-defined definition
 |===
