@@ -1,9 +1,15 @@
 [[hart]]
 == Hart Requirements
+
+A compliant system includes a RISC-V application processor and the requirements in this section apply solely to harts in the application processors of a system.
+
 The BRS specification is minimally prescriptive on the RISC-V hart requirements. It is anticipated that detailed requirements will be driven by target market segment and product/solution requirements. The SEE mandates the minimal set required for a compliant system implementation of the BRS.
 
-The BRS requires harts to least be compliant to:
+[width=100%]
+[%header, cols="5,25"]
+|===
+| ID#     ^| Requirement
+| HR_010  | The RISC-V application processor harts MUST be compliant to RVA20S64 Profile cite:[Profile].
+2+| _The BRS governs the interactions between 64-bit OS supervisor-mode software and 64-bit firmware. These are minimum requirements allowing for the wide variety of existing and future hart implementations to be supported. It is expected that operating systems and hypervisors may impose additional profile/ISA requirements, depending on the use-case and application._
 
-* RVA20S64 Profile cite:[Profile], as BRS governs the interactions between 64-bit OS supervisor-mode software and 64-bit firmware, when employed.
-
-These are minimum requirements allowing for the wide variety of existing and future hart implementations to be supported. It is expected that operating systems and hypervisors may impose additional profile/ISA requirements, depending on the use-case and application.
+|===
