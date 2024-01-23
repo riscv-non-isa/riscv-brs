@@ -3,7 +3,7 @@
 
 The Unified Extensible Firmware Interface (UEFI) specification describes the interface between the OS and the supervisor-mode firmware.
 
-This section defines the BRS-I mandatory and optional UEFI requirements on top of cite:[UEFI], and is optional and recommended for BRS-B. Additional non-normative guidance may be found in the <<uefi-guidance, appendix>>.
+This section defines the BRS-I mandatory and optional UEFI requirements on top of cite:[UEFI], and is optional and recommended for BRS-B. Additional non-normative guidance may be found in the <<uefi-guidance, Firmware Implementation Guidance>> section.
 
 [width=100%]
 [%header, cols="5,25"]

@@ -6,7 +6,7 @@ The Operating System uses this address to locate all other ACPI tables.
 Certain implementations may make use of the RISC-V Functional Fixed hardware Specification cite:[FFH].
 
 [[acpi-guidance-64bit-clean]]
-===== 64-bits Clean
+==== 64-bits Clean
 
 ACPI started as a specification for 32-bit systems,
 so certain tables with physical address pointers (e.g. RSDP, FADT) allow for reporting
@@ -17,14 +17,14 @@ as the XSDT is a direct replacement). Thus, the ACPI tables are allowed to be
 located in any part of the physical address space.
 
 [[acpi-guidance-hw-reduced]]
-===== Hardware-Reduced ACPI
+==== Hardware-Reduced ACPI
 
 Compliant RISC-V systems only implement the HW-Reduced ACPI Model cite:[ACPI] (Section 4.1).
 This means the hardware portion of cite:[ACPI] (Section 4) is not required or
 supported. All functionality is instead provided through equivalent
 software-defined interfaces and the complexity in supporting ACPI is reduced.
 
-===== Table Guidance
+==== Table Guidance
 <<acpi-guidance-tab-min>> summarizes the minimum set of structures
 that must exist to support basic booting of RISC-V system with ACPI
 support. <<acpi-guidance-tab-opt>> lists additional possible ACPI
@@ -68,7 +68,7 @@ information about certain capabilities like ISA string, cache and MMU info.
 |===
 
 [[acpi-guidance-aml]]
-===== DSDT and SSDTs
+==== DSDT and SSDTs
 
 The ACPI name space describes devices which cannot be enumerated by any other standard ways. These typically include SoC embedded memory-mapped I/O devices, such as UARTs, <<acpi-guidance-pcie, PCIe>> or CXL root complexes, GPIO controllers, etc.
 
@@ -85,7 +85,7 @@ may choose to use SSDTs to:
 // Provide guidance here for PCIe RCs, perhaps leverage some of https://www.infradead.org/~mchehab/rst_conversion/PCI/acpi-info.html
 
 [[acpi-guidance-fadt]]
-===== FADT
+==== FADT
 
 cite:[ACPI] (Section 5.2.9) provides guidance on filling the
 Fixed ACPI Description Table for HW-reduced ACPI.
@@ -93,7 +93,7 @@ Fixed ACPI Description Table for HW-reduced ACPI.
 Don't forget to select an appropriate Preferred PM Profile.
 
 [[acpi-guidance-madt]]
-===== MADT
+==== MADT
 
 RINTC (per-hart) structures are mandatory. Depending on the interrupt controller implemented by the system, the MADT will also contain either PLIC or IMSIC/APLIC structures.
 
@@ -105,7 +105,7 @@ The PPTT Processor Properties Topology Table (PPTT) is to be used to
 describe affinities.
 
 [[acpi-guidance-pcie]]
-===== PCIe
+==== PCIe
 
 On some architectures, it became an industry accepted norm to describe PCIe implementations not compliant to the PCI Firmware Specification cite:[PCIFW]
 using specification-defined ACPI tables and objects. RISC-V systems compliant to the BRS must only expose ECAM-compatible implementations using the
@@ -122,7 +122,7 @@ a DSDT/SSDT MMIO device object without making the OS aware of the underlying PCI
 // Provide guidance here on AML object used, including interrupt routing, why I/O space is not included.
 
 [[acpi-guidance-spcr]]
-===== SPCR
+==== SPCR
 
 Early serial console can be implemented using either an NS16550 UART (SPCR Interface Type 0x12) or
 SBI console (SPCR Interface Type 0x15). When SPCR describes SBI console, the OS must use

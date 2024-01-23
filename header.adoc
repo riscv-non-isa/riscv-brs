@@ -62,7 +62,7 @@ include::sbi.adoc[]
 include::uefi.adoc[]
 include::acpi.adoc[]
 include::smbios.adoc[]
-include::appendices.adoc[]
+include::non-normative/guidance.adoc[]
 
 //the index must precede the bibliography
 include::index.adoc[]

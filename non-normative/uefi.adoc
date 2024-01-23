@@ -1,7 +1,7 @@
 UEFI implementations run in 64-bit S-Mode, VS-Mode or HS-Mode,
 depending on whether virtualization is supported or used.
 
-===== Privilege Levels
+==== Privilege Levels
 
 Different portions of system firmware might target a specific
 privilege level. In contrast, UEFI drivers, OS loaders and
@@ -15,13 +15,13 @@ mode as part of initializing boot and runtime services for UEFI
 drivers and applications.
 
 [[uefi-guidance-firmware-update]]
-===== Firmware Update
+==== Firmware Update
 
 UpdateCapsule() is only required before ExitBootServices() is called.
 The UpdateCapsule() implementation is expected to be suitable for use by generic firmware update services like fwupd and Windows Update. Both fwupd and Windows Update read the ESRT table to determine what firmware can be updated and use an EFI helper application to call UpdateCapsule() before ExitBootServices() is called.
 
 [[uefi-guidance-pcie]]
-====== PCIe
+==== PCIe
 
 Every implementation of the EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL provides the
 correct Address Translation Offset field to translate between the hart
