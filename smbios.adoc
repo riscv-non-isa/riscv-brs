@@ -4,29 +4,32 @@
 The System Management BIOS (SMBIOS) specification defines a standard format for presenting management information about an implentation, mostly focusing on hardware components.
 
 This section defines the BRS-I mandatory and optional SMBIOS requirements
-on top of cite:[SMBIOS], and is optional and recommended for BRS-B. Additional non-normative guidance may be found in the <<smbios-guidance, appendix>>.
+on top of cite:[SMBIOS], and is optional and recommended for BRS-B. Additional non-normative guidance may be found in the <<smbios-guidance, Firmware Implementation Guidance>> section.
 
-.*SMBIOS structures in a conforming implementation*
-[cols="1,3,2,4", width=95%, align="center", options="header"]
+[width=100%]
+[%header, cols="5,25"]
 |===
-| Type | SMBIOS Structure                          | Status      | Note
-| 02   | Baseboard/Module Information              | Recommended |
-| 03   | System Enclosure/Chassis                  | Recommended | Relaxes DMTF requirement.
-| 08   | Port Connector Information                | Recommended | When physical ports present.
-| 09   | System Slots                              | Conditional | Required when expansion slots present.
-| 11   | OEM Strings                               | Recommended |
-| 13   | BIOS Language Information                 | Recommended |
-| 14   | Group Associations                        | Recommended | To describe associations between SMBIOS types.
-| 38   | IPMI Device Information                   | Conditional | Required when IPMIv1.0 host interface present.
-| 39   | System Power Supplies                     | Recommended | For servers.
-| 41   | Onboard Devices Extended Information      | Recommended |
-| 42   | Redfish Host Interface                    | Conditional | Required when Redfish host interface present.
-| 43   | TPM Device                                | Conditional | Required when TPM present.
-| 44   | Processor Additional Information | Required    |
-| 45   | Firwmare Inventory Information            | Recommended |
-| 46   | String Property                           | Recommended |
+| ID#     ^| Requirement
+| SMBIOS_010 | A Baseboard/Module Information (Type 02) structure SHOULD be implemented.
+| SMBIOS_020 | A System Enclosure/Chassis (Type 03) structure SHOULD be implemented.
+2+|_This relaxes the DMTF specification requirement._
+| SMBIOS_030 | A Port Connector Information (Type 08) SHOULD be implemented.
+| SMBIOS_040 | A System Slots (Type 09) structure MUST be implemented, when expansion slots are present.
+| SMBIOS_050 | An OEM Strings (Type 11) structure SHOULD be implemented.
+| SMBIOS_060 | A BIOS Language Information (Type 13) structure SHOULD be implemented.
+| SMBIOS_070 | A Group Associations (Type 14) structure SHOULD be implemented.
+| SMBIOS_080 | An IPMI Device Information (Type 38) structure MUST be implemented, when an IPMIv1.0 host interface is present.
+| SMBIOS_090 | A System Power Supplies (Type 39) structure SHOULD be implemented.
+| SMBIOS_100 | An Onboard Devices Extended Information (Type 41) structure SHOULD be implemented.
+| SMBIOS_110 | A Redfish Host Interface (Type 42) structure MUST be implmented, when a Redfish host interface is present.
+| SMBIOS_120 | A TPM Device (Type 43) structure MUST be implmented, when a TPM is present.
+| SMBIOS_130 | A Processor Additional Information (Type 44) structure MUST be implemented.
+2+| _See the <<smbios-type44, structure definitions below>>_.
+| SMBIOS_140 | A Firwmare Inventory Information (Type 45) structure SHOULD be implemented.
+| SMBIOS_150 | A String Property (Type 46) structure SHOULD be implemented.
 |===
 
+[[smbios-type44]]
 === Type 44 Processor-Specific Data
 
 The processor-specific data structure fields are defined to follow the standard Processor-Specific Block fields (cite:[SMBIOS], Section 7.45.1).

@@ -3,118 +3,102 @@
 
 The Unified Extensible Firmware Interface (UEFI) specification describes the interface between the OS and the supervisor-mode firmware.
 
-This section defines the BRS-I mandatory and optional UEFI requirements on top of cite:[UEFI], and is optional and recommended for BRS-B. Additional non-normative guidance may be found in the <<uefi-guidance, appendix>>.
+This section defines the BRS-I mandatory and optional UEFI requirements on top of cite:[UEFI], and is optional and recommended for BRS-B. Additional non-normative guidance may be found in the <<uefi-guidance, Firmware Implementation Guidance>> section.
 
-A compliant system must:
+[width=100%]
+[%header, cols="5,25"]
+|===
+| ID#     ^| Requirement
+| UEFI_010 | Implement a 64-bit UEFI firmware.
+| UEFI_020 | Meet the 3rd Party UEFI Certificate Authority (CA) requirements on UEFI memory mitigations cite:[MSUefiCaRequirements].
+| UEFI_030 a| Meet BRS-I specific memory map requirements:
 
-* Implement a 64-bit UEFI firmware.
-* Meet the 3rd Party UEFI Certificate Authority (CA) requirements on UEFI memory mitigations cite:[MSUefiCaRequirements].
-* Meet the following UEFI memory map requirements:
-** The default memory space attribute must be EFI_MEMORY_WB.
-** Enable address translation.
-** Only use EfiRuntimeServicesData memory type for describing any SMBIOS data structures.
-* Declare a EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID conformance profile, as the BRS requirements are a superset of UEFI cite:[UEFI] (Section 2.6).
-* Declare EFI_CONFORMANCE_PROFILE_BRS_1_0_SPEC_GUID conformance profile ({ 0x05453310, 0x0545, 0x0545, { 0x05, 0x45, 0x33, 0x05, 0x45, 0x33, 0x05, 0x45 }}).
-
-The BRS does not require complying with the UEFI Platform Initialization Specification cite:[UEFI-PI].
-
-Only a system fully compliant to the requirements in this section
-may declare the EFI_CONFORMANCE_PROFILE_BRS_1_0_SPEC_GUID conformance profile.
+              * The default memory space attribute must be EFI_MEMORY_WB.
+              * Enable address translation.
+	      * Only use EfiRuntimeServicesData memory type for describing any SMBIOS data structures.
+| UEFI_040 | An implemenation MAY comply with the UEFI Platform Initialization Specification cite:[UEFI-PI].
+| UEFI_050 | All hart manipulation internal to a firmware implementation SHOULD be done before completion of the EFI_EVENT_GROUP_READY_TO_BOOT event, with all secondary harts remaining offline from that point on.
+2+| _This ensures an OS loader is entered with an OS-compatible state for all harts._
+| UEFI_060 | Declare a EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID conformance profile.
+2+| _The EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID conformance profile must be declared, as the BRS requirements are a superset of UEFI cite:[UEFI] (Section 2.6)._
+| UEFI_070 | Declare EFI_CONFORMANCE_PROFILE_BRS_1_0_SPEC_GUID conformance profile ({ 0x05453310, 0x0545, 0x0545, { 0x05, 0x45, 0x33, 0x05, 0x45, 0x33, 0x05, 0x45 }}).
+2+| _Only a system fully compliant to the requirements in this section may declare the EFI_CONFORMANCE_PROFILE_BRS_1_0_SPEC_GUID conformance profile._
+|===
 
 === Security Requirements
 
-Systems implementing secure boot must support the following UEFI Platform Initialization Specification cite:[UEFI-PI] protocols:
-
-* EFI_SECURITY_ARCH_PROTOCOL
-* EFI_SECURITY2_ARCH_PROTOCOL
-
-Systems implementing a TPM must implement the TCG
+[width=100%]
+[%header, cols="5,25"]
+|===
+| ID#     ^| Requirement
+| USEC_010 | Systems implementing UEFI Secure Boot MUST implement the EFI_SECURITY_ARCH_PROTOCOL and EFI_SECURITY2_ARCH_PROTOCOL protocols cite:[UEFI-PI].
+2+| _The Security and Security2 Architectural Protocols are overridden by some bootloaders (e.g. systemd-boot) to validate EFI binaries that cannot be validated against the UEFI security database._
+| USEC_020 | Systems implementing a TPM MUST implement the TCG
 EFI Protocol Specification cite:[TcgEfiPlat].
+|===
 
-<<uefi-variable, See additional requirements under Variable Services>>
+See additional <<uefi-rt, requirements under UEFI Runtime Services>>.
 
-<<uefi-guidance-security, See additional guidance>>.
+=== I/O-specific Requirements
 
-=== PCIe
+[width=100%]
+[%header, cols="5,25"]
+|===
+| ID#     ^| Requirement
+| UIO_010 | Systems implementing PCIe MUST always initialize all root complex hardware and perform resource assignment for all endpoints and usable hotplug-capable switches in the system, even in a boot scenario from a non-PCIe boot device.
+2+| _This is a stronger requirement than the PCI Firmware Specification firmware/OS device hand-off state (cite:[PCIFW] Section 3.5). <<uefi-guidance-pcie, See additional guidance>>._
+| UIO_020 | Systems implementing EFI_GRAPHICS_OUTPUT_PROTOCOL SHOULD configure the frame buffer to be directly accessible.
+2+| _That is, EFI_GRAPHICS_PIXEL_FORMAT is not PixelBltOnly and FrameBufferBase is reported as a valid hart MMIO address._
+|===
 
-Systems implementing PCIe must always initialize all root complex
-hardware and perform resource assignment for all endpoints and usable
-hotplug-capable switches in the system, even in a "rapid boot"
-scenario from a non-PCIe boot device. This is a stronger requirement
-than the PCI Firmware Specification firmware/OS device hand-off state
-(cite:[PCIFW] Section 3.5).
-
-<<uefi-guidance-pcie, See additional guidance>>.
-
+[[uefi-rt]]
 === UEFI Runtime Services
 
-[[uefi-rtc]]
-==== Real-Time Clock (RTC)
-
-The RTC is usually exposed via the UEFI GetTime and SetTime runtime services.
-
-===== Systems without an RTC
-
-* GetTime must be implemented (e.g. in terms of CPU cycle counter).
-* SetTime must return EFI_UNSUPPORTED, and be appropriately described in EFI_RT_PROPERTIES_TABLE.
-
-===== Systems with an RTC
-
-Where the RTC is on an OS-managed bus (e.g. I2C, subject to arbiration issues due to access to the bus by the OS):
-
-* The ACPI Time and Alarm Device <<acpi-tad, must be implemented>>.
-* GetTime and SetTime must return EFI_UNSUPPORTED, when called after the UEFI boot services have been exited.
-* GetTime and SetTime must be appropriately described in EFI_RT_PROPERTIES_TABLE.
-
-[[uefi-resetsystem]]
-==== UEFI Reset and Shutdown
-
-The UEFI ResetSystem() runtime service must be implemented using the SBI System Reset (SRST) extension. The following table maps the UEFI RT and SRST call parameters:
-
-[%autowidth]
+[width=100%]
+[%header, cols="5,25"]
 |===
-|ResetSystem() ResetType|sbi_system_reset type
+| ID#     ^| Requirement
+| URT_010 a| Systems without a Real-Time Clock (RTC) MUST meet the following requirements:
 
-|EfiResetShutdown
-|0x00000000 (Shutdown)
+             * GetTime must be implemented (e.g. in terms of CPU cycle counter).
+	     * SetTime must return EFI_UNSUPPORTED, and be appropriately described in EFI_RT_PROPERTIES_TABLE.
+| [[uefi-rtc]] URT_020 a| Systems with a Real-Time Clock on an OS-managed bus (e.g. I2C, subject to arbiration issues due to access to the bus by the OS) MUST meet the following requirements:
 
-|EfiResetCold
-|0x00000001 (Cold reboot)
+             * GetTime and SetTime must return EFI_UNSUPPORTED, when called after the UEFI boot services have been exited.
+             * GetTime and SetTime must be appropriately described in EFI_RT_PROPERTIES_TABLE.
+2+|_Also see <<acpi-tad, AML_070>>_.
+| [[uefi-resetsystem]] URT_030 a| The UEFI ResetSystem() runtime service MUST be implemented using the SBI SRST extension. The following table maps the UEFI RT and SRST call parameters:
+[width=100%]
+[%header]
+!===
+!ResetSystem() ResetType ^! sbi_system_reset type
+!EfiResetShutdown ! 0x00000000 (Shutdown)
+!EfiResetCold ! 0x00000001 (Cold reboot)
+!EfiResetWarm ! 0x00000002 (Warm reboot)
+!EfiResetPlatformSpecific ! 0xF0000000 - 0xFFFFFFFF (Vendor or platform specific reset type)
+!===
+2+| _The OS MUST call the ResetSystem() runtime service call to reset the system, preferring this to SBI SRST or other platform-specific mechanisms. This allows for systens to perform any required platform tasks on the way out (e.g. servicing UpdateCapsule() or persisting non-volatile variables in some systems)._
+| URT_040 | Non-volatile UEFI variables MUST persist across calls to the Reset System() runtime service call.
+| URT_050 | UEFI Runtime Services MUST be able to update the variables directly without the aid of an OS.
+| URT_060 a| The following requirements MUST be met for systems with UEFI Secure Boot:
 
-|EfiResetWarm
-|0x00000002 (Warm reboot)
-
-|EfiResetPlatformSpecific
-|0xF0000000 - 0xFFFFFFFF (Vendor or platform specific reset type)
+             * Must support a minimum of 128 KB of non-volatile storage for UEFI variables.
+	     * The maximum supported variable size must be at least 64 KB.
+	     * The 'db' signature database variable EFI_IMAGE_SECURITY_DATABASE must be created with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS, to prevent rollback attacks.
+	     * The 'dbx' signature database variable EFI_IMAGE_SECURITY_DATABASE1 must be created with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS, to prevent rollback.
 |===
-
-The OS must call the ResetSystem() runtime service call to reset the system,
-preferring this to SBI SRST or other platform-specific mechanisms. This
-allows for UEFI implementations to perform any required platform tasks on the way out (e.g. servicing UpdateCapsule() or persisting non-volatile variables in some implementations).
-
-[[uefi-variable]]
-==== Variable Services
-
-* Non-volatile UEFI variables must persist across EFI ResetSystem() calls.
-* The UEFI Runtime Services must be able to update the variables directly without the aid of the operating system.
-* For systems implementing secure boot:
-** Must support a minimum of 128 KB of non-volatile storage for UEFI variables.
-** The maximum supported variable size must be at least 64 KB.
-** The 'db' signature database variable EFI_IMAGE_SECURITY_DATABASE must
-be created with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS, to
-prevent rollback attacks.
-** The dbx signature database variable EFI_IMAGE_SECURITY_DATABASE1
-must be created with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS,
-to prevent rollback.
 
 === Firmware Update
 
-Systems with updatable firmware must implement either an in-band (firmware on hart updates itself) or an out-of-band firmware update mechanism (for example, by a Base Management Controller, BMC)).
-
-In-band firmware updates must be implemented in one of two ways:
-
-* UpdateCapsule() UEFI runtime service (cite:[UEFI] Section 8.5.3).
-** Firmware must accept updates in the "Firmware Management Protocol Data Capsule Structure" format as described in "Delivering Capsules Containing Updates to Firmware Management Protocol" cite:[UEFI] (Section 23.3).
-** Must provide an ESRT cite:[UEFI] (Section 23.4) describing every firmware image that is updated in-band.
-** UpdateCapsule() is allowed to return EFI_UNSUPPORTED, when called after the UEFI boot services have been exited. <<uefi-guidance-firmware-update, See additional guidance>>.
-* Delivery of Capsules via file on Mass Storage Device (cite:[UEFI] Section 8.5.5).
+[width=100%]
+[%header, cols="5,25"]
+|===
+| ID#     ^| Requirement
+| UFU_010 | Systems with updatable firmware MUST implement either an in-band or an out-of-band firmware update mechanism.
+2+| _In-band means the firmware running on a hart updates itself. Out-of-band means the update mechanism is located on an auxiliary processor, such as a Base Management Controller (BMC)._
+| UFU_020 | Systems with in-band firmware updates MUST do so either via UpdateCapsule() UEFI runtime service (cite:[UEFI] Section 8.5.3) or Delivery of Capsules via file on Mass Storage Device (cite:[UEFI] Section 8.5.5).
+| UFU_030 | Systems implementing in-band firmware updates via UpdateCapsule MUST accept updates in the "Firmware Management Protocol Data Capsule Structure" format as described in "Delivering Capsules Containing Updates to Firmware Management Protocol" cite:[UEFI] (Section 23.3).
+| UFU_040 | Systems implementing in-band firmware updates via UpdateCapsule MUST provide an ESRT cite:[UEFI] (Section 23.4) describing every firmware image that is updated in-band.
+| UFU_050 | Systems implementing in-band firmware updates via UpdateCapsule MAY return EFI_UNSUPPORTED, when called after the UEFI boot services have been exited.
+2+| _<<uefi-guidance-firmware-update, See additional guidance>>_.
+|===

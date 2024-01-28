@@ -1,9 +1,6 @@
 [[header]]
 :description: RISC-V Boot and Runtime Services Specification Document (BRS)
 :company: RISC-V.org
-:revdate: 2/2023
-:revnumber: 1.0
-:revremark: This document is in development. Assume everything can change. See http://riscv.org/spec-state for details.
 :url-riscv: http://riscv.org
 :doctype: book
 :preface-title: Preamble
@@ -14,11 +11,9 @@
 // Settings:
 :experimental:
 :reproducible:
-// needs to be changed? bug discussion started
-//:WaveDromEditorApp: app/wavedrom-editor.app
 :imagesoutdir: images
 :bibtex-file: brs.bib
-:bibtex-order: alphabetical
+:bibtex-order: appearance
 :bibtex-style: ieee
 :icons: font
 :lang: en
@@ -37,7 +32,7 @@ endif::[]
 :xrefstyle: short
 
 = RISC-V Boot and Runtime Services Specification (BRS)
-Aaron Durbin; Andrei Warkentin; OS-A SEE Task Group
+OS-A SEE Task Group
 
 // Preamble
 [WARNING]
@@ -60,7 +55,6 @@ Copyright 2023 by RISC-V International.
 [preface]
 include::contributors.adoc[]
 
-include::about.adoc[]
 include::intro.adoc[]
 include::recipes.adoc[]
 include::hart.adoc[]
@@ -68,7 +62,7 @@ include::sbi.adoc[]
 include::uefi.adoc[]
 include::acpi.adoc[]
 include::smbios.adoc[]
-include::appendices.adoc[]
+include::non-normative/guidance.adoc[]
 
 //the index must precede the bibliography
 include::index.adoc[]

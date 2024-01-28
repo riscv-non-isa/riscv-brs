@@ -1,5 +1,5 @@
 [[recipe-brs-i-guidance]]
-===== BRS-I Recipe Guidance
+==== BRS-I Recipe Guidance
 
 Systems compliant to BRS-I can successfully boot an existing generic
 operating system image without system-specific customizations, yet

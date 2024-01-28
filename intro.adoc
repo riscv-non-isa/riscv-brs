@@ -1,9 +1,11 @@
 [[intro]]
 == Introduction
 
-The Boot and Runtime Services (BRS) specification provides the software requirements for system vendors and Operating System Vendors (OSVs) to interoperate with one another by providing expectations for the Operating System (OS) to utilize in acts of device discovery, system management, and other rich operations provided in this specification. The approach taken is to leverage industry standards as well as RISC-V ratified specifications.
+The Boot and Runtime Services (BRS) specification defines a standardized set of software capabilities, that portable system software, such as operating systems and hypervisors, can rely on being present in an implementation to utilize in acts of device discovery, OS boot and hand-off, system management, and other operations.
 
 The BRS specification is targeting systems that implement S/U privilege modes, and optionally the HS privilege mode. This is the expected deployment for OSVs and system vendors in a typical ecosystem covering client systems up through server systems where software is provided by different vendors than the system vendor.
+
+This specification standardizes the requires for software interfaces and capabilities by building on top of relevant industry and ratified RISC-V standards.
 
 === Releases
 
@@ -15,4 +17,52 @@ The Boot and Runtime Services specification focuses on two solutions in the form
 
 === Testing and Conformance
 
-There will be a set of tests to help aid with conformance of the Boot and Runtime Services specification. It can be found...
+To be compliant with this specification, an implementation MUST support all mandatory requirements and MUST support the listed versions of the specifications. This standard set of capabilities MAY be extended by a specific implemenation with additional standard on custom capabilities, including compatible later versions of listed standard specifications. Portable system software MUST support the specified mandatory capabilities to the compliant with this specification.
+
+The requirements in this specification use the following format:
+
+[width=100%]
+[%header, cols="5,20"]
+|===
+| ID#     ^| Requirement
+| CAT_NNN  | The `CAT` is a category prefix that logically groups the
+             requirements and is followed by 3 digits - `NNN` - assigning a
+             numeric ID to the requirement.                                   +
+                                                                              +
+             The requirements use the key words "MUST", "MUST NOT",
+             "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
+             "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" that are
+             to be interpreted as described in RFC 2119 cite:[RFC_2119] when,
+             and only when, they appear in all capitals, as shown here. When
+             these words are not capitalized, they have their normal English
+             meanings.
+2+| _A requirement or a group of requirements may be followed by non-normative
+    text providing context or justification for the requirement. The
+    non-normative text may also be used to reference sources that are the
+    origin of the requirement._
+|===
+
+=== Glossary
+
+Most terminology has the standard RISC-V meaning. This table captures other terms used in the document. Terms in the document prefixed by 'PCIe' have the meaning defined in the PCI Express (PCIe) Base Specification cite:[PCI] (even if they are not in this table).
+
+.Terms and definitions
+[width=90%]
+[%header, cols="5,20"]
+|===
+| Term            ^| Definition
+| ACPI            | Advanced Configuration and Power Interface Specification cite:[ACPI].
+| BRS             | RISC-V Boot and Runtime Services. This document.
+| BRS-I           | Boot and Runtime Services Recipe targeting interoperation across different software suppliers.
+| BRS-B           | Boot and Runtime Services Recipe using a bespoke solution.
+| DT              | DeviceTree cite:[DT].
+| EBBR            | Embedded Base Boot Requirements Specification cite:[EBBR].
+| OSV             | Operating System Vendor.
+| OS              | Operating System or Hypervisor.
+| Profile         | RISC-V Profile cite:[Profile].
+| SBI             | RISC-V Supervisor Binary Interface Specification cite:[SBI].
+| SMBIOS          | System Management BIOS cite:[SMBIOS].
+| SoC             | System on a chip, a combination of processor and supporting chipset logic in single package.
+| System          | A system is the entirety of a computing entity, including all elements in a platform (hardware, firmware) and software (hypervisor, operating system, user applications, user data). A system can be thought of both as a logical construct (e.g. a software stack) or physical construct (e.g. a notebook, a desktop, a server, a network switch, etc).
+| UEFI            | Unified Extensible Firmware Interface Specification cite:[UEFI].
+|===

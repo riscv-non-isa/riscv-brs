@@ -3,67 +3,37 @@
 
 The Advanced Configuration and Power Interface specification provides the OS-centric view of system configuration, various hardware resources, events and power management.
 
-This section defines the BRS-I mandatory and optional ACPI requirements on top of cite:[ACPI] and cite:[UEFI]. Additional non-normative guidance may be found in the <<acpi-guidance, appendix>>.
+This section defines the BRS-I mandatory and optional ACPI requirements on top of cite:[ACPI] and cite:[UEFI]. Additional non-normative guidance may be found in the <<acpi-guidance, Firmware Implementation Guidance>> section.
 
-A compliant system must:
+[width=100%]
+[%header, cols="5,25"]
+|===
+| ID#     ^| Requirement
+| [[acpi-64bit-clean]]ACPI_010 a| Be 64-bits clean.
 
-* [[acpi-64bit-clean]]Be 64-bits clean.
-** RSDT must not be implemented, with RsdtAddress in RSDP set to 0.
-** 32-bit address fields must be 0.
-** <<acpi-guidance-64bit-clean, See additional guidance>>.
-* [[acpi-hw-reduced]]Implement the HW-Reduced ACPI Mode.
-** No FACS table.
-** <<acpi-guidance-hw-reduced, See additional guidance>>.
+  * RSDT must not be implemented, with RsdtAddress in RSDP set to 0.
+  * 32-bit address fields must be 0.
+2+| _<<acpi-guidance-64bit-clean, See additional guidance>>._
+| [[acpi-hw-reduced]]ACPI_020 a| Implement the HW-Reduced ACPI Mode (no FACS table).
+2+| _<<acpi-guidance-hw-reduced, See additional guidance>>._
+| [[acpi-pptt]]ACPI_030 | The Processor Properties Table (PPTT) MUST be implemented, even on systems with a simple hart topology.
+| ACPI_040 | The PCI Memory-mapped Configuration Space (MCFG) table cite:[PCIFW] MUST be present if and only if compatible non-hot-removable PCIe segments are made available to the OS.
+| [[acpi-mcfg]]ACPI_050 a| An MCFG table, if present, MUST meet the following requirements:
 
-=== Additional ACPI Table Requirements
+  * PCIe configuration space must be exposed to the OS in an ECAM-compatible (Enhanced Configuration Access Mechanism) manner.
+  * MCFG table must not require a custom vendor-specific PCIe root complex OS driver.
+2+| _See PCI Services in ACPI (cite:[ACPI], Section 4) for more ACPI requirements relating to PCIe support. <<acpi-guidance-pcie, See additional guidance>>._
+| ACPI_060 | A Serial Port Console Redirection Table cite:[SPCR] MUST be present on systems, where where the graphics hardware is not present or not made
+available to an OS loader via the standard UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL interface.
+2+|_In these cases, the table provides essential configuration for an early OS boot console._
+| [[acpi-spcr]]ACPI_070 a| An SPCR table, if present, MUST meet the following requirements:
 
-This section lists additional requirements for the mandatory and
-conditionally-required ACPI tables in a compliant system.
-
-[[acpi-pptt]]
-==== PPTT (Processor Properties Table).
-
-The PPTT is mandatory even for systems with a simple hart topology.
-
-==== Conditionally Required ACPI Tables
-
-This section lists requirements for ACPI tables that depend on
-features that may not be present in compliant systems.  For example,
-some systems may not have PCIe busses or a serial port.
-
-[[acpi-mcfg]]
-===== MCFG
-
-The PCI Memory-mapped Configuration Space (MCFG) table cite:[PCIFW] must only be present
-if and only if cite:[PCIFW] compatible non-hot-removable PCIe segments are made available
-to the OS.
-
-* PCIe configuration space must be exposed to the OS in an ECAM-compatible (Enhanced Configuration Access Mechanism) manner.
-* MCFG table must not require a custom vendor-specific PCIe root complex OS driver.
-
-Please see PCI Services in ACPI (cite:[ACPI], Section 4) for more ACPI requirements relating to PCIe support.
-
-<<acpi-guidance-pcie, See additional guidance>>.
-
-[[acpi-spcr]]
-===== SPCR
-
-The Serial Port Console Redirection Table cite:[SPCR] is required on
-systems where the graphics hardware is not present or not made
-available to an OS loader via the standard UEFI
-EFI_GRAPHICS_OUTPUT_PROTOCOL interface. In these cases, the table
-provides essential configuration for an early OS boot console.
-
-Additional requirements:
-
-// Version 4 is WIP https://github.com/andreiw/ms-acpi-tables-for-riscv/tree/riscv_plus_improvements
-* Revision 4 or later of SPCR.
-* For NS16550-compatible UARTs:
-** Use Interface Type 0x12 (16550-compatible with parameters defined in
-Generic Address Structure).
-** There must be a matching AML device object.
-
-<<acpi-guidance-spcr, See additional guidance>>.
+ * Revision 4 or later of SPCR.
+ * For NS16550-compatible UARTs:
+ ** Use Interface Type 0x12 (16550-compatible with parameters defined in Generic Address Structure).
+ ** There must be a matching AML device object.
+2+| _<<acpi-guidance-spcr, See additional guidance>>_.
+|===
 
 [[acpi-aml]]
 === ACPI Methods and Objects
@@ -73,37 +43,29 @@ objects.
 
 <<acpi-guidance-aml, See additional guidance>>.
 
-==== Device Methods and Objects
 
-* _CCA: Cache Coherency Attribute. This object provides information
+[width=100%]
+[%header, cols="5,25"]
+|===
+| ID#     ^| Requirement
+| AML_010 | The Cache Coherency Attribute (_CCA) device method MUST be implemented.
+2+| _This object provides information
   about whether a device has to manage cache coherency and about
   hardware support. This object is mandatory for all devices that
-  can access CPU-visible memory. (cite:[ACPI] Section 6.2.17)
-* _PRS: Possible Resource Settings. Not supported.
-* _SRS: Set Resource Settings. Not supported.
-
-===== Harts and Hart Performance Control
-
-Harts must be defined under \_SB (System Bus) namespace and not in the deprecated \_PR (Processors) namespace.
-
-If the platform provides support for OS-directed hart performance control and power management,
-then it must be exposed using Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8.4.6).
-Processor idle states must be described using Low Power Idle (LPI, cite:[ACPI] Section 8.4.3).
-
-===== PCIe Root Complex Devices
-
-* _CRS: Current Resource Settings
-** PCIe Root Complex descriptors must not contain resources of type DWordIO, QWordIO or ExtendedIO as the legacy PCI I/O port space is not supported.
-
-[[acpi-tad]]
-===== Time and Alarm Device
-
-UEFI Runtime Service should be used to provide time services to the
-OS, unless the RTC is subject to arbitration issues between concurrent
-OS and UEFI accesses to the underlying hardware. See <<uefi-rtc>>.
-
-In situations where the Time and Alarm Device (TAD) depends on a
+  can access CPU-visible memory. (cite:[ACPI] Section 6.2.17)._
+| AML_020 | The Current Resource Setting (_CRS) device method for a PCIe Root Complex SHOULD NOT contain resources of type DWordIO, QWordIO or ExtendedIO.
+2+| _Legacy PCI I/O BARs are uncommon in modern PCIe devices and support for PCI I/O space may complicate configuration of PCIe RC hardware in a compliant manner._
+| AML_030 | The Possible Resource Settings (_PRS) and Set Resource Settings (_SRS) device method SHOULD NOT be implemented.
+2+| _ACPI resource descriptors are typically used to describe devices with fixed CSR regions that do not change. Flexible resource assignment is not supported by most modern ACPI OSes._
+| AML_040 | Per-hart device objects MUST be defined under \_SB (System Bus) namespace and not in the deprecated \_PR (Processors) namespace.
+| AML_050 | Systems supporting OS-directed hart performance control and power management MUST expose these via Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8.4.6).
+| AML_060 | Processor idle states must be described using Low Power Idle (LPI, cite:[ACPI] Section 8.4.3).
+| [[acpi-tad]] AML_070 | Systems with a Real-Time Clock on an OS-managed bus (e.g. I2C, subject to arbiration issues due to access to the bus by the OS) MUST implement the Time and Alarm Device (TAD).
+2+| _Also see <<uefi-rtc, URT_020>>_.
+| AML_080 | Systems implementing a TAD must be functional without additional system-specific OS drivers.
+2+| _In situations where the Time and Alarm Device (TAD) depends on a
 vendor-specific OS driver for correct function (SPI, I2C, etc), the TAD must
 be functional if the OS driver is not loaded. That is, when a dependent
 driver is loaded, an AML method switches further accesses to go
-through the driver-backed OperationRegion.
+through the driver-backed OperationRegion._
+|===

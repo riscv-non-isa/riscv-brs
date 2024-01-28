@@ -1,0 +1,21 @@
+[[guidance]]
+== Firmware Implementation Guidance
+
+The guidance section is non-normative, and covers certain
+implementation choices, suggestions, historical context, etc.
+
+[[recipes-guidance]]
+=== Recipes Guidance
+include::recipes.adoc[]
+
+[[uefi-guidance]]
+=== UEFI Implementation Guidance
+include::uefi.adoc[]
+
+[[acpi-guidance]]
+=== ACPI Implementation Guidance
+include::acpi.adoc[]
+
+[[smbios-guidance]]
+=== SMBIOS Implementation Guidance
+include::smbios.adoc[]
