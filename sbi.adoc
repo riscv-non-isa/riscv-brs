@@ -10,7 +10,7 @@ privilege mode in order to be compatible with this specification.
 [%header, cols="5,25"]
 |===
 | ID#     ^| Requirement
-| SBI_010  | The SBI implementation MUST conform to SBI v1.0.
+| SBI_010  | The SBI implementation MUST conform to SBI v2.0 or later.
 | SBI_020  | The SBI implementation MUST implement the Hart State Management (HSM) extension.
 2+| _HSM is used by an OS for starting up, stopping, suspending and querying the status of secondary harts.
 | SBI_030  | The System Reset (SRST) extension MUST be implemented.
