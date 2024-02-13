@@ -60,7 +60,7 @@ objects.
 | AML_040 | Per-hart device objects MUST be defined under \_SB (System Bus) namespace and not in the deprecated \_PR (Processors) namespace.
 | AML_050 | Systems supporting OS-directed hart performance control and power management MUST expose these via Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8.4.6).
 | AML_060 | Processor idle states must be described using Low Power Idle (LPI, cite:[ACPI] Section 8.4.3).
-| [[acpi-tad]] AML_070 | Systems with a Real-Time Clock on an OS-managed bus (e.g. I2C, subject to arbiration issues due to access to the bus by the OS) MUST implement the Time and Alarm Device (TAD).
+| [[acpi-tad]] AML_070 | Systems with a Real-Time Clock on an OS-managed bus (e.g. I2C, subject to arbitration issues due to access to the bus by the OS) MUST implement the Time and Alarm Device (TAD).
 2+| _Also see <<uefi-rtc, URT_020>>_.
 | AML_080 | Systems implementing a TAD must be functional without additional system-specific OS drivers.
 2+| _In situations where the Time and Alarm Device (TAD) depends on a
