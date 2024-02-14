@@ -25,7 +25,7 @@ on top of cite:[SMBIOS], and is optional and recommended for BRS-B. Additional n
 | SMBIOS_120 | A TPM Device (Type 43) structure MUST be implmented, when a TPM is present.
 | SMBIOS_130 | A Processor Additional Information (Type 44) structure MUST be implemented.
 2+| _See the <<smbios-type44, structure definitions below>>_.
-| SMBIOS_140 | A Firwmare Inventory Information (Type 45) structure SHOULD be implemented.
+| SMBIOS_140 | A Firmware Inventory Information (Type 45) structure SHOULD be implemented.
 | SMBIOS_150 | A String Property (Type 46) structure SHOULD be implemented.
 |===
 
