@@ -62,7 +62,7 @@ See additional <<uefi-rt, requirements under UEFI Runtime Services>>.
 
              * GetTime must be implemented (e.g. in terms of CPU cycle counter).
 	     * SetTime must return EFI_UNSUPPORTED, and be appropriately described in EFI_RT_PROPERTIES_TABLE.
-| [[uefi-rtc]] URT_020 a| Systems with a Real-Time Clock on an OS-managed bus (e.g. I2C, subject to arbiration issues due to access to the bus by the OS) MUST meet the following requirements:
+| [[uefi-rtc]] URT_020 a| Systems with a Real-Time Clock on an OS-managed bus (e.g. I2C, subject to arbitration issues due to access to the bus by the OS) MUST meet the following requirements:
 
              * GetTime and SetTime must return EFI_UNSUPPORTED, when called after the UEFI boot services have been exited.
              * GetTime and SetTime must be appropriately described in EFI_RT_PROPERTIES_TABLE.
