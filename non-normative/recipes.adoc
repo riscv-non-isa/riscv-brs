@@ -13,20 +13,7 @@ management might not work out of the box. You could subsequently load
 the right drivers from the media coming with the board or fetch newest
 ones using a well-supported network adapter.
 
-Heterogeneous performance harts (e.g. mix of "performance" and "efficiency"
-harts) is a great example of a feature outside the current scope of BRS-I,
-yet with potential for adverse effects to a generic operating system
-written against the BRS-I spec. Such a feature does not have a standard
-way of being detected by an OS, leading to scheduling anomalies in
-operating systems that are not specially adapted. Consider two identical
-threads that, unbeknownst to the OS, get scheduled on harts with different
-performance characteristics. This might see dramatic difference in forward
-progress being made, with unexpected delays, timeouts or even crashes
-posible. Worse, there could be little to no system messages pointing to
-the cause of such behavior. Thus, such a feature would need to be made
-*opt-in* for BRS-I compliance. This could be done implicitly via loading
-of system-specific drivers, or explicitly via firmware setup and
-configuration utilities. The actual meaning of the default (compatible to
-BRS-I) configuration would be highly specific to the vendor. In this example,
-it could capping all harts at the same performance level, or it could mean
-disabling efficiency harts.
+Requirements for heterogeneous performance harts (e.g. mix of "performance"
+and "efficiency" harts) are described in the "RISC-V Server Platform
+specification" cite:[RSPS]. The ACPI specification cite:[ACPI] has a
+chapter on "Collaborative Processor Performance Control".
