@@ -45,7 +45,7 @@ See additional <<uefi-rt, requirements under UEFI Runtime Services>>.
 [%header, cols="5,25"]
 |===
 | ID#     ^| Requirement
-| UIO_010 | Systems implementing PCIe MUST always initialize all root complex hardware and perform resource assignment for all endpoints and usable hotplug-capable switches in the system, even in a boot scenario from a non-PCIe boot device.
+| UIO_010 | BRS-I Systems implementing PCIe MUST always initialize all root complex hardware and perform resource assignment for all endpoints and usable hotplug-capable switches in the system, even in a boot scenario from a non-PCIe boot device. For BRS-B systems, this implementation is optional.
 2+| _This is a stronger requirement than the PCI Firmware Specification firmware/OS device hand-off state (cite:[PCIFW] Section 3.5). <<uefi-guidance-pcie, See additional guidance>>._
 | UIO_020 | Systems implementing EFI_GRAPHICS_OUTPUT_PROTOCOL SHOULD configure the frame buffer to be directly accessible.
 2+| _That is, EFI_GRAPHICS_PIXEL_FORMAT is not PixelBltOnly and FrameBufferBase is reported as a valid hart MMIO address._
