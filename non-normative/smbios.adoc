@@ -1,2 +1,5 @@
 Note the DMTF requirements on the 64-bit SMBIOS 3.0 entry point (cite:[SMBIOS] Section 5.2.2) and data structures (cite:[SMBIOS] Section 6.2).
 
+==== Type 44 Processor-Specific Data
+
+The Machine Vendor ID, Machine Architecture ID, and Machine Implementation ID fields typically reflect the mvendorid, marchid and mimpid CSRs respectively.

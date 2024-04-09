@@ -10,53 +10,65 @@ Implementation Guidance>> section.
 
 IMPORTANT: All content in this section is optional and recommended for BRS-B.
 
+NOTE: The structures and fields in this section are defined in a manner consistent with the DMTF specification
+language (cite:[SMBIOS]).
+
 [width=100%]
 [%header, cols="5,25"]
 |===
 | ID#     ^| Requirement
 | SMBIOS_010 | A Baseboard/Module Information (Type 02) structure SHOULD be implemented.
 | SMBIOS_020 | A System Enclosure/Chassis (Type 03) structure SHOULD be implemented.
-2+|_This relaxes the DMTF specification requirement._
-| SMBIOS_030 | A Port Connector Information (Type 08) SHOULD be implemented.
-| SMBIOS_040 | A System Slots (Type 09) structure MUST be implemented, when expansion slots are present.
-| SMBIOS_050 | An OEM Strings (Type 11) structure SHOULD be implemented.
-| SMBIOS_060 | A BIOS Language Information (Type 13) structure SHOULD be implemented.
-| SMBIOS_070 | A Group Associations (Type 14) structure SHOULD be implemented.
-| SMBIOS_080 | An IPMI Device Information (Type 38) structure MUST be implemented, when an IPMIv1.0 host interface is present.
-| SMBIOS_090 | A System Power Supplies (Type 39) structure SHOULD be implemented.
-| SMBIOS_100 | An Onboard Devices Extended Information (Type 41) structure SHOULD be implemented.
-| SMBIOS_110 | A Redfish Host Interface (Type 42) structure MUST be implmented, when a Redfish host interface is present.
-| SMBIOS_120 | A TPM Device (Type 43) structure MUST be implmented, when a TPM is present.
-| SMBIOS_130 | A Processor Additional Information (Type 44) structure MUST be implemented.
+2+|_This relaxes the SMBIOS specification requirement._
+| SMBIOS_030 | A Processor Information (Type 04) structure, meeting the additional <<smbios-type04>> clarifications, must be implemented.
+2+|_This supersedes the RISC-V specific language in the SMBIOS specification (cite:[SMBIOS], Section 7.5.3.5)._
+| SMBIOS_040 | A Port Connector Information (Type 08) SHOULD be implemented.
+| SMBIOS_050 | A System Slots (Type 09) structure MUST be implemented, when expansion slots are present.
+| SMBIOS_060 | An OEM Strings (Type 11) structure SHOULD be implemented.
+| SMBIOS_070 | A BIOS Language Information (Type 13) structure SHOULD be implemented.
+| SMBIOS_080 | A Group Associations (Type 14) structure SHOULD be implemented.
+| SMBIOS_090 | An IPMI Device Information (Type 38) structure MUST be implemented, when an IPMIv1.0 host interface is present.
+| SMBIOS_100 | A System Power Supplies (Type 39) structure SHOULD be implemented.
+| SMBIOS_110 | An Onboard Devices Extended Information (Type 41) structure SHOULD be implemented.
+| SMBIOS_120 | A Redfish Host Interface (Type 42) structure MUST be implmented, when a Redfish host interface is present.
+| SMBIOS_130 | A TPM Device (Type 43) structure MUST be implmented, when a TPM is present.
+| SMBIOS_140 | A Processor Additional Information (Type 44) structure MUST be implemented.
 2+| _See the <<smbios-type44, structure definitions below>>_.
-| SMBIOS_140 | A Firmware Inventory Information (Type 45) structure SHOULD be implemented.
-| SMBIOS_150 | A String Property (Type 46) structure SHOULD be implemented.
+| SMBIOS_150 | A Firmware Inventory Information (Type 45) structure SHOULD be implemented.
 |===
+
+[[smbios-type04]]
+=== Type 04 Processor Information
+
+IMPORTANT: The information in this section supersedes the definitions in (cite:[SMBIOS], Section 7.5.3.5).
+
+For RISC-V class CPUs, the Processor ID contains a QWORD Machine Vendor ID CSR (mvendorid) of
+the first RISC-V processor hart meeting <<hart>> requirements.
+
+A processor is a physical grouping of harts. In modern designs this can mean the SoC.
 
 [[smbios-type44]]
 === Type 44 Processor-Specific Data
 
 The processor-specific data structure fields are defined to follow the standard Processor-Specific Block fields (cite:[SMBIOS], Section 7.45.1).
 
-The structure is defined in a manner consistent with the DMTF specification
-language (cite:[SMBIOS]), and is valid for processors declared as
-architecture 07h (64-bit RISC-V) only.
+The structure is valid for processors declared as architecture 07h (64-bit RISC-V) only.
+
+A Type 44 structure needs to be provided for every hart meeting <<hart>> requirements.
 
 [cols="2,2,3,2,2,4", width=95%, align="center", options="header"]
 |===
 | Offset | Version | Name      | Length | Value   | Description
 | 00h| 0100h|Revision|WORD|Varies|See <<smbios-psd-ver>>.
-| 02h| 0100h| Hart ID| QWORD| Varies| The ID of this RISC-V hart
+| 02h| 0100h| Hart ID| QWORD| Varies| The ID of this RISC-V hart.
 | 0Ah| 0100h| Machine Vendor ID | QWORD| Varies| The vendor ID of this
-RISC-V hart
+RISC-V hart.
 | 12h| 0100h| Machine Architecture ID| QWORD| Varies| Base
 microarchitecture of the hart. Value of 0 is possible to indicate the field is
 not implemented. The combination of Machine Architecture ID and Machine Vendor
 ID should uniquely identify the type of hart microarchitecture that is implemented.
 | 1Ah| 0100h| Machine Implementation ID| QWORD| Varies| Unique encoding
-of the version of the processor implementation. Value of 0 is possible to indicate
-the field is not implemented. The Implementation value should reflect the design of
-the RISC-V processor and not the surrounding system.
+of the version of the processor implementation.
 |===
 
 [[smbios-psd-ver]]
