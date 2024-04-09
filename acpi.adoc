@@ -29,7 +29,7 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
   * PCIe configuration space must be exposed to the OS in an ECAM-compatible (Enhanced Configuration Access Mechanism) manner.
   * MCFG table must not require a custom vendor-specific PCIe root complex OS driver.
 2+| _See PCI Services in ACPI (cite:[ACPI], Section 4) for more ACPI requirements relating to PCIe support. <<acpi-guidance-pcie, See additional guidance>>._
-| ACPI_060 | A Serial Port Console Redirection Table cite:[SPCR] MUST be present on systems, where where the graphics hardware is not present or not made
+| ACPI_060 | A Serial Port Console Redirection Table cite:[SPCR] MUST be present on systems, where the graphics hardware is not present or not made
 available to an OS loader via the standard UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL interface.
 2+|_In these cases, the table provides essential configuration for an early OS boot console._
 | [[acpi-spcr]]ACPI_070 a| An SPCR table, if present, MUST meet the following requirements:
