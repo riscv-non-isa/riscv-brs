@@ -21,7 +21,7 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
               * The default memory space attribute must be EFI_MEMORY_WB.
               * Enable address translation.
               * Only use EfiRuntimeServicesData memory type for describing any SMBIOS data structures.
-| UEFI_040 | An implemenation MAY comply with the UEFI Platform Initialization Specification cite:[UEFI-PI].
+| UEFI_040 | An implementation MAY comply with the UEFI Platform Initialization Specification cite:[UEFI-PI].
 | UEFI_050 | All hart manipulation internal to a firmware implementation SHOULD be done before completion of the EFI_EVENT_GROUP_READY_TO_BOOT event, with all secondary harts remaining offline from that point on.
 2+| _This ensures an OS loader is entered with an OS-compatible state for all harts._
 | UEFI_060 | Declare a EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID conformance profile.
@@ -66,7 +66,7 @@ See additional <<uefi-rt, requirements under UEFI Runtime Services>>.
 | URT_010 a| Systems without a Real-Time Clock (RTC) MUST meet the following requirements:
 
              * GetTime must be implemented (e.g. in terms of CPU cycle counter).
-	     * SetTime must return EFI_UNSUPPORTED, and be appropriately described in EFI_RT_PROPERTIES_TABLE.
+             * SetTime must return EFI_UNSUPPORTED, and be appropriately described in EFI_RT_PROPERTIES_TABLE.
 | [[uefi-rtc]] URT_020 a| Systems with a Real-Time Clock on an OS-managed bus (e.g. I2C, subject to arbitration issues due to access to the bus by the OS) MUST meet the following requirements:
 
              * GetTime and SetTime must return EFI_UNSUPPORTED, when called after the UEFI boot services have been exited.
@@ -82,15 +82,15 @@ See additional <<uefi-rt, requirements under UEFI Runtime Services>>.
 !EfiResetWarm ! 0x00000002 (Warm reboot)
 !EfiResetPlatformSpecific ! 0xF0000000 - 0xFFFFFFFF (Vendor or platform specific reset type)
 !===
-2+| _The OS MUST call the ResetSystem() runtime service call to reset the system, preferring this to SBI SRST or other platform-specific mechanisms. This allows for systens to perform any required platform tasks on the way out (e.g. servicing UpdateCapsule() or persisting non-volatile variables in some systems)._
+2+| _The OS MUST call the ResetSystem() runtime service call to reset or shutdown the system, preferring this to SBI SRST, ACPI or other platform-specific mechanisms. This allows for systems to perform any required platform tasks on the way out (e.g. servicing UpdateCapsule() or persisting non-volatile variables in some systems)._
 | URT_040 | Non-volatile UEFI variables MUST persist across calls to the Reset System() runtime service call.
 | URT_050 | UEFI Runtime Services MUST be able to update the variables directly without the aid of an OS.
 | URT_060 a| The following requirements MUST be met for systems with UEFI Secure Boot:
 
              * Must support a minimum of 128 KB of non-volatile storage for UEFI variables.
-	     * The maximum supported variable size must be at least 64 KB.
-	     * The 'db' signature database variable EFI_IMAGE_SECURITY_DATABASE must be created with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS, to prevent rollback attacks.
-	     * The 'dbx' signature database variable EFI_IMAGE_SECURITY_DATABASE1 must be created with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS, to prevent rollback.
+             * The maximum supported variable size must be at least 64 KB.
+             * The 'db' signature database variable EFI_IMAGE_SECURITY_DATABASE must be created with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS, to prevent rollback attacks.
+             * The 'dbx' signature database variable EFI_IMAGE_SECURITY_DATABASE1 must be created with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS, to prevent rollback.
 |===
 
 === BRS-I Firmware Update
