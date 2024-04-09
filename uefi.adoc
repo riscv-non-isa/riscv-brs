@@ -36,7 +36,7 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
 [%header, cols="5,25"]
 |===
 | ID#     ^| Requirement
-| USEC_010 | Systems implementing UEFI Secure Boot MUST implement the EFI_SECURITY_ARCH_PROTOCOL and EFI_SECURITY2_ARCH_PROTOCOL protocols cite:[UEFI-PI].
+| USEC_010 | Systems implementing UEFI Secure Boot are RECOMMENDED to implement the EFI_SECURITY_ARCH_PROTOCOL and EFI_SECURITY2_ARCH_PROTOCOL protocols cite:[UEFI-PI].
 2+| _The Security and Security2 Architectural Protocols are overridden by some bootloaders (e.g. systemd-boot) to validate EFI binaries that cannot be validated against the UEFI security database._
 | USEC_020 | Systems implementing a TPM MUST implement the TCG
 EFI Protocol Specification cite:[TcgEfiPlat].
