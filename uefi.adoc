@@ -80,9 +80,9 @@ See additional <<uefi-rt, requirements under UEFI Runtime Services>>.
 !EfiResetShutdown ! 0x00000000 (Shutdown)
 !EfiResetCold ! 0x00000001 (Cold reboot)
 !EfiResetWarm ! 0x00000002 (Warm reboot)
-!EfiResetPlatformSpecific ! 0xF0000000 - 0xFFFFFFFF (Vendor or platform specific reset type)
+!EfiResetPlatformSpecific ! 0xF0000000 - 0xFFFFFFFF (Vendor or system-specific reset type)
 !===
-2+| _The OS MUST call the ResetSystem() runtime service call to reset or shutdown the system, preferring this to SBI SRST, ACPI or other platform-specific mechanisms. This allows for systems to perform any required platform tasks on the way out (e.g. servicing UpdateCapsule() or persisting non-volatile variables in some systems)._
+2+| _The OS MUST call the ResetSystem() runtime service call to reset or shutdown the system, preferring this to SBI SRST, ACPI or other system-specific mechanisms. This allows for systems to perform any required system tasks on the way out (e.g. servicing UpdateCapsule() or persisting non-volatile variables in some systems)._
 | URT_040 | Non-volatile UEFI variables MUST persist across calls to the Reset System() runtime service call.
 | URT_050 | UEFI Runtime Services MUST be able to update the variables directly without the aid of an OS.
 | URT_060 a| The following requirements MUST be met for systems with UEFI Secure Boot:
