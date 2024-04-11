@@ -94,11 +94,10 @@ See additional <<uefi-rt, requirements under UEFI Runtime Services>>.
 [%header, cols="5,25"]
 |===
 | ID#     ^| Requirement
-| UFU_010 | Systems with updatable firmware MUST implement either an in-band or an out-of-band firmware update mechanism.
-2+| _In-band means the firmware running on a hart updates itself. Out-of-band means the update mechanism is located on an auxiliary processor, such as a Base Management Controller (BMC)._
-| UFU_020 | Systems with in-band firmware updates MUST do so either via UpdateCapsule() UEFI runtime service (cite:[UEFI] Section 8.5.3) or Delivery of Capsules via file on Mass Storage Device (cite:[UEFI] Section 8.5.5).
-| UFU_030 | Systems implementing in-band firmware updates via UpdateCapsule MUST accept updates in the "Firmware Management Protocol Data Capsule Structure" format as described in "Delivering Capsules Containing Updates to Firmware Management Protocol" cite:[UEFI] (Section 23.3).
-| UFU_040 | Systems implementing in-band firmware updates via UpdateCapsule MUST provide an ESRT cite:[UEFI] (Section 23.4) describing every firmware image that is updated in-band.
-| UFU_050 | Systems implementing in-band firmware updates via UpdateCapsule MAY return EFI_UNSUPPORTED, when called after the UEFI boot services have been exited.
+| UFU_010 | Systems with in-band firmware updates MUST do so either via UpdateCapsule() UEFI runtime service (cite:[UEFI] Section 8.5.3) or Delivery of Capsules via file on Mass Storage Device (cite:[UEFI] Section 8.5.5).
+2+| _In-band means the firmware running on a hart updates itself._
+| UFU_020 | Systems implementing in-band firmware updates via UpdateCapsule MUST accept updates in the "Firmware Management Protocol Data Capsule Structure" format as described in "Delivering Capsules Containing Updates to Firmware Management Protocol" cite:[UEFI] (Section 23.3).
+| UFU_030 | Systems implementing in-band firmware updates via UpdateCapsule MUST provide an ESRT cite:[UEFI] (Section 23.4) describing every firmware image that is updated in-band.
+| UFU_040 | Systems implementing in-band firmware updates via UpdateCapsule MAY return EFI_UNSUPPORTED, when called after the UEFI boot services have been exited.
 2+| _<<uefi-guidance-firmware-update, See additional guidance>>_.
 |===
