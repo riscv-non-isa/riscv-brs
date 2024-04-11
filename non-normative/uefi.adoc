@@ -5,9 +5,9 @@ depending on whether virtualization is supported or used.
 
 Different portions of system firmware might target a specific
 privilege level. In contrast, UEFI drivers, OS loaders and
-applications must not contain any assumptions of the privilege
-level at boot time. This is because UEFI-compliant executable
-images need to operate correctly in both (V)S-Mode or HS-Mode.
+pre-boot applications need to operate in supervisor mode (either
+(V)S-Mode or HS-Mode), because they are UEFI-compliant executable
+images.
 
 As an implementation choice, a UEFI firmware implementation may
 start execution in M-Mode. However it must switch to supervisor
