@@ -23,16 +23,12 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
 | [[acpi-hw-reduced]]ACPI_020 a| Implement the HW-Reduced ACPI Mode (no FACS table).
 2+| _<<acpi-guidance-hw-reduced, See additional guidance>>._
 | [[acpi-pptt]]ACPI_030 | The Processor Properties Table (PPTT) MUST be implemented, even on systems with a simple hart topology.
-| ACPI_040 | The PCI Memory-mapped Configuration Space (MCFG) table cite:[PCIFW] MUST be present if and only if compatible non-hot-removable PCIe segments are made available to the OS.
-| [[acpi-mcfg]]ACPI_050 a| An MCFG table, if present, MUST meet the following requirements:
-
-  * PCIe configuration space must be exposed to the OS in an ECAM-compatible (Enhanced Configuration Access Mechanism) manner.
-  * MCFG table must not require a custom vendor-specific PCIe root complex OS driver.
-2+| _See PCI Services in ACPI (cite:[ACPI], Section 4) for more ACPI requirements relating to PCIe support. <<acpi-guidance-pcie, See additional guidance>>._
-| ACPI_060 | A Serial Port Console Redirection Table cite:[SPCR] MUST be present on systems, where the graphics hardware is not present or not made
+| [[acpi-mcfg]]ACPI_040 | The PCI Memory-mapped Configuration Space (MCFG) table MUST NOT be present if it violates cite:[PCIFW].
+2+| _Only compatible PCIe segments, exposed via ECAM (Enhanced Configuration Access Mechanism), may be described in the MCFG. The MCFG MUST NOT require vendor-specific OS support. See PCI Services (cite:[ACPI], Section 4) for more ACPI requirements relating to PCIe support. <<acpi-guidance-pcie, See additional guidance>>._
+| ACPI_050 | A Serial Port Console Redirection Table cite:[SPCR] MUST be present on systems, where the graphics hardware is not present or not made
 available to an OS loader via the standard UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL interface.
 2+|_In these cases, the table provides essential configuration for an early OS boot console._
-| [[acpi-spcr]]ACPI_070 a| An SPCR table, if present, MUST meet the following requirements:
+| [[acpi-spcr]]ACPI_060 a| An SPCR table, if present, MUST meet the following requirements:
 
  * Revision 4 or later of SPCR.
  * For NS16550-compatible UARTs:
