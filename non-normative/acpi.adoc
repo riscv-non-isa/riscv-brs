@@ -58,9 +58,9 @@ information about certain capabilities like ISA string, cache and MMU info.
 |Memory-mapped Configuration space (MCFG)      |cite:[PCIFW]  |See <<acpi-mcfg>> and <<acpi-guidance-pcie, the notes below>>
 |Secondary System Description Table (SSDT)     |5.2.11.2      |See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
 |Serial Port Console Redirection (SPCR)        |cite:[SPCR]   |See <<acpi-spcr>> and <<acpi-guidance-spcr, the notes below>>
-|ACPI Table for TPM 2.0 (TPM2)                 |cite:[TcgAcpi]|If the platform supports TPM 2.0
-|System Resource Affinity Table (SRAT)         |5.2.16        |If the platform supports NUMA
-|System Locality Information Table (SLIT)      |5.2.17        |If the platform supports NUMA
+|ACPI Table for TPM 2.0 (TPM2)                 |cite:[TcgAcpi]|If the system supports TPM 2.0
+|System Resource Affinity Table (SRAT)         |5.2.16        |If the system supports NUMA
+|System Locality Information Table (SLIT)      |5.2.17        |If the system supports NUMA
 |Boot Error Record Table (BERT)                |18.3.1        |If APEI is supported
 |Error Injection Table (EINJ)                  |18.6.1        |If APEI is supported
 |Error Record Serialization Table (ERST)       |18.5          |If APEI is supported
