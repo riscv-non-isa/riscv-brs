@@ -1,10 +1,14 @@
 [[smbios]]
-== SMBIOS Requirements
+== BRS-I SMBIOS Requirements
 
 The System Management BIOS (SMBIOS) specification defines a standard format for presenting management information about an implentation, mostly focusing on hardware components.
 
 This section defines the BRS-I mandatory and optional SMBIOS requirements
-on top of cite:[SMBIOS], and is optional and recommended for BRS-B. Additional non-normative guidance may be found in the <<smbios-guidance, Firmware Implementation Guidance>> section.
+on top of existing cite:[SMBIOS] specification requirements. Additional
+non-normative guidance may be found in the <<smbios-guidance, Firmware
+Implementation Guidance>> section.
+
+IMPORTANT: All content in this section is optional and recommended for BRS-B.
 
 [width=100%]
 [%header, cols="5,25"]

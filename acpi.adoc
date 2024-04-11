@@ -1,9 +1,15 @@
 [[acpi]]
-== ACPI Requirements
+== BRS-I ACPI Requirements
 
 The Advanced Configuration and Power Interface specification provides the OS-centric view of system configuration, various hardware resources, events and power management.
 
-This section defines the BRS-I mandatory and optional ACPI requirements on top of cite:[ACPI] and cite:[UEFI]. Additional non-normative guidance may be found in the <<acpi-guidance, Firmware Implementation Guidance>> section.
+This section defines the BRS-I mandatory and optional ACPI
+requirements on top of existing cite:[ACPI] and cite:[UEFI]
+specification requirements. Additional non-normative guidance may be
+found in the <<acpi-guidance, Firmware Implementation Guidance>>
+section.
+
+IMPORTANT: All content in this section is optional and recommended for BRS-B.
 
 [width=100%]
 [%header, cols="5,25"]
@@ -36,13 +42,12 @@ available to an OS loader via the standard UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL int
 |===
 
 [[acpi-aml]]
-=== ACPI Methods and Objects
+=== BRS-I ACPI Methods and Objects
 
 This section lists additional requirements for ACPI methods and
 objects.
 
 <<acpi-guidance-aml, See additional guidance>>.
-
 
 [width=100%]
 [%header, cols="5,25"]
