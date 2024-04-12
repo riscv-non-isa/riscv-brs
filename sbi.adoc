@@ -1,7 +1,7 @@
 [[sbi]]
 == SBI Requirements
 
-The _RISC-V Supervisor Binary Interface Specification_ (SBI) cite: [SBI] defines the interface
+The _RISC-V Supervisor Binary Interface Specification_ (SBI) cite: [SBI] defines an interface
 between the supervisor mode and the next higher privilege mode. This section
 defines the mandatory SBI version and extensions implemented by the higher
 privilege mode in order to be compatible with this specification.
