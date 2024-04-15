@@ -40,12 +40,12 @@ implemented.
 |ACPI Table                                    |ACPI Section|Note
 |Root System Description Pointer (RSDP)        |5.2.5      | See <<acpi-64bit-clean, high-level requirements>>.
 |Extended System Description Table (XSDT)      |5.2.8      | Contains pointers to other tables.
-|Fixed ACPI Description Table (FADT)           |5.2.9      | See <<acpi-hw-reduced>>, <<acpi-guidance-hw-reduced>> and <<acpi-guidance-fadt, the notes below>>.
+|Fixed ACPI Description Table (FADT)           |5.2.9      | See <<acpi-hw-reduced, ACPI_020>>, <<acpi-guidance-hw-reduced>> and <<acpi-guidance-fadt, the notes below>>.
 |Differentiated System Description Table (DSDT)|5.2.11.1   | See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
 |Multiple APIC Description Table (MADT)        |5.2.12     | See <<acpi-guidance-madt, the notes below>>
 |RISC-V Hart Capabilities Table (RHCT)         |New        | Communicates
 information about certain capabilities like ISA string, cache and MMU info.
-|Processor Properties Topology Table (PPTT)    |5.2.29     | See <<acpi-pptt>>
+|Processor Properties Topology Table (PPTT)    |5.2.29     | See <<acpi-pptt, ACPI_030>>
 |===
 
 // Add RIMT for IOMMU here.
@@ -55,9 +55,9 @@ information about certain capabilities like ISA string, cache and MMU info.
 [cols="3,2,2", width=95%, align="center", options="header"]
 |===
 |ACPI Table                                    |ACPI Section  |Note
-|Memory-mapped Configuration space (MCFG)      |cite:[PCIFW]  |See <<acpi-mcfg>> and <<acpi-guidance-pcie, the notes below>>
+|Memory-mapped Configuration space (MCFG)      |cite:[PCIFW]  |See <<acpi-mcfg, ACPI_040>> and <<acpi-guidance-pcie, the notes below>>
 |Secondary System Description Table (SSDT)     |5.2.11.2      |See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
-|Serial Port Console Redirection (SPCR)        |cite:[SPCR]   |See <<acpi-spcr>> and <<acpi-guidance-spcr, the notes below>>
+|Serial Port Console Redirection (SPCR)        |cite:[SPCR]   |See <<acpi-spcr, APCI_060>> and <<acpi-guidance-spcr, the notes below>>
 |ACPI Table for TPM 2.0 (TPM2)                 |cite:[TcgAcpi]|If the system supports TPM 2.0
 |System Resource Affinity Table (SRAT)         |5.2.16        |If the system supports NUMA
 |System Locality Information Table (SLIT)      |5.2.17        |If the system supports NUMA
