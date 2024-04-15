@@ -20,7 +20,7 @@ language (cite:[SMBIOS]).
 | SMBIOS_010 | A Baseboard/Module Information (Type 02) structure SHOULD be implemented.
 | SMBIOS_020 | A System Enclosure/Chassis (Type 03) structure SHOULD be implemented.
 2+|_This relaxes the SMBIOS specification requirement._
-| SMBIOS_030 | A Processor Information (Type 04) structure, meeting the additional <<smbios-type04>> clarifications, must be implemented.
+| SMBIOS_030 | A Processor Information (Type 04) structure, meeting the additional <<smbios-type04>> clarifications, MUST be implemented.
 2+|_This supersedes the RISC-V specific language in the SMBIOS specification (cite:[SMBIOS], Section 7.5.3.5)._
 | SMBIOS_040 | A Port Connector Information (Type 08) SHOULD be implemented.
 | SMBIOS_050 | A System Slots (Type 09) structure MUST be implemented, when expansion slots are present.
