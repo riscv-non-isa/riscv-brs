@@ -36,10 +36,10 @@ available to an OS loader via the standard UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL int
  ** There must be a matching AML device object.
 2+| _<<acpi-guidance-spcr, See additional guidance>>_.
 | [[acpi-namespace-dev]]ACPI_080 | Depending on the interrupt controller
-implemented by the system, PLIC or APLIC namespace devices must be
+implemented by the system, PLIC or APLIC namespace devices MUST be
 present in the ACPI namespace along with MADT entries. <<acpi-ids,
 See RVI ACPI IDs>>.
-2+| _Also see <<acpi-irq-gsb, AML_090>> and <<acpi-irq-dep, AML_100>>_.
+2+| _Also see <<acpi-irq-gsb, AML_090>>, <<acpi-irq-dep, AML_100>> and <<acpi-guidance-gsi-namespace, additional guidance>>_.
 |===
 
 [[acpi-aml]]
@@ -74,11 +74,11 @@ vendor-specific OS driver for correct function (SPI, I2C, etc), the TAD must
 be functional if the OS driver is not loaded. That is, when a dependent
 driver is loaded, an AML method switches further accesses to go
 through the driver-backed OperationRegion._
-| [[acpi-irq-gsb]] AML_090 | PLIC and APLIC devices must support
-Global System Interrupt Base (_GSB, cite:[ACPI] Section 6.2.7).
+| [[acpi-irq-gsb]] AML_090 | PLIC and APLIC device objects MUST support
+the Global System Interrupt Base (_GSB, cite:[ACPI] Section 6.2.7) object.
 <<acpi-guidance-gsi-namespace, See additional guidance>>.
-| [[acpi-irq-dep]] AML_100 | Devices which use Global System
-Interrupts (GSI) must indicate the dependency on corresponding
+| [[acpi-irq-dep]] AML_100 | Devices with Global System
+Interrupt (GSI, aka wired interrupt) resources MUST indicate the dependency on the corresponding
 interrupt controller using Operation Region Dependencies (_DEP,
 cite:[ACPI] Section 6.5.8).
 <<acpi-guidance-gsi-namespace, See additional guidance>>.
