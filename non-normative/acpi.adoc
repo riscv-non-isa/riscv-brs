@@ -105,11 +105,10 @@ The PPTT Processor Properties Topology Table (PPTT) is to be used to
 describe affinities.
 
 [[acpi-guidance-gsi-namespace]]
-==== PLIC/APLIC as namespace devices
-The devices which have wired interrupts (GSI), should provide the
-dependency on the appropriate interrupt controller similar to below
-example with PLIC.
+==== PLIC/APLIC Namespace Devices
 
+Here's an example of an ASL excerpt satisfying <<acpi-namespace-dev, ACPI_080>>,
+<<acpi-irq-dep, AML_090>> and <<acpi-irq-gsb, AML_100>> requirements.
 
  Scope (\_SB)
  {
@@ -122,17 +121,17 @@ example with PLIC.
        }
     }
     Device (DEV1)
-    { 
+    {
       ...
       Name (_DEP, Package() {\_SB.IC00})
       Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
-      {   
+      {
           Memory32Fixed (ReadWrite,
             0x10010000,         // Address Base.
             0x00010000,         // Address Length
             )
           Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive, ,,)
-          { 
+          {
             0x10,
           }
       })

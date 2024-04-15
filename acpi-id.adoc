@@ -1,9 +1,9 @@
 [[acpi-ids]]
-=== RVI specific ACPI IDs
+=== RVI-specific ACPI IDs
 
 ACPI ID is used in the _HID (Hardware ID), _CID (Compatibility ID) or
 _SUB (Subsystem ID) objects as described in the ACPI Specification for
-devices that do not have a standard enumeration mechanism. The ACPI ID
+devices, that do not have a standard enumeration mechanism. The ACPI ID
 consists of two parts: a Vendor ID followed by a product identifier.
 
 Vendor IDs consist of 4 characters, each character being either an
