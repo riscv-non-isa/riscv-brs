@@ -40,12 +40,17 @@ language (cite:[SMBIOS]).
 [[smbios-type04]]
 === Type 04 Processor Information
 
-IMPORTANT: The information in this section supersedes the definitions in (cite:[SMBIOS], Section 7.5.3.5).
+IMPORTANT: The information in this section supersedes the definitions in (cite:[SMBIOS], Section 7.5.3.4).
 
-For RISC-V class CPUs, the Processor ID contains a QWORD Machine Vendor ID CSR (mvendorid) of
-the first RISC-V processor hart meeting <<hart>> requirements.
+A processor is a grouping of harts in a physical package. In modern designs this MAY mean a SoC.
 
-A processor is a physical grouping of harts. In modern designs this can mean the SoC.
+For RISC-V class CPUs, the Processor ID field contains two DWORD-formatted values describing
+the overall physical processor package vendor and version. For some implementations
+this may also be known as the SoC ID. The first DWORD (offsets 08h-0Bh) is the JEP-106 code for
+the vendor. The second DWORD (offsets 0Ch-0Fh) reflects vendor-specific part versioning.
+
+For hart-specific vendor and revision information, please see Type 44 Processor-Specific Data
+structures.
 
 [[smbios-type44]]
 === Type 44 Processor-Specific Data
