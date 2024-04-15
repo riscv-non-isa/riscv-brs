@@ -9,7 +9,7 @@ consists of two parts: a Vendor ID followed by a product identifier.
 Vendor IDs consist of 4 characters, each character being either an
 uppercase letter (A-Z) or a numeral (0-9). The Vendor ID SHOULD be
 unique across the Industry and registered by the UEFI forum. For RVI
-standard devices, **"RSCV"** is the Vendor ID registered. Vendor-specific
+standard devices, `RSCV` is the Vendor ID registered. Vendor-specific
 devices can use an appropriate Vendor ID registered for the manufacturer.
 
 Product Identifiers are always four-character hexadecimal numbers (0-9
@@ -25,6 +25,8 @@ ACPI ID for any new device.
 [%header, cols="5,25"]
 |===
 | ACPI ID     ^| Device
-| RSCV0001     | RISC-V Platform-Level Interrupt Controller (PLIC)
-| RSCV0002     | RISC-V Advanced Platform-Level Interrupt Controller (APLIC)
+| `RSCV0001`     | RISC-V Platform-Level Interrupt Controller (PLIC)
+| `RSCV0002`     | RISC-V Advanced Platform-Level Interrupt Controller (APLIC)
+| `RSCV0003`     | NS16550-compatible UART compatible with a Type 0x12 SPCR definition
+2+| _Also see <<acpi-props-uart>>._
 |===

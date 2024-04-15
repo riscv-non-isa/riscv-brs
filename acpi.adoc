@@ -33,8 +33,8 @@ available to an OS loader via the standard UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL int
  * Revision 4 or later of SPCR.
  * For NS16550-compatible UARTs:
  ** Use Interface Type 0x12 (16550-compatible with parameters defined in Generic Address Structure).
- ** There MUST be a matching AML device object.
-2+| _<<acpi-guidance-spcr, See additional guidance>>_.
+ ** There MUST be a matching AML device object with compatible ID `RSCV0003`.
+2+| _See <<acpi-guidance-spcr, additional guidance>>_.
 | [[acpi-namespace-dev]]ACPI_080 | Depending on the interrupt controller
 implemented by the system, PLIC or APLIC namespace devices MUST be
 present in the ACPI namespace along with MADT entries. <<acpi-ids,
@@ -82,6 +82,8 @@ Interrupt (GSI, aka wired interrupt) resources MUST indicate the dependency on t
 interrupt controller using Operation Region Dependencies (_DEP,
 cite:[ACPI] Section 6.5.8).
 <<acpi-guidance-gsi-namespace, See additional guidance>>.
+| AML_110 | UART device objects with ID `RSCV0003` MUST implement <<acpi-props-uart, Properties for UART Devices>>.
 |===
 
 include::acpi-id.adoc[]
+include::acpi-prop.adoc[]
