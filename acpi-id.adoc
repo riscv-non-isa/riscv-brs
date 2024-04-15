@@ -7,7 +7,7 @@ devices, that do not have a standard enumeration mechanism. The ACPI ID
 consists of two parts: a Vendor ID followed by a product identifier.
 
 Vendor IDs consist of 4 characters, each character being either an
-uppercase letter (A-Z) or a numeral (0-9). The Vendor ID should be
+uppercase letter (A-Z) or a numeral (0-9). The Vendor ID SHOULD be
 unique across the Industry and registered by the UEFI forum. For RVI
 standard devices, **"RSCV"** is the Vendor ID registered. Vendor-specific
 devices can use an appropriate Vendor ID registered for the manufacturer.
