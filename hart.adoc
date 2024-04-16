@@ -9,7 +9,7 @@ The BRS specification is minimally prescriptive on the RISC-V hart requirements.
 [%header, cols="5,25"]
 |===
 | ID#     ^| Requirement
-| HR_010  | The RISC-V application processor harts MUST be compliant to RVA20S64 Profile cite:[Profile].
+| `HR_010`  | The RISC-V application processor harts MUST be compliant to `RVA20S64` profile cite:[Profile].
 2+| _The BRS governs the interactions between 64-bit OS supervisor-mode software and 64-bit firmware. These are minimum requirements allowing for the wide variety of existing and future hart implementations to be supported. It is expected that operating systems and hypervisors may impose additional profile/ISA requirements, depending on the use-case and application._
 
 |===

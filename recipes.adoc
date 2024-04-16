@@ -67,4 +67,4 @@ custom distributions.
 | >= RVA20 | EBBR, >= 2.1.0 cite:[EBBR] | optional, >= 6.6 | optional, >= v0.3 | >= 2.0 | optional, >= 3.7.0
 |===
 
-Either of ACPI table or device-tree must be supplied.
+Either of ACPI table or Device Tree must be supplied, but never both at the same time.
