@@ -1,7 +1,7 @@
 [[acpi-props]]
 === RVI-specific ACPI Device Properties
 
-This section defines the _DSD device properties cite:[DSD] in the `rscv-` namespace.
+This section defines the `_DSD` device properties cite:[DSD] in the `rscv-` namespace.
 
 Where explicit values are provided in a property definition, only these values must be used. System behavior with any other values is undefined.
 
@@ -20,6 +20,6 @@ to configure a disabled device._
 | `reg-shift` | Integer | Quantity to shift the register offsets by.
 | `reg-io-width` | Integer | The size (in bytes) of the register accesses that should be performed on the device.
 3+| _1, 2, 4 or 8._
-| `rx-fifo-size` | Integer | The RX FIFO size (in bytes).
+| `rx-fifo-size` | Integer | The receive FIFO size (in bytes).
 |===
 

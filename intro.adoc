@@ -1,7 +1,7 @@
 [[intro]]
 == Introduction
 
-The Boot and Runtime Services (BRS) specification defines a standardized set of software capabilities, that portable system software, such as operating systems and hypervisors, can rely on being present in an implementation to utilize in acts of device discovery, OS boot and hand-off, system management, and other operations.
+The _RISC-V Boot and Runtime Services Specification_ (BRS) defines a standardized set of software capabilities, that portable system software, such as operating systems and hypervisors, can rely on being present in an implementation to utilize in acts of device discovery, OS boot and hand-off, system management, and other operations.
 
 The BRS specification is targeting systems that implement S/U privilege modes, and optionally the HS privilege mode. This is the expected deployment for OSVs and system vendors in a typical ecosystem covering client systems up through server systems where software is provided by different vendors than the system vendor.
 
@@ -9,11 +9,11 @@ This specification standardizes the requires for software interfaces and capabil
 
 === Releases
 
-It is expected that the Boot and Runtime Services specification will periodically release a new specification. The determination of a new release will be based on the evaluation of significant changes to its underlying dependencies.
+It is expected that the BRS will periodically release a new specification. The determination of a new release will be based on the evaluation of significant changes to its underlying dependencies.
 
 === Approach to Solutions
 
-The Boot and Runtime Services specification focuses on two solutions in the form of what is deemed a recipe. Each recipe contains the requirements needed to fulfill each solution. The requirements of each recipe will be marked accordingly with an unique identifier. The recipe names are named BRS-I and BRS-B, Interoperable and Bespoke, respectively.
+The BRS focuses on two solutions in the form of what is deemed a recipe. Each recipe contains the requirements needed to fulfill each solution. The requirements of each recipe will be marked accordingly with an unique identifier. The recipes are BRS-I (Interoperable) and BRS-B (Bespoke).
 
 === Testing and Conformance
 
@@ -25,7 +25,7 @@ The requirements in this specification use the following format:
 [%header, cols="5,20"]
 |===
 | ID#     ^| Requirement
-| CAT_NNN  | The `CAT` is a category prefix that logically groups the
+| `CAT_NNN`  | The `CAT` is a category prefix that logically groups the
              requirements and is followed by 3 digits - `NNN` - assigning a
              numeric ID to the requirement.                                   +
                                                                               +
@@ -44,25 +44,25 @@ The requirements in this specification use the following format:
 
 === Glossary
 
-Most terminology has the standard RISC-V meaning. This table captures other terms used in the document. Terms in the document prefixed by 'PCIe' have the meaning defined in the PCI Express (PCIe) Base Specification cite:[PCI] (even if they are not in this table).
+Most terminology has the standard RISC-V meaning. This table captures other terms used in the document. Terms in the document prefixed by *PCIe* have the meaning defined in the _PCI Express Base Specification_ cite:[PCI] (even if they are not in this table).
 
 .Terms and definitions
 [width=90%]
 [%header, cols="5,20"]
 |===
 | Term            ^| Definition
-| ACPI            | Advanced Configuration and Power Interface Specification cite:[ACPI].
-| BRS             | RISC-V Boot and Runtime Services. This document.
-| BRS-I           | Boot and Runtime Services Recipe targeting interoperation across different software suppliers.
-| BRS-B           | Boot and Runtime Services Recipe using a bespoke solution.
+| ACPI            | _Advanced Configuration and Power Interface Specification_ cite:[ACPI].
+| BRS             | _RISC-V Boot and Runtime Services Specification_. This document.
+| BRS-I           | Boot and Runtime Services recipe targeting interoperation across different software suppliers.
+| BRS-B           | Boot and Runtime Services recipe using a bespoke solution.
 | DT              | DeviceTree cite:[DT].
-| EBBR            | Embedded Base Boot Requirements Specification cite:[EBBR].
+| EBBR            | _Embedded Base Boot Requirements Specification_ cite:[EBBR].
 | OSV             | Operating System Vendor.
 | OS              | Operating System or Hypervisor.
 | Profile         | RISC-V Profile cite:[Profile].
-| SBI             | RISC-V Supervisor Binary Interface Specification cite:[SBI].
-| SMBIOS          | System Management BIOS cite:[SMBIOS].
+| SBI             | _RISC-V Supervisor Binary Interface Specification_ cite:[SBI].
+| SMBIOS          | _System Management BIOS (SMBIOS) Reference Specification_ cite:[SMBIOS].
 | SoC             | System on a chip, a combination of processor and supporting chipset logic in single package.
 | System          | A system is the entirety of a computing entity, including all hardware, firmware and software (hypervisor, operating system, user applications, user data). A system can be thought of both as a logical construct (e.g. a software stack) or physical construct (e.g. a notebook, a desktop, a server, a network switch, etc).
-| UEFI            | Unified Extensible Firmware Interface Specification cite:[UEFI].
+| UEFI            | _Unified Extensible Firmware Interface Specification_ cite:[UEFI].
 |===

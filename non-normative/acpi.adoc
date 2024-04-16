@@ -1,9 +1,9 @@
 ACPI information is structured as tables with the address of the root of these
 tables known as Root System Description Table (RSDP) passed to the OS
-via a EFI_ACPI_20_TABLE_GUID configuration table in the UEFI firmware.
+via a `EFI_ACPI_20_TABLE_GUID` configuration table in the UEFI firmware.
 The Operating System uses this address to locate all other ACPI tables.
 
-Certain implementations may make use of the RISC-V Functional Fixed hardware Specification cite:[FFH].
+Certain implementations may make use of the _RISC-V Functional Fixed Hardware Specification_ cite:[FFH].
 
 [[acpi-guidance-64bit-clean]]
 ==== 64-bits Clean
@@ -19,7 +19,7 @@ located in any part of the physical address space.
 [[acpi-guidance-hw-reduced]]
 ==== Hardware-Reduced ACPI
 
-Compliant RISC-V systems only implement the HW-Reduced ACPI Model cite:[ACPI] (Section 4.1).
+Compliant RISC-V systems only implement the hardware-reduced ACPI model cite:[ACPI] (Section 4.1).
 This means the hardware portion of cite:[ACPI] (Section 4) is not required or
 supported. All functionality is instead provided through equivalent
 software-defined interfaces and the complexity in supporting ACPI is reduced.
@@ -40,12 +40,12 @@ implemented.
 |ACPI Table                                    |ACPI Section|Note
 |Root System Description Pointer (RSDP)        |5.2.5      | See <<acpi-64bit-clean, high-level requirements>>.
 |Extended System Description Table (XSDT)      |5.2.8      | Contains pointers to other tables.
-|Fixed ACPI Description Table (FADT)           |5.2.9      | See <<acpi-hw-reduced, ACPI_020>>, <<acpi-guidance-hw-reduced>> and <<acpi-guidance-fadt, the notes below>>.
+|Fixed ACPI Description Table (FADT)           |5.2.9      | See <<acpi-hw-reduced, `ACPI_020`>>, <<acpi-guidance-hw-reduced>> and <<acpi-guidance-fadt, the notes below>>.
 |Differentiated System Description Table (DSDT)|5.2.11.1   | See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
 |Multiple APIC Description Table (MADT)        |5.2.12     | See <<acpi-guidance-madt, the notes below>>
 |RISC-V Hart Capabilities Table (RHCT)         |New        | Communicates
 information about certain capabilities like ISA string, cache and MMU info.
-|Processor Properties Topology Table (PPTT)    |5.2.29     | See <<acpi-pptt, ACPI_030>>
+|Processor Properties Topology Table (PPTT)    |5.2.29     | See <<acpi-pptt, `ACPI_030`>>
 |===
 
 // Add RIMT for IOMMU here.
@@ -55,9 +55,9 @@ information about certain capabilities like ISA string, cache and MMU info.
 [cols="3,2,2", width=95%, align="center", options="header"]
 |===
 |ACPI Table                                    |ACPI Section  |Note
-|Memory-mapped Configuration space (MCFG)      |cite:[PCIFW]  |See <<acpi-mcfg, ACPI_040>> and <<acpi-guidance-pcie, the notes below>>
+|Memory-mapped Configuration space (MCFG)      |cite:[PCIFW]  |See <<acpi-mcfg, `ACPI_040`>> and <<acpi-guidance-pcie, the notes below>>
 |Secondary System Description Table (SSDT)     |5.2.11.2      |See <<acpi-aml>> and <<acpi-guidance-aml, the notes below>>.
-|Serial Port Console Redirection (SPCR)        |cite:[SPCR]   |See <<acpi-spcr, APCI_060>> and <<acpi-guidance-spcr, the notes below>>
+|Serial Port Console Redirection (SPCR)        |cite:[SPCR]   |See <<acpi-spcr, `ACPI_060`>> and <<acpi-guidance-spcr, the notes below>>
 |ACPI Table for TPM 2.0 (TPM2)                 |cite:[TcgAcpi]|If the system supports TPM 2.0
 |System Resource Affinity Table (SRAT)         |5.2.16        |If the system supports NUMA
 |System Locality Information Table (SLIT)      |5.2.17        |If the system supports NUMA
@@ -107,8 +107,8 @@ describe affinities.
 [[acpi-guidance-gsi-namespace]]
 ==== PLIC/APLIC Namespace Devices
 
-Here's an example of an ASL excerpt satisfying <<acpi-namespace-dev, ACPI_080>>,
-<<acpi-irq-dep, AML_090>> and <<acpi-irq-gsb, AML_100>> requirements.
+Here's an example of an ASL excerpt satisfying <<acpi-namespace-dev, `ACPI_080`>>,
+<<acpi-irq-dep, `AML_090`>> and <<acpi-irq-gsb, `AML_100`>> requirements.
 
  Scope (\_SB)
  {
@@ -141,15 +141,14 @@ Here's an example of an ASL excerpt satisfying <<acpi-namespace-dev, ACPI_080>>,
 [[acpi-guidance-pcie]]
 ==== PCIe
 
-On some architectures, it became an industry accepted norm to describe PCIe implementations not compliant to the PCI Firmware Specification cite:[PCIFW]
+On some architectures, it became an industry accepted norm to describe PCIe implementations not compliant to the _PCI Firmware Specification_ cite:[PCIFW]
 using specification-defined ACPI tables and objects. RISC-V systems compliant to the BRS must only expose ECAM-compatible implementations using the
-MCFG and the standard AML Hardware ID (HID) PNP0A08 and Compatible ID (CID) PNP0A03, and must not rely on ACPI table header information or other out-of-band
-means of detecting quirked behavior.
+MCFG and the standard AML Hardware ID (`_HID`) `PNP0A08` and Compatible ID (`_CID`) `PNP0A03`, and must not rely on ACPI table header information or other out-of-band means of detecting quirked behavior.
 
 Some minor incompatibilities, such as incorrect CFG0 filtering, broken BARs/capabilities for RCs, embedded switches/bridges
 or embedded endpoints can be handled by emulating ECAM accesses in privileged firmware (e.g. M-mode) or similar facilities (e.g. a hypervisor).
 
-Non-compliant implementations must be exposed using vendor-specific mechanisms (e.g. AML object with custom HID, custom vendor-specific ACPI table if necessary).
+Non-compliant implementations must be exposed using vendor-specific mechanisms (e.g. AML object with custom `_HID`, custom vendor-specific ACPI table if necessary).
 In cases where such PCIe implementations are only used to expose a fixed non-removable device (e.g. USB host controller or NVMe), the device could be exposed via
 a DSDT/SSDT MMIO device object without making the OS aware of the underlying PCIe connection.
 
@@ -158,13 +157,13 @@ a DSDT/SSDT MMIO device object without making the OS aware of the underlying PCI
 [[acpi-guidance-spcr]]
 ==== SPCR
 
-Early serial console can be implemented using either an NS16550 UART (SPCR Interface Type 0x12) or
-SBI console (SPCR Interface Type 0x15). When SPCR describes SBI console, the OS must use
-the SBI Probe extension (FID #3) to detect the appropriate facilities, e.g. the Debug Console Extension
-(DBCN) or the deprecated legacy console EIDs.
+Early serial console can be implemented using either an NS16550 UART (SPCR `Interface Type` 0x12) or
+SBI console (SPCR `Interface Type` 0x15). When SPCR describes SBI console, the OS must use
+the SBI Probe extension (`FID #3`) to detect the appropriate facilities, e.g. the Debug Console Extension
+(`DBCN`) or the deprecated legacy console EIDs.
 
-The new Precise Baud Rate field, introduced in cite:[SPCR] rev. 4, allows describing rates faster
+The new `Precise Baud Rate` field, introduced in cite:[SPCR] rev. 4, allows describing rates faster
 than 115200 baud for NS16550-compatible UARTS.
 
 Hardware not capable of interrupt-driven operation and SBI console should be described with
-Interrupt Type 0 and Global System Interrupt 0.
+`Interrupt Type` of 0 and `Global System Interrupt` of 0.
