@@ -32,7 +32,7 @@ endif::[]
 :xrefstyle: short
 
 = RISC-V Boot and Runtime Services Specification (BRS)
-OS-A SEE Task Group
+BRS Task Group
 
 // Preamble
 [WARNING]
