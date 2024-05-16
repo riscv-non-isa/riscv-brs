@@ -35,10 +35,9 @@ available to an OS loader via the standard `UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL` i
  ** Use `Interface Type` 0x12 (16550-compatible with parameters defined in Generic Address Structure).
  ** There MUST be a matching AML device object with compatible ID `RSCV0003`.
 2+| _See <<acpi-guidance-spcr, additional guidance>>_.
-| [[acpi-namespace-dev]]`ACPI_080` | Depending on the interrupt controller
-implemented by the system, PLIC or APLIC namespace devices MUST be
-present in the ACPI namespace along with MADT entries. <<acpi-ids,
-See RVI ACPI IDs>>.
+| [[acpi-namespace-dev]]`ACPI_080` | PLIC/APLIC namespace devices MUST
+be present in the ACPI namespace whenever corresponding MADT entries are
+present. <<acpi-ids, See RVI ACPI IDs>>.
 2+| _Also see <<acpi-irq-gsb, AML_090>>, <<acpi-irq-dep, AML_100>> and <<acpi-guidance-gsi-namespace, additional guidance>>_.
 |===
 
