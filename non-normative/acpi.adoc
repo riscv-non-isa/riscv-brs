@@ -95,7 +95,7 @@ Don't forget to select an appropriate Preferred PM Profile.
 [[acpi-guidance-madt]]
 ==== MADT
 
-RINTC (per-hart) structures are mandatory. Depending on the interrupt controller implemented by the system, the MADT will also contain either PLIC or IMSIC/APLIC structures.
+RINTC (per-hart) structures are mandatory. Depending on the interrupt controller implemented by the system, the MADT will also contain either PLIC or APLIC structures.
 
 Entry ordering can be correlated with initialization order by an OS, but
 should not be taken to reflect affinity in resource sharing,
