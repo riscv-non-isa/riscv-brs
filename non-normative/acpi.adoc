@@ -107,8 +107,8 @@ describe affinities.
 [[acpi-guidance-gsi-namespace]]
 ==== PLIC/APLIC Namespace Devices
 
-Here's an example of an ASL excerpt satisfying <<acpi-namespace-dev, `ACPI_080`>>,
-<<acpi-irq-dep, `AML_090`>> and <<acpi-irq-gsb, `AML_100`>> requirements.
+Here's an example of an ASL excerpt satisfying <<acpi-namespace-dev, `ACPI_080`>>
+and <<acpi-irq-gsb, `AML_090`>> requirements.
 
  Scope (\_SB)
  {
@@ -118,12 +118,18 @@ Here's an example of an ASL excerpt satisfying <<acpi-namespace-dev, `ACPI_080`>
         Name (_UID, Zero)  // _UID: Unique ID
         Method(_GSB) {
             Return (0x10) // Global System Interrupt Base for this PLIC starts at 16
-       }
+        }
+        Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
+        {
+            Memory32Fixed (ReadWrite,
+              0x0C000000,         // Address Base.
+              0x00220000,         // Address Length
+              )
+        })
     }
     Device (DEV1)
     {
       ...
-      Name (_DEP, Package() {\_SB.IC00})
       Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
       {
           Memory32Fixed (ReadWrite,
