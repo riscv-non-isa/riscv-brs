@@ -38,7 +38,7 @@ available to an OS loader via the standard `UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL` i
 | [[acpi-namespace-dev]]`ACPI_080` | PLIC/APLIC namespace devices MUST
 be present in the ACPI namespace whenever corresponding MADT entries are
 present. <<acpi-ids, See RVI ACPI IDs>>.
-2+| _Also see <<acpi-irq-gsb, AML_090>>, <<acpi-irq-dep, AML_100>> and <<acpi-guidance-gsi-namespace, additional guidance>>_.
+2+| _Also see <<acpi-irq-gsb, AML_090>> and <<acpi-guidance-gsi-namespace, additional guidance>>_.
 |===
 
 [[acpi-aml]]
@@ -76,12 +76,7 @@ through the driver-backed `OperationRegion`._
 | [[acpi-irq-gsb]] `AML_090` | PLIC and APLIC device objects MUST support
 the Global System Interrupt Base (`_GSB`, cite:[ACPI] Section 6.2.7) object.
 <<acpi-guidance-gsi-namespace, See additional guidance>>.
-| [[acpi-irq-dep]] `AML_100` | Devices with Global System
-Interrupt (GSI, aka wired interrupt) resources MUST indicate the dependency on the corresponding
-interrupt controller using Operation Region Dependencies (`_DEP`,
-cite:[ACPI] Section 6.5.8).
-<<acpi-guidance-gsi-namespace, See additional guidance>>.
-| `AML_110` | UART device objects with ID `RSCV0003` MUST implement <<acpi-props-uart, Properties for UART Devices>>.
+| `AML_100` | UART device objects with ID `RSCV0003` MUST implement <<acpi-props-uart, Properties for UART Devices>>.
 |===
 
 include::acpi-id.adoc[]
