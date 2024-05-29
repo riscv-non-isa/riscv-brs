@@ -65,6 +65,7 @@ information about certain capabilities like ISA string, cache and MMU info.
 |Error Injection Table (EINJ)                  |18.6.1        |If APEI is supported
 |Error Record Serialization Table (ERST)       |18.5          |If APEI is supported
 |Hardware Error Source Table (HEST)            |18.3.2        |If APEI is supported
+|RISC-V IO Mapping Table (RIMT)                |New           |If the system supports IOMMU
 |===
 
 [[acpi-guidance-aml]]
