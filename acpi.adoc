@@ -33,7 +33,7 @@ available to an OS loader via the standard `UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL` i
  * Revision 4 or later of SPCR.
  * For NS16550-compatible UARTs:
  ** Use `Interface Type` 0x12 (16550-compatible with parameters defined in Generic Address Structure).
- ** There MUST be a matching AML device object with compatible ID `RSCV0003`.
+ ** There MUST be a matching AML device object with `_HID` (Hardware ID) or `_CID` (Compatible ID) `RSCV0003`.
 2+| _See <<acpi-guidance-spcr, additional guidance>>_.
 | [[acpi-namespace-dev]]`ACPI_080` | PLIC/APLIC namespace devices MUST
 be present in the ACPI namespace whenever corresponding MADT entries are
