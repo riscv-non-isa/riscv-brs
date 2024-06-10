@@ -1,7 +1,7 @@
 [[acpi-ids]]
 === RVI-specific ACPI IDs
 
-ACPI ID is used in the `_HID` (Hardware ID), `_CID` (Compatibility ID) or
+ACPI ID is used in the `_HID` (Hardware ID), `_CID` (Compatible ID) or
 `_SUB` (Subsystem ID) objects as described in the ACPI Specification for
 devices, that do not have a standard enumeration mechanism. The ACPI ID
 consists of two parts: a vendor identifier followed by a product identifier.
