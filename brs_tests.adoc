@@ -1,0 +1,189 @@
+== BRS Test Specification
+
+=== Hart Requirements
+
+[width=100%]
+[%header, cols="8,25"]
+|===
+| ID#            ^| Algorithm
+| `ME_HR_010_010` a| For each application processor hart:
+
+                    . Determine the ISA string for that hart from
+                    .. RHCT table if ACPI was used
+                    .. riscv,isa-base and riscv,isa-extensions nodes if DT was used
+                    . Parse the ISA string and verify that all mandatory extensions
+                      in `RVA20S64` profile cite:[Profile] are supported.
+                    . Verify that the ISA string matches that of hart 0.
+                    . Report the ISA string of hart 0 into the test output log.
+|===
+
+<<<
+
+=== SBI Requirements
+
+[width=100%]
+[%header, cols="8,25"]
+|===
+| ID#            ^| Algorithm
+| `ME_SBI_010_010` | . Get the SBI version by sbi_get_sbi_spec_version().
+                     . Verify that the version is v2.0 or later.
+                     . Report the version into the test output log.
+| `ME_SBI_020_010` | . See `ME_SBI_010_010`.
+                     . Probe the presence of HSM extension by sbi_probe_extension().
+                     . Verify that the result is true.
+| `OE_SBI_030_010` | . If Sstc extension was present(See `ME_HR_010_010`)
+                     .. Report Sstc was present and Skip the test.
+                     . Else
+                     .. Probe the presence of TIME extension by sbi_probe_extension().
+                     .. Verify that the result is true.
+| `OE_SBI_040_010` | . If Ssaia extension was present(See `ME_HR_010_010`)
+                     .. Report Ssaia was present and Skip the test.
+                     . Else
+                     .. Probe the presence of sPI extension by sbi_probe_extension().
+                     .. Verify that the result is true.
+| `OE_SBI_050_010` | . If Ssaia extension was present(See `ME_HR_010_010`)
+                     .. Report Ssaia was present and Skip the test.
+                     . Else
+                     .. Probe the presence of RFNC extension by sbi_probe_extension().
+                     .. Verify that the result is true.
+| `OE_SBI_060_010` | . If Smcsrind,Sscsrind,Smcdeleg,Ssccfg extensions
+                       were present(See `ME_HR_010_010`).
+                     .. Report Smcsrind,Sscsrind,Smcdeleg,Ssccfg  was present and
+                        Skip the test.
+                     . Else
+                     .. Probe the presence of PMU extension by sbi_probe_extension().
+                     .. Verify that the result is true.
+|===
+
+<<<
+
+=== BRS-I UEFI Requirements
+
+[width=100%]
+[%header, cols="8,25"]
+|===
+| ID#            ^| Algorithm
+| `ME_UEFI_010_010` | _FIXME_.
+| `ME_UEFI_020_010` | _FIXME_.
+| `ME_UEFI_030_010` | _FIXME .
+| `OE_UEFI_040_010` | _FIXME .
+| `OE_UEFI_050_010` | _FIXME .
+| `ME_UEFI_060_010` | _FIXME .
+| `ME_UEFI_070_010` | _FIXME .
+|===
+
+<<<
+
+==== BRS-I UEFI Security Requirements
+
+[width=100%]
+[%header, cols="8,25"]
+|===
+| ID#            ^| Algorithm
+| `OE_USEC_010_010` | _FIXME_.
+| `OE_USEC_020_010` | _FIXME_.
+|===
+
+<<<
+
+==== BRS-I UEFI IO Requirements
+
+[width=100%]
+[%header, cols="8,25"]
+|===
+| ID#            ^| Algorithm
+| `OE_UIO_010_010` | _FIXME_.
+| `OE_UIO_020_010` | _FIXME_.
+|===
+
+<<<
+
+==== BRS-I UEFI Runtime Service Requirements
+
+[width=100%]
+[%header, cols="8,25"]
+|===
+| ID#            ^| Algorithm
+| `OE_URT_010_010` | _FIXME_.
+| `OE_URT_020_010` | _FIXME_.
+| `ME_URT_030_010` | _FIXME_.
+| `ME_URT_040_010` | _FIXME_.
+| `ME_URT_050_010` | _FIXME_.
+| `OE_URT_060_010` | _FIXME_.
+|===
+
+<<<
+
+==== BRS-I UEFI Firmware Update Requirements
+
+[width=100%]
+[%header, cols="8,25"]
+|===
+| ID#            ^| Algorithm
+| `OE_UFU_010_010` | _FIXME_.
+| `OE_UFU_020_010` | _FIXME_.
+| `OE_UFU_030_010` | _FIXME_.
+| `OE_UFU_040_010` | _FIXME_.
+|===
+
+<<<
+
+=== BRS-I ACPI Requirements
+
+[width=100%]
+[%header, cols="8,25"]
+|===
+| ID#            ^| Algorithm
+| `ME_ACPI_010_010` | _FIXME_.
+| `ME_ACPI_020_010` | _FIXME_.
+| `ME_ACPI_030_010` | _FIXME_.
+| `OE_ACPI_040_010` | _FIXME_.
+| `OE_ACPI_050_010` | _FIXME_.
+| `OE_ACPI_060_010` | _FIXME_.
+| `OE_ACPI_080_010` | _FIXME_.
+|===
+
+<<<
+
+==== BRS-I ACPI Methods and Objects Requirements
+
+[width=100%]
+[%header, cols="8,25"]
+|===
+| ID#            ^| Algorithm
+| `ME_AML_010_010` | _FIXME_.
+| `OE_AML_020_010` | _FIXME_.
+| `OE_AML_030_010` | _FIXME_.
+| `ME_AML_040_010` | _FIXME_.
+| `OE_AML_050_010` | _FIXME_.
+| `ME_AML_060_010` | _FIXME_.
+| `OE_AML_070_010` | _FIXME_.
+| `OE_AML_080_010` | _FIXME_.
+| `ME_AML_090_010` | _FIXME_.
+| `ME_AML_100_010` | _FIXME_.
+|===
+
+<<<
+
+=== SMBIOS Requirements
+
+[width=100%]
+[%header, cols="8,25"]
+|===
+| ID#            ^| Algorithm
+| `OE_SMBIOS_010_010`  | _FIXME_
+| `ME_SMBIOS_020_010`  | _FIXME_
+| `OE_SMBIOS_030_010`  | _FIXME_
+| `OE_SMBIOS_040_010`  | _FIXME_
+| `OE_SMBIOS_050_010`  | _FIXME_
+| `OE_SMBIOS_060_010`  | _FIXME_
+| `OE_SMBIOS_070_010`  | _FIXME_
+| `OE_SMBIOS_080_010`  | _FIXME_
+| `OE_SMBIOS_090_010`  | _FIXME_
+| `OE_SMBIOS_100_010`  | _FIXME_
+| `OE_SMBIOS_110_010`  | _FIXME_
+| `ME_SMBIOS_120_010`  | _FIXME_
+| `OE_SMBIOS_130_010`  | _FIXME_
+|===
+
+<<<

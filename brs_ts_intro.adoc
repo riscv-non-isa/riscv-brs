@@ -1,0 +1,70 @@
+[[intro]]
+
+== Introduction
+
+The RISC-V Boot and Runtime Services Test specification defines a set of tests to
+verify if the requirements specified in RISC-V BRS specification are implemented.
+The tests specified in this specification are not intended to exhaustively verify
+the implementation. In most cases the tests only check for existence of the feature.
+Future versions of this specification may include more exhaustive tests.
+
+The tests in this specification are documented use the following format:
+
+[width=100%]
+[%header, cols="8,20"]
+|===
+| TEST_ID#       ^| Test algorithm
+| AB_CAT_NNN_MMM a| The `CAT_NNN` identifies a requirement in the RISC-V BRS
+                    specification. Each requirement is associated with one or
+                    more tests identified by `MMM`. The test IDs are prefixed
+                    with two character prefix - `AB`.                          +
+                                                                               +
+                    If character in position `A` is `M` then the test is for a
+                    requirement that MUST be supported and this test MUST pass.
+                    If character in position `A` is `O` then the test is for a
+                    requirement that SHOULD or MAY be supported; such tests may
+                    be skipped if the requirement is not implemented. The tests
+                    record if optional features were present in the test output
+                    log.                                                       +
+                                                                               +
+                    The character in position `B` indicates the nature of the
+                    test. If this character is `F` then the test exercises some
+                    or all of the functionality associated with the feature. If
+                    the character is `E` then the test determines for evidence
+                    that the feature is implemented (e.g., check ACPI tables)
+                    but does not functionally exercise the feature.
+
+|===
+
+This specification groups the tests in the following broad categories:
+
+* Hart
+* SBI
+* UEFI
+* ACPI
+* SMBIOS
+
+=== Glossary
+
+Most terminology has the standard RISC-V meaning. This table captures other
+terms used in the document.
+
+.Terms and definitions
+[width=90%]
+[%header, cols="5,20"]
+|===
+| Term            ^| Definition
+| ACPI             | Advanced Configuration and Power Interface cite:[ACPI].
+| BRS              | RISC-V Boot and Runtime Services Specification.
+| BRS-I            | Boot and Runtime Services recipe targeting interoperation across different software suppliers.
+| BRS-B            | Boot and Runtime Services recipe using a bespoke solution.
+| DT               | DeviceTree cite:[DT].
+| EBBR             | Embedded Base Boot Requirements Specification cite:[EBBR].
+| OSV              | Operating System Vendor.
+| OS               | Operating System or Hypervisor.
+| Profile          | RISC-V Profile cite:[Profile].
+| SBI              | RISC-V Supervisor Binary Interface Specification cite:[SBI].
+| SMBIOS           | System Management BIOS (SMBIOS) Reference Specification cite:[SMBIOS].
+| SoC              | System on a chip, a combination of processor and supporting chipset logic in single package.
+| UEFI             | Unified Extensible Firmware Interface Specification cite:[UEFI].
+|===
