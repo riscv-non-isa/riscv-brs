@@ -9,17 +9,20 @@ Request for additional property names in the `rscv-` namespace should be made as
 
 [[acpi-props-uart]]
 ==== Properties for UART Devices
+Generic 16550-compatible UART devices can have below device properties in the global name space
+since Operating Systems are already using them.
 
 [width=100%]
 [%header, cols="10,5,25"]
 |===
-|  Property (`rscv-uart-*`) ^| Type | Description
+|  Property  ^| Type | Description
 | `clock-frequency` | Integer | Clock feeding the IP block in Hz.
 3+| _A value of zero will preclude the ability to set the baud rate, or
 to configure a disabled device._
+| `reg-offset` | Integer | Offset to apply to the register map base address from the start of the registers.
 | `reg-shift` | Integer | Quantity to shift the register offsets by.
 | `reg-io-width` | Integer | The size (in bytes) of the register accesses that should be performed on the device.
 3+| _1, 2, 4 or 8._
-| `rx-fifo-size` | Integer | The receive FIFO size (in bytes).
+| `fifo-size` | Integer | The FIFO size (in bytes).
 |===
 
