@@ -24,6 +24,6 @@ Certain requirements are conditional on the presence of RISC-V ISA extensions or
 | `SBI_030`  | The Timer Extension (TIME) MUST be implemented, if the RISC-V "stimecmp / vstimecmp" Extension (Sstc, cite: [Sstc]) is not available.
 | `SBI_040`  | The S-Mode IPI Extension (sPI) MUST be implemented, if the Incoming MSI Controller (IMSIC, cite: [Aia]) is not available.
 | `SBI_050`  | The RFENCE Extension (RFNC) extension MUST be implemented, if the Incoming MSI Controller (IMSIC, cite: [Aia]) is not available.
-| `SBI_060`  | The Performance Monitoring Extension (PMU) MUST be implemented, if the counter delegation-related ISA extensions (S*csrind cite: [Sscsrind], Smcdeleg cite: [Smcdeleg], Ssccfg cite: [Smcdeleg]) are not present.
+| `SBI_060`  | The Performance Monitoring Extension (PMU) MUST be implemented, if the counter delegation-related S-Mode ISA extensions (Sscsrind cite: [Sscsrind], Ssccfg cite: [Smcdeleg]) are not present.
 2+| _NOTE: The PMU extension is currently being developed by the performance analysis TG cite: [PerfAnalysis]._
 |===
