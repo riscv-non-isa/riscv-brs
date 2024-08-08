@@ -65,11 +65,12 @@
 | ID#            ^| Algorithm
 | `ME_UEFI_010_010` | _FIXME_.
 | `ME_UEFI_020_010` | _FIXME_.
-| `ME_UEFI_030_010` | _FIXME .
-| `OE_UEFI_040_010` | _FIXME .
-| `OE_UEFI_050_010` | _FIXME .
-| `ME_UEFI_060_010` | _FIXME .
-| `ME_UEFI_070_010` | _FIXME .
+| `ME_UEFI_030_010` | _FIXME_.
+| `OE_UEFI_040_010` | _FIXME_.
+| `OE_UEFI_050_010` | _FIXME_.
+| `ME_UEFI_060_010` | _FIXME_.
+| `ME_UEFI_070_010` | _FIXME_.
+| `ME_UEFI_070_010` | _FIXME_.
 |===
 
 <<<
