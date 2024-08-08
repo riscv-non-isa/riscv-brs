@@ -21,17 +21,16 @@ NOTE: The structures and fields in this section are defined in a manner consiste
 | `SMBIOS_020` | A Processor Information (Type 04) structure, meeting the additional <<smbios-type04>> clarifications, MUST be implemented.
 2+|_This supersedes the RISC-V specific language in the SMBIOS specification (cite:[SMBIOS], Section 7.5.3.5)._
 | `SMBIOS_030` | A Port Connector Information (Type 08) SHOULD be implemented.
-| `SMBIOS_040` | An OEM Strings (Type 11) structure SHOULD be implemented.
-| `SMBIOS_050` | A BIOS Language Information (Type 13) structure SHOULD be implemented.
-| `SMBIOS_060` | A Group Associations (Type 14) structure SHOULD be implemented.
-| `SMBIOS_070` | An IPMI Device Information (Type 38) structure MUST be implemented, when an IPMIv1.0 host interface is present.
-| `SMBIOS_080` | A System Power Supplies (Type 39) structure SHOULD be implemented.
-| `SMBIOS_090` | An Onboard Devices Extended Information (Type 41) structure SHOULD be implemented.
-| `SMBIOS_100` | A Redfish Host Interface (Type 42) structure MUST be implmented, when a Redfish host interface is present.
-| `SMBIOS_110` | A TPM Device (Type 43) structure MUST be implmented, when a TPM is present.
-| `SMBIOS_120` | A Processor Additional Information (Type 44) structure MUST be implemented.
+| `SMBIOS_040` | A BIOS Language Information (Type 13) structure SHOULD be implemented.
+| `SMBIOS_050` | A Group Associations (Type 14) structure SHOULD be implemented.
+| `SMBIOS_060` | An IPMI Device Information (Type 38) structure MUST be implemented, when an IPMIv1.0 host interface is present.
+| `SMBIOS_070` | A System Power Supplies (Type 39) structure SHOULD be implemented.
+| `SMBIOS_080` | An Onboard Devices Extended Information (Type 41) structure SHOULD be implemented.
+| `SMBIOS_090` | A Redfish Host Interface (Type 42) structure MUST be implmented, when a Redfish host interface is present.
+| `SMBIOS_100` | A TPM Device (Type 43) structure MUST be implemented, when a TPM is present.
+| `SMBIOS_110` | A Processor Additional Information (Type 44) structure MUST be implemented.
 2+| _See the <<smbios-type44, structure definitions below>>_.
-| `SMBIOS_130` | A Firmware Inventory Information (Type 45) structure SHOULD be implemented.
+| `SMBIOS_120` | A Firmware Inventory Information (Type 45) structure SHOULD be implemented.
 |===
 
 [[smbios-type04]]
