@@ -33,3 +33,12 @@ register maps. In the cases where there are unpopulated PCIe slots
 behind a root bridge, `EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL_CONFIGURATION`
 reports valid resources assigned (e.g. for hot plug), or reports no
 resources assigned.
+
+[[uefi-guidance-rt]]
+==== UEFI Runtime Services
+
+Systems without an RTC and with an equivalent alternate source for current time,
+that is not trivially accessible from a UEFI implementation after the
+UEFI boot services are shut down (e.g. network time), can implement `GetTime()`
+using the `time` CSR. The time, of course, needs to be synchronized
+before the boot services are shut down.
