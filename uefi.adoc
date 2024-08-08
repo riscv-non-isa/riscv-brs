@@ -28,6 +28,10 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
 2+| _The `EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID` conformance profile MUST be declared, as the BRS requirements are a superset of UEFI cite:[UEFI] (Section 2.6)._
 | `UEFI_070` | The implementation MUST declare the `EFI_CONFORMANCE_PROFILE_BRS_1_0_SPEC_GUID` conformance profile `({ 0x05453310, 0x0545, 0x0545, { 0x05, 0x45, 0x33, 0x05, 0x45, 0x33, 0x05, 0x45 }})`.
 2+| _Only a system fully compliant to the requirements in this section MAY declare the `EFI_CONFORMANCE_PROFILE_BRS_1_0_SPEC_GUID` conformance profile._
+| `UEFI_080` | A Device Tree MUST only be exposed to the OS iff no actual hardware description is included in the DT.
+2+|_Such a "dummy" DT could be installed by firmware, as a UEFI configuration table entry of type `EFI_DTB_TABLE_GUID`, to provide necessary
+hand-off info to an OS, for example, to provide RAM disk information
+(e.g. via `/chosen/linux,initrd-start`)._
 |===
 
 === BRS-I Security Requirements
