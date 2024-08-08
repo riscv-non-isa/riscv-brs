@@ -63,10 +63,11 @@ See additional <<uefi-rt, requirements for UEFI runtime services>>.
 [%header, cols="5,25"]
 |===
 | ID#     ^| Requirement
-| `URT_010` a| Systems without a Real-Time Clock (RTC) MUST meet the following requirements:
+| `URT_010` a| Systems without a Real-Time Clock (RTC), but with an equivalent alternate source for the current time, MUST meet the following requirements:
 
-             * `GetTime()` MUST be implemented (e.g. in terms of CPU cycle counter).
+             * `GetTime()` MUST be implemented.
              * `SetTime()` MUST return `EFI_UNSUPPORTED`, and be appropriately described in the `EFI_RT_PROPERTIES_TABLE`.
+2+| _<<uefi-guidance-rt, See additional guidance>>_.
 | [[uefi-rtc]] `URT_020` a| Systems with a Real-Time Clock on an OS-managed bus (e.g. I2C, subject to arbitration issues due to access to the bus by the OS) MUST meet the following requirements:
 
              * `GetTime()` and `SetTime()` MUST return `EFI_UNSUPPORTED`, when called after the UEFI boot services have been exited.
