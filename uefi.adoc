@@ -74,9 +74,9 @@ See additional <<uefi-rt, requirements for UEFI runtime services>>.
 2+| _<<uefi-guidance-rt, See additional guidance>>_.
 | [[uefi-rtc]] `URT_020` a| Systems with a Real-Time Clock on an OS-managed bus (e.g. I2C, subject to arbitration issues due to access to the bus by the OS) MUST meet the following requirements:
 
-             * `GetTime()` and `SetTime()` MUST return `EFI_UNSUPPORTED`, when called after the UEFI boot services have been exited.
+             * `GetTime()` and `SetTime()` MUST return `EFI_UNSUPPORTED`, when called after the UEFI boot services have been exited, and must
+                operate on the same hardware as the <<acpi-tad, ACPI TAD>> before UEFI boot services are exited.
              * `GetTime()` and `SetTime()` MUST be appropriately described in the `EFI_RT_PROPERTIES_TABLE`.
-2+|_Also see <<acpi-tad, `AML_070`>>_.
 | `URT_030` a| The UEFI `ResetSystem()` runtime service MUST be implemented.
 2+| _The OS MUST call the `ResetSystem()` runtime service call to reset or shutdown the system, preferring this to SBI, ACPI or other system-specific mechanisms. This allows for systems to perform any required system tasks on the way out (e.g. servicing `UpdateCapsule()` or persisting non-volatile variables in some systems)._
 | `URT_040` | Non-volatile UEFI variables MUST persist across calls to the `ResetSystem()` runtime service call.
