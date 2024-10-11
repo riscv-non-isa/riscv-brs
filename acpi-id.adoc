@@ -27,7 +27,7 @@ ACPI ID for any new device.
 | ACPI ID     ^| Device
 | `RSCV0001`     | RISC-V Platform-Level Interrupt Controller (PLIC)
 | `RSCV0002`     | RISC-V Advanced Platform-Level Interrupt Controller (APLIC)
-| `RSCV0003`     | NS16650 UART compatible with an SPCR definition using `Interface Type` 0x12
+| `RSCV0003`     | NS16550 UART compatible with an SPCR definition using `Interface Type` 0x12
 | `RSCV0004`     | RISC-V IOMMU implemented as a platform device
 2+| _Also see <<acpi-props-uart>>._
 |===
