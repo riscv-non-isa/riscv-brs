@@ -81,6 +81,7 @@ See additional <<uefi-rt, requirements for UEFI runtime services>>.
 2+| _The OS MUST call the `ResetSystem()` runtime service call to reset or shutdown the system, preferring this to SBI, ACPI or other system-specific mechanisms. This allows for systems to perform any required system tasks on the way out (e.g. servicing `UpdateCapsule()` or persisting non-volatile variables in some systems)._
 | `URT_040` | Non-volatile UEFI variables MUST persist across calls to the `ResetSystem()` runtime service call.
 | `URT_050` | UEFI runtime services MUST be able to update the UEFI variables directly without the aid of an OS.
+2+| _UEFI variables are normally saved in a dedicated storage which is not directly accessible by the operating system._
 | `URT_060` a| The following requirements MUST be met for systems with UEFI secure boot:
 
              * MUST support a minimum of 128 KiB of non-volatile storage for UEFI variables.
