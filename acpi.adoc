@@ -14,7 +14,7 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
 [width=100%]
 [%header, cols="5,25"]
 |===
-| ID#     ^| Requirement
+| ID#     ^| Rule
 | [[acpi-64bit-clean]]`ACPI_010` a| Be 64-bits clean.
 
   * RSDT MUST NOT be implemented, with `RsdtAddress` in RSDP set to 0.
@@ -52,7 +52,7 @@ objects.
 [width=100%]
 [%header, cols="5,25"]
 |===
-| ID#     ^| Requirement
+| ID#     ^| Rule
 | `AML_010` | The Cache Coherency Attribute (`_CCA`) device method MUST be implemented.
 2+| _This object provides information
   about whether a device has to manage cache coherency and about

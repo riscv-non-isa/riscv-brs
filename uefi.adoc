@@ -4,7 +4,7 @@
 The _Unified Extensible Firmware Interface Specification_ (UEFI) describes the interface between the OS and the supervisor-mode firmware.
 
 This section defines the BRS-I mandatory and optional UEFI
-requirements on top of existing cite:[UEFI] specification
+rules on top of existing cite:[UEFI] specification
 requirements. Additional non-normative guidance may be found in the
 <<uefi-guidance, firmware implementation guidance>> section.
 
@@ -13,10 +13,10 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
 [width=100%]
 [%header, cols="5,25"]
 |===
-| ID#     ^| Requirement
+| ID#     ^| Rule
 | `UEFI_010` | MUST implement a 64-bit UEFI firmware.
 | `UEFI_020` | MUST meet the 3rd Party UEFI Certificate Authority (CA) requirements on UEFI memory mitigations cite:[MSUefiCaRequirements].
-| `UEFI_030` a| MUST meet the following memory map requirements:
+| `UEFI_030` a| MUST meet the following memory map rules:
 
               * The default memory space attribute is `EFI_MEMORY_WB`.
               * Address translation is enabled.
@@ -39,7 +39,7 @@ hand-off info to an OS, for example, to provide RAM disk information
 [width=100%]
 [%header, cols="5,25"]
 |===
-| ID#     ^| Requirement
+| ID#     ^| Rule
 | `USEC_010` | Systems implementing UEFI secure boot are RECOMMENDED to implement the `EFI_SECURITY_ARCH_PROTOCOL` and `EFI_SECURITY2_ARCH_PROTOCOL` protocols cite:[UEFI-PI].
 2+| _The Security and Security2 architectural protocols are overridden by some bootloaders (e.g. systemd-boot) to validate EFI binaries that cannot be validated against the UEFI security database._
 | `USEC_020` | Systems implementing a TPM MUST implement the _TCG
@@ -53,7 +53,7 @@ See additional <<uefi-rt, requirements for UEFI runtime services>>.
 [width=100%]
 [%header, cols="5,25"]
 |===
-| ID#     ^| Requirement
+| ID#     ^| Rule
 | `UIO_010` | Systems implementing PCIe MUST always initialize all root complex hardware and perform resource assignment for all endpoints and usable hotplug-capable switches in the system, even in a boot scenario from a non-PCIe boot device.
 2+| _This is a stronger requirement than the PCI Firmware Specification firmware/OS device hand-off state (cite:[PCIFW] Section 3.5). <<uefi-guidance-pcie, See additional guidance>>._
 | `UIO_020` | Systems implementing `EFI_GRAPHICS_OUTPUT_PROTOCOL` SHOULD configure the frame buffer to be directly accessible.
@@ -66,7 +66,7 @@ See additional <<uefi-rt, requirements for UEFI runtime services>>.
 [width=100%]
 [%header, cols="5,25"]
 |===
-| ID#     ^| Requirement
+| ID#     ^| Rule
 | `URT_010` a| Systems without a Real-Time Clock (RTC), but with an equivalent alternate source for the current time, MUST meet the following requirements:
 
              * `GetTime()` MUST be implemented.
@@ -95,7 +95,7 @@ See additional <<uefi-rt, requirements for UEFI runtime services>>.
 [width=100%]
 [%header, cols="5,25"]
 |===
-| ID#     ^| Requirement
+| ID#     ^| Rule
 | `UFU_010` | Systems with in-band firmware updates MUST do so either via `UpdateCapsule()` UEFI runtime service (cite:[UEFI] Section 8.5.3) or via _Delivery of Capsules via file on Mass Storage Device_ (cite:[UEFI] Section 8.5.5).
 2+| _In-band means the firmware running on a hart updates itself._
 | `UFU_020` | Systems implementing in-band firmware updates via `UpdateCapsule()` MUST accept updates in the _Firmware Management Protocol Data Capsule Structure_ format as described in _Delivering Capsules Containing Updates to Firmware Management Protocol_ cite:[UEFI] (Section 23.3).

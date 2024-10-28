@@ -15,7 +15,7 @@ NOTE: The structures and fields in this section are defined in a manner consiste
 [width=100%]
 [%header, cols="5,25"]
 |===
-| ID#     ^| Requirement
+| ID#     ^| Rule
 | `SMBIOS_010` | A Baseboard/Module Information (Type 02) structure SHOULD be implemented.
 2+|_This relaxes the SMBIOS specification requirement._
 | `SMBIOS_020` | Processor Information (Type 04) structures, meeting the additional <<smbios-type04>> clarifications, MUST be implemented.
