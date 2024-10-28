@@ -22,8 +22,8 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
               * Address translation is enabled.
               * Only use `EfiRuntimeServicesData` memory type for describing any SMBIOS data structures.
 | `UEFI_040` | An implementation MAY comply with the _UEFI Platform Initialization Specification_ cite:[UEFI-PI].
-| `UEFI_050` | All hart manipulation internal to a firmware implementation SHOULD be done before completion of the `EFI_EVENT_GROUP_READY_TO_BOOT` event, with all secondary harts remaining offline from that point on.
-2+| _This ensures an OS loader is entered with an OS-compatible state for all harts._
+| `UEFI_050` | All hart manipulation internal to a firmware implementation SHOULD be done before completion of the `EFI_EVENT_GROUP_READY_TO_BOOT` event. Firmware MUST place all secondary harts in an offline state before completion of the EFI_EVENT_GROUP_READY_TO_BOOT event.
+2+| _This ensures an OS loader is entered with an OS-compatible state for all harts.The OS loader and/or the OS may resume the secondary harts, if required, as part of their boot and join sequence._
 | `UEFI_060` | The implementation MUST declare the `EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID` conformance profile.
 2+| _The `EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID` conformance profile MUST be declared, as the BRS requirements are a superset of UEFI cite:[UEFI] (Section 2.6)._
 | `UEFI_070` | The implementation MUST declare the `EFI_CONFORMANCE_PROFILE_BRS_1_0_SPEC_GUID` conformance profile `({ 0x05453310, 0x0545, 0x0545, { 0x05, 0x45, 0x33, 0x05, 0x45, 0x33, 0x05, 0x45 }})`.
