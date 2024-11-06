@@ -9,7 +9,7 @@ privilege mode in order to be compatible with this specification.
 [width=100%]
 [%header, cols="5,25"]
 |===
-| ID#     ^| Requirement
+| ID#     ^| Rule
 | `SBI_010`  | The SBI implementation MUST conform to SBI v2.0 or later.
 | `SBI_020`  | The SBI implementation MUST implement the Hart State Management (HSM) extension.
 2+| _HSM is used by an OS for starting up, stopping, suspending and querying the status of secondary harts._
@@ -20,7 +20,7 @@ Certain requirements are conditional on the presence of RISC-V ISA extensions or
 [width=100%]
 [%header, cols="5,25"]
 |===
-| ID#     ^| Requirement
+| ID#     ^| Rule
 | `SBI_030`  | The Timer Extension (TIME) MUST be implemented, if the RISC-V "stimecmp / vstimecmp" Extension (Sstc, cite: [Sstc]) is not available.
 | `SBI_040`  | The S-Mode IPI Extension (sPI) MUST be implemented, if the Incoming MSI Controller (IMSIC, cite: [Aia]) is not available.
 | `SBI_050`  | The RFENCE Extension (RFNC) extension MUST be implemented, if the Incoming MSI Controller (IMSIC, cite: [Aia]) is not available.

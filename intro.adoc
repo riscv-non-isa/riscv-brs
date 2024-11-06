@@ -24,7 +24,7 @@ The requirements in this specification use the following format:
 [width=100%]
 [%header, cols="5,20"]
 |===
-| ID#     ^| Requirement
+| ID#     ^| Rule
 | `CAT_NNN`  | The `CAT` is a category prefix that logically groups the
              requirements and is followed by 3 digits - `NNN` - assigning a
              numeric ID to the requirement.                                   +
