@@ -34,6 +34,15 @@ behind a root bridge, `EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL_CONFIGURATION`
 reports valid resources assigned (e.g. for hot plug), or reports no
 resources assigned.
 
+Firmware MUST always initialize PCIe root complexes, even if booting from non-PCIe devices,
+and should not assume the OS knows how to configure root complex hardware (including,
+for example, inbound and outbound address translation windows). In fact, ECAM-compatible
+PCIe segments are assumed by operating systems to just work as per their hardware
+descriptions in ACPI and DT. Furthermore, firmware MUST perform BAR resource assignment,
+bridge bus number and window assignments and other reasonable device setting configuration
+(e.g. Max Payload Size) and not assume operating systems to be capable of full PCIe
+resource configuration, or to expect full reconfiguration to be necessary.
+
 [[uefi-guidance-rt]]
 ==== UEFI Runtime Services
 
