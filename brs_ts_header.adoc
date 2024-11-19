@@ -2,6 +2,9 @@
 :description: RISC-V Boot and Runtime Services Test Specification
 :company: RISC-V.org
 :url-riscv: http://riscv.org
+:revdate: 19th November 2024
+:revnumber: 0.0.3
+:revremark: This document is Stable.
 :doctype: book
 :preface-title: Preamble
 :colophon:
