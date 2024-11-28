@@ -20,7 +20,7 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
   * RSDT MUST NOT be implemented, with `RsdtAddress` in RSDP set to 0.
   * 32-bit address fields MUST be 0.
 2+| _<<acpi-guidance-64bit-clean, See additional guidance>>._
-| [[acpi-hw-reduced]]`ACPI_020` a| Implement the hardware-reduced ACPI mode (no FACS table).
+| [[acpi-hw-reduced]]`ACPI_020` a| MUST implement the hardware-reduced ACPI mode (no FACS table).
 2+| _<<acpi-guidance-hw-reduced, See additional guidance>>._
 | [[acpi-pptt]]`ACPI_030` | The Processor Properties Table (PPTT) MUST be implemented, even on systems with a simple hart topology.
 | [[acpi-mcfg]]`ACPI_040` | The PCI Memory-mapped Configuration Space (MCFG) table MUST NOT be present if it violates cite:[PCIFW].
