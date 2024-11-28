@@ -17,9 +17,9 @@ The BRS focuses on two solutions in the form of what is deemed a recipe. Each re
 
 === Testing and Conformance
 
-To be compliant with this specification, an implementation MUST support all mandatory requirements and MUST support the listed versions of the specifications. This standard set of capabilities MAY be extended by a specific implemenation with additional standard on custom capabilities, including compatible later versions of listed standard specifications. Portable system software MUST support the specified mandatory capabilities to the compliant with this specification.
+To be compliant with this specification, an implementation MUST support all mandatory rules and MUST support the listed versions of the specifications. This standard set of capabilities MAY be extended by a specific implementation with additional standard on custom capabilities, including compatible later versions of listed standard specifications. Portable system software MUST support the specified mandatory capabilities to the compliant with this specification.
 
-The requirements in this specification use the following format:
+The rules in this specification use the following format:
 
 [width=100%]
 [%header, cols="5,20"]
@@ -27,19 +27,19 @@ The requirements in this specification use the following format:
 | ID#     ^| Rule
 | `CAT_NNN`  | The `CAT` is a category prefix that logically groups the
              requirements and is followed by 3 digits - `NNN` - assigning a
-             numeric ID to the requirement.                                   +
+             numeric ID to the rule.                                   +
                                                                               +
-             The requirements use the key words "MUST", "MUST NOT",
+             The rules use the key words "MUST", "MUST NOT",
              "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
              "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" that are
              to be interpreted as described in RFC 2119 cite:[RFC_2119] when,
              and only when, they appear in all capitals, as shown here. When
              these words are not capitalized, they have their normal English
              meanings.
-2+| _A requirement or a group of requirements may be followed by non-normative
-    text providing context or justification for the requirement. The
+2+| _A rule or a group of rules may be followed by non-normative
+    text providing context or justification for the rule. The
     non-normative text may also be used to reference sources that are the
-    origin of the requirement._
+    origin of the rule._
 |===
 
 === Glossary
