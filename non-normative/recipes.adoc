@@ -12,8 +12,3 @@ might be low-resolution and the sound, built-in network port or power
 management might not work out of the box. You could subsequently load
 the right drivers from the media coming with the board or fetch newest
 ones using a well-supported network adapter.
-
-Requirements for heterogeneous performance harts (e.g. mix of "performance"
-and "efficiency" harts) are described in the "RISC-V Server Platform
-specification" cite:[RSPS]. The ACPI specification cite:[ACPI] has a
-chapter on "Collaborative Processor Performance Control".
