@@ -34,12 +34,10 @@ experience that negatively affects the value of the whole RISC-V
 standards-based ecosystem. *Anomalous and unexpected behavior* is taken
 to mean system instability and worst-case behavior for non-specialized
 workloads, but does not include suboptimal/unoptimized behavior or
-missing I/O or accelerator drivers.
-
-A key tenet of BRS-I is constraining behavior outside the scope of BRS-I.
-Features violating the principle of least surprise and causing anomalous and
-unexpected behavior in a generic OS must be configured by firmware as opt-in.
-<<recipe-brs-i-guidance, See additional guidance>>.
+missing I/O or accelerator drivers. Any additional firmware features
+that cause anomalous and unexpected behavior must be disabled by
+default, and only enabled by opt-in. <<recipe-brs-i-guidance, See
+additional guidance>>.
 
 .BRS-I Recipe Overview
 [width=100%]
