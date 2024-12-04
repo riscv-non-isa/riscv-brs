@@ -5,17 +5,17 @@ This section is used to define the `_DSD` device properties cite:[DSD] in the `r
 
 Where explicit values are provided in a property definition, only these values must be used. System behavior with any other values is undefined.
 
-Request for new property names in the `rscv-` namespace should be made as a git pull request to below table in this document.
-
 [width=100%]
 [%header, cols="10,5,25"]
 |===
 |  Property  ^| Type | Description
+3+|_Currently, there are no properties defined in the `riscv-` namespace. Request for new property names in the `rscv-` namespace should be made as a git pull request to this table._
 |===
+
 
 [[acpi-props-uart]]
 === ACPI Device Properties for UART Devices
-Generic 16550-compatible UART devices can have below device properties in the global name space
+Generic 16550-compatible UART devices can have device properties in the global name space
 since Operating Systems are already using them.
 
 [width=100%]
