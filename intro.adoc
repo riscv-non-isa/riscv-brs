@@ -26,7 +26,7 @@ The rules in this specification use the following format:
 |===
 | ID#     ^| Rule
 | `CAT_NNN`  | The `CAT` is a category prefix that logically groups the
-             requirements and is followed by 3 digits - `NNN` - assigning a
+             rules and is followed by 3 digits - `NNN` - assigning a
              numeric ID to the rule.                                   +
                                                                               +
              The rules use the key words "MUST", "MUST NOT",
