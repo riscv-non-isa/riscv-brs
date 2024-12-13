@@ -1,7 +1,7 @@
 [[sbi]]
 == SBI Requirements
 
-The _RISC-V Supervisor Binary Interface Specification_ (SBI) cite: [SBI] defines an interface
+The _RISC-V Supervisor Binary Interface Specification_ (SBI) cite:[SBI] defines an interface
 between the supervisor mode and the next higher privilege mode. This section
 defines the mandatory SBI version and extensions implemented by the higher
 privilege mode in order to be compatible with this specification.
@@ -21,8 +21,8 @@ Certain requirements are conditional on the presence of RISC-V ISA extensions or
 [%header, cols="5,25"]
 |===
 | ID#     ^| Rule
-| `SBI_030`  | The Timer Extension (TIME) MUST be implemented, if the RISC-V "stimecmp / vstimecmp" Extension (Sstc, cite: [Sstc]) is not available.
-| `SBI_040`  | The S-Mode IPI Extension (sPI) MUST be implemented, if the Incoming MSI Controller (IMSIC, cite: [Aia]) is not available.
-| `SBI_050`  | The RFENCE Extension (RFNC) extension MUST be implemented, if the Incoming MSI Controller (IMSIC, cite: [Aia]) is not available.
-| `SBI_060`  | The Performance Monitoring Extension (PMU) MUST be implemented, if the counter delegation-related S-Mode ISA extensions (Sscsrind cite: [Sscsrind] and Ssccfg cite: [Smcdeleg]) are not present.
+| `SBI_030`  | The Timer Extension (TIME) MUST be implemented, if the RISC-V "stimecmp / vstimecmp" Extension (Sstc, cite:[Sstc]) is not available.
+| `SBI_040`  | The S-Mode IPI Extension (sPI) MUST be implemented, if the Incoming MSI Controller (IMSIC, cite:[Aia]) is not available.
+| `SBI_050`  | The RFENCE Extension (RFNC) extension MUST be implemented, if the Incoming MSI Controller (IMSIC, cite:[Aia]) is not available.
+| `SBI_060`  | The Performance Monitoring Extension (PMU) MUST be implemented, if the counter delegation-related S-Mode ISA extensions (Sscsrind cite:[Sscsrind] and Ssccfg cite:[Smcdeleg]) are not present.
 |===
