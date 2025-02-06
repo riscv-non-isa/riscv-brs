@@ -35,10 +35,6 @@ available to an OS loader via the standard `UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL` i
  ** Use `Interface Type` 0x12 (16550-compatible with parameters defined in Generic Address Structure).
  ** There MUST be a matching AML device object with `_HID` (Hardware ID) or `_CID` (Compatible ID) `RSCV0003`.
 2+| _See <<acpi-guidance-spcr, additional guidance>>_.
-| [[acpi-namespace-dev]]`ACPI_080` | PLIC/APLIC namespace devices MUST
-be present in the ACPI namespace whenever corresponding MADT entries are
-present. <<acpi-ids, See RVI ACPI IDs>>.
-2+| _Also see <<acpi-irq-gsb, AML_090>> and <<acpi-guidance-gsi-namespace, additional guidance>>_.
 |===
 
 [[acpi-aml]]
@@ -77,6 +73,10 @@ through the driver-backed `OperationRegion`._
 the Global System Interrupt Base (`_GSB`, cite:[ACPI] Section 6.2.7) object.
 <<acpi-guidance-gsi-namespace, See additional guidance>>.
 | `AML_100` | UART device objects with ID `RSCV0003` MUST implement <<acpi-props-uart, Properties for UART Devices>>.
+| [[acpi-namespace-dev]]`AML_110` | PLIC/APLIC namespace devices MUST
+be present in the ACPI namespace whenever corresponding MADT entries are
+present. <<acpi-ids, See RVI ACPI IDs>>.
+2+| _Also see <<acpi-irq-gsb, AML_090>> and <<acpi-guidance-gsi-namespace, additional guidance>>_.
 |===
 
 include::acpi-id.adoc[]
