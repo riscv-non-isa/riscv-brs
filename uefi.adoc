@@ -35,20 +35,6 @@ hand-off info to an OS, for example, to provide RAM disk information
 (e.g. via `/chosen/linux,initrd-start`)._
 |===
 
-=== BRS-I Security Requirements
-
-[width=100%]
-[%header, cols="5,25"]
-|===
-| ID#     ^| Rule
-| `USEC_010` | Systems implementing UEFI secure boot are RECOMMENDED to implement the `EFI_SECURITY_ARCH_PROTOCOL` and `EFI_SECURITY2_ARCH_PROTOCOL` protocols cite:[UEFI-PI].
-2+| _The Security and Security2 architectural protocols are overridden by some bootloaders (e.g. systemd-boot) to validate EFI binaries that cannot be validated against the UEFI security database._
-| `USEC_020` | Systems implementing a TPM MUST implement the _TCG
-EFI Protocol Specification_ cite:[TcgEfiPlat].
-|===
-
-See additional <<uefi-rt, requirements for UEFI runtime services>>.
-
 === BRS-I I/O-specific Requirements
 
 [width=100%]
@@ -84,13 +70,24 @@ See additional <<uefi-rt, requirements for UEFI runtime services>>.
 2+| _This rule is included in this specification to address a common mistake in implementing the UEFI requirements for non-volatile variables, even though it may appear redundant with the existing UEFI specification._
 | `URT_050` | UEFI runtime services MUST be able to update the UEFI variables directly without the aid of an OS.
 2+| _UEFI variables are normally saved in a dedicated storage which is not directly accessible by the operating system._
-| `URT_060` a| The following requirements MUST be met for systems with UEFI secure boot:
-
-             * MUST support a minimum of 128 KiB of non-volatile storage for UEFI variables.
-             * The maximum supported variable size MUST be at least 64 KiB.
-             * The `db` signature database variable (`EFI_IMAGE_SECURITY_DATABASE`) MUST be created with `EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS`, to prevent rollback attacks.
-             * The `dbx` signature database variable (`EFI_IMAGE_SECURITY_DATABASE1`) MUST be created with `EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS`, to prevent rollback attacks.
 |===
+
+=== BRS-I Security Requirements
+
+[width=100%]
+[%header, cols="5,25"]
+|===
+| ID#     ^| Rule
+| `USEC_010` | Systems implementing UEFI secure boot are RECOMMENDED to implement the `EFI_SECURITY_ARCH_PROTOCOL` and `EFI_SECURITY2_ARCH_PROTOCOL` protocols cite:[UEFI-PI].
+2+| _The Security and Security2 architectural protocols are overridden by some bootloaders (e.g. systemd-boot) to validate EFI binaries that cannot be validated against the UEFI security database._
+| `USEC_020` | Systems implementing a TPM MUST implement the _TCG EFI Protocol Specification_ cite:[TcgEfiPlat].
+| `USEC_030` | Systems with UEFI secure boot MUST support a minimum of 128 KiB of non-volatile storage for UEFI variables.
+| `USEC_040` | For systems with UEFI secure boot, the maximum supported variable size MUST be at least 64 KiB.
+| `USEC_050` | For systems with UEFI secure boot, the `db` signature database variable (`EFI_IMAGE_SECURITY_DATABASE`) MUST be created with `EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS`, to prevent rollback attacks.
+| `USEC_060` | For systems with UEFI secure boot, the `dbx` signature database variable (`EFI_IMAGE_SECURITY_DATABASE1`) MUST be created with `EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS`, to prevent rollback attacks.
+|===
+
+See additional <<uefi-rt, requirements for UEFI runtime services>>.
 
 === BRS-I Firmware Update
 
