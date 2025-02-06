@@ -2,8 +2,8 @@
 :description: RISC-V Boot and Runtime Services Specification Document (BRS)
 :company: RISC-V.org
 :url-riscv: http://riscv.org
-:revdate: 6th December 2024
-:revnumber: 0.0.4
+:revdate: 6th February 2025
+:revnumber: 0.8
 :revremark: This document is Stable.
 :doctype: book
 :preface-title: Preamble
