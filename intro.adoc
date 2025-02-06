@@ -55,11 +55,12 @@ Most terminology has the standard RISC-V meaning. This table captures other term
 | BRS             | _RISC-V Boot and Runtime Services Specification_. This document.
 | BRS-I           | Boot and Runtime Services recipe targeting interoperation across different software suppliers.
 | BRS-B           | Boot and Runtime Services recipe using a bespoke solution.
-| DT              | DeviceTree cite:[DT].
+| DT              | _Device Tree_ cite:[DT].
 | EBBR            | _Embedded Base Boot Requirements Specification_ cite:[EBBR].
 | OSV             | Operating System Vendor.
 | OS              | Operating System or Hypervisor.
-| Profile         | RISC-V Profile cite:[Profile].
+| Profile         | _RISC-V Profile_ cite:[Profile].
+| RPMI            | _RISC-V Platform Management Interface_ cite:[RPMI].
 | RVI             | RISC-V International.
 | SBI             | _RISC-V Supervisor Binary Interface Specification_ cite:[SBI].
 | SMBIOS          | _System Management BIOS (SMBIOS) Reference Specification_ cite:[SMBIOS].
