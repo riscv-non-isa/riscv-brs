@@ -2,9 +2,9 @@
 :description: RISC-V Boot and Runtime Services Test Specification
 :company: RISC-V.org
 :url-riscv: http://riscv.org
-:revdate: 6th December 2024
-:revnumber: 0.0.4
-:revremark: This document is Stable.
+:revdate: 7th February 2024
+:revnumber: 0.1
+:revremark: This document is in Development state.  Change should be expected.
 :doctype: book
 :preface-title: Preamble
 :colophon:
@@ -39,7 +39,7 @@ BRS Task Group
 
 // Preamble
 [WARNING]
-.This document is in the link:http://riscv.org/spec-state[Development state]
+.This document is in the link:https://lf-riscv.atlassian.net/wiki/display/HOME/Specification+States[Development state]
 ====
 Assume everything can change. This draft specification will change before
 being accepted as standard, so implementations made to this draft
