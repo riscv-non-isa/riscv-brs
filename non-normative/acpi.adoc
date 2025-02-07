@@ -108,7 +108,7 @@ describe affinities.
 [[acpi-guidance-gsi-namespace]]
 ==== PLIC/APLIC Namespace Devices
 
-Here's an example of an ASL excerpt satisfying <<acpi-namespace-dev, `ACPI_080`>>
+Here's an example of an ASL excerpt satisfying <<acpi-namespace-dev, `AML_110`>>
 and <<acpi-irq-gsb, `AML_090`>> requirements.
 
  Scope (\_SB)
