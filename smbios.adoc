@@ -1,7 +1,7 @@
 [[smbios]]
 == BRS-I SMBIOS Requirements
 
-The _System Management BIOS (SMBIOS) Reference Specification_ defines a standard format for presenting management information about an implentation, mostly focusing on hardware components.
+The _System Management BIOS (SMBIOS) Reference Specification_ defines a standard format for presenting management information about an implementation, mostly focusing on hardware components.
 
 This section defines the BRS-I mandatory and optional SMBIOS requirements
 on top of existing cite:[SMBIOS] specification requirements. Additional
