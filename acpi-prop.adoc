@@ -9,7 +9,7 @@ Where explicit values are provided in a property definition, only these values m
 [%header, cols="10,5,25"]
 |===
 |  Property  ^| Type | Description
-3+|_Currently, there are no properties defined in the `riscv-` namespace. Request for new property names in the `rscv-` namespace should be made as a git pull request to this table._
+3+|_Currently, there are no properties defined in the `rscv-` namespace. Request for new property names in the `rscv-` namespace should be made as a git pull request to this table._
 |===
 
 
