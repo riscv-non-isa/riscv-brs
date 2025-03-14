@@ -31,28 +31,14 @@
 | `ME_SBI_020_010` | . See `ME_SBI_010_010`.
                      . Probe the presence of HSM extension by sbi_probe_extension().
                      . Verify that the result is true.
-| `OE_SBI_030_010` | . If Sstc extension was present(See `ME_HR_010_010`)
-                     .. Report Sstc was present and Skip the test.
-                     . Else
-                     .. Probe the presence of TIME extension by sbi_probe_extension().
-                     .. Verify that the result is true.
-| `OE_SBI_040_010` | . If Ssaia extension was present(See `ME_HR_010_010`)
-                     .. Report Ssaia was present and Skip the test.
-                     . Else
-                     .. Probe the presence of sPI extension by sbi_probe_extension().
-                     .. Verify that the result is true.
-| `OE_SBI_050_010` | . If Ssaia extension was present(See `ME_HR_010_010`)
-                     .. Report Ssaia was present and Skip the test.
-                     . Else
-                     .. Probe the presence of RFNC extension by sbi_probe_extension().
-                     .. Verify that the result is true.
-| `OE_SBI_060_010` | . If Smcsrind,Sscsrind,Smcdeleg,Ssccfg extensions
-                       were present(See `ME_HR_010_010`).
-                     .. Report Smcsrind,Sscsrind,Smcdeleg,Ssccfg  was present and
-                        Skip the test.
-                     . Else
-                     .. Probe the presence of PMU extension by sbi_probe_extension().
-                     .. Verify that the result is true.
+| `ME_SBI_030_010` | . Probe the presence of TIME extension by sbi_probe_extension().
+                     . Verify that the result is true.
+| `ME_SBI_040_010` | . Probe the presence of sPI extension by sbi_probe_extension().
+                     . Verify that the result is true.
+| `ME_SBI_050_010` | . Probe the presence of RFNC extension by sbi_probe_extension().
+                     . Verify that the result is true.
+| `ME_SBI_060_010` | . Probe the presence of PMU extension by sbi_probe_extension().
+                     . Verify that the result is true.
 |===
 
 <<<
