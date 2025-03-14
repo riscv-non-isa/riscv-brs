@@ -25,4 +25,5 @@ Certain requirements are conditional on the presence of RISC-V ISA extensions or
 | `SBI_040`  | The S-Mode IPI Extension (sPI) MUST be implemented.
 | `SBI_050`  | The RFENCE Extension (RFNC) extension MUST be implemented.
 | `SBI_060`  | The Performance Monitoring Extension (PMU) MUST be implemented.
+| `SBI_070`  | The Debug Console Extension (DBCN) MUST be implemented if the ACPI SPCR table references Interface Type 0x15.
 |===

@@ -39,6 +39,11 @@
                      . Verify that the result is true.
 | `ME_SBI_060_010` | . Probe the presence of PMU extension by sbi_probe_extension().
                      . Verify that the result is true.
+| `OE_SBI_070_010` | . If ACPI is used and the ACPI SPCR table references Interface Type 0x15
+                     .. Probe the presence of DBCN extension by sbi_probe_extension().
+                     .. Verify that the result is true.
+                     . Else
+                     .. Report DBCN is not mandatory in this configuration and skip the test.
 |===
 
 <<<
