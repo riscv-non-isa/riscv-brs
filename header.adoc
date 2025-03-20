@@ -2,9 +2,9 @@
 :description: RISC-V Boot and Runtime Services Specification Document (BRS)
 :company: RISC-V.org
 :url-riscv: http://riscv.org
-:revdate: 7th February 2025
-:revnumber: 0.8
-:revremark: This document is Stable.
+:revdate: 18th March 2025
+:revnumber: 0.9
+:revremark: This document is Frozen.
 :doctype: book
 :preface-title: Preamble
 :colophon:
@@ -39,9 +39,12 @@ BRS Task Group
 
 // Preamble
 [WARNING]
-.This document is in the link:https://lf-riscv.atlassian.net/wiki/display/HOME/Specification+States[Stable state]
+.This document is in the link:https://lf-riscv.atlassian.net/wiki/display/HOME/Specification+States[Frozen state]
 ====
-Assume anything could still change, but limited change should be expected.
+Change is extremely unlikely. A high threshold will be used, and a change
+will only occur because of some truly critical issue being identified during
+the public review cycle. Any other desired or needed changes can be the subject
+of a follow-on new extension.
 ====
 
 [preface]
