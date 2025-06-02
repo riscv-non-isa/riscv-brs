@@ -70,6 +70,8 @@ hand-off info to an OS, for example, to provide RAM disk information
 2+| _This rule is included in this specification to address a common mistake in implementing the UEFI requirements for non-volatile variables, even though it may appear redundant with the existing UEFI specification._
 | `URT_050` | UEFI runtime services MUST be able to update the UEFI variables directly without the aid of an OS.
 2+| _UEFI variables are normally saved in a dedicated storage which is not directly accessible by the operating system._
+| `URT_060` | If UEFI runtime services can be called with enabled forward control flow guard, then UEFI runtime services MUST have the `EFI_MEMORY_ATTRIBUTES_FLAGS_RT_FORWARD_CONTROL_FLOW_GUARD` bit set to 1.
+2+| _This rule allows calls to UEFI runtime services without disabling the forward control flow guard on platforms that allow the OS to enable it._
 |===
 
 === BRS-I Security Requirements
