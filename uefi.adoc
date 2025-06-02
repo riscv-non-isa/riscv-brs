@@ -21,7 +21,7 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
               * The default memory space attribute is `EFI_MEMORY_WB`.
               * Paged virtual-memory scheme MUST be configured by the firmware with identity mapping and MUST support `EFI_MEMORY_ATTRIBUTE_PROTOCOL` protocol.
               * Only use `EfiRuntimeServicesData` memory type for describing any SMBIOS data structures.
-2+| _Enabling paged virtual memory scheme means, `satp.MODE` must not be set to `Bare` and proper page table with identity mapping is setup by the firmware. This is required for platform protection use cases before handing off to the OS._
+2+| _Paged virtual memory scheme is required for platform protection use cases before handing off to the OS._
 | `UEFI_040` | An implementation MAY comply with the _UEFI Platform Initialization Specification_ cite:[UEFI-PI].
 | `UEFI_050` | All hart manipulation internal to a firmware implementation SHOULD be done before completion of the `EFI_EVENT_GROUP_READY_TO_BOOT` event. Firmware MUST place all secondary harts in an offline state before completion of the EFI_EVENT_GROUP_READY_TO_BOOT event.
 2+| _This ensures an OS loader is entered with an OS-compatible state for all harts.The OS loader and/or the OS may resume the secondary harts, if required, as part of their boot and join sequence._
