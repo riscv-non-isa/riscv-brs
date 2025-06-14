@@ -164,8 +164,9 @@ a DSDT/SSDT MMIO device object without making the OS aware of the underlying PCI
 [[acpi-guidance-spcr]]
 ==== SPCR
 
-Early serial console can be implemented using either an NS16550 UART (SPCR `Interface Type` 0x12) or
-SBI console (SPCR `Interface Type` 0x15). When SPCR describes SBI console, the OS must use
+Early serial console can be implemented using either an NS16550 UART (SPCR `Interface Type` 0x12),
+a PL011 UART (SPCR `Interface Type` 0x03),
+or an SBI console (SPCR `Interface Type` 0x15). When SPCR describes SBI console, the OS must use
 the SBI Probe extension (`FID #3`) to detect the Debug Console Extension
 (`DBCN`).
 
