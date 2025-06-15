@@ -2,7 +2,7 @@
 :description: RISC-V Boot and Runtime Services Specification Document (BRS)
 :company: RISC-V.org
 :url-riscv: http://riscv.org
-:revdate: 18th March 2025
+:revdate: 15th June 2025
 :revnumber: 0.9
 :revremark: This document is Frozen.
 :doctype: book
@@ -54,7 +54,7 @@ Attribution 4.0 International License (CC-BY 4.0). The full
 license text is available at
 https://creativecommons.org/licenses/by/4.0/.
 
-Copyright 2024 by RISC-V International.
+Copyright 2024-2025 by RISC-V International.
 
 [preface]
 include::contributors.adoc[]
