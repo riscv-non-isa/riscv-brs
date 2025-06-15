@@ -49,34 +49,29 @@ objects.
 [%header, cols="5,25"]
 |===
 | ID#     ^| Rule
-| `AML_010` | The Cache Coherency Attribute (`_CCA`) device method MUST be implemented.
-2+| _This object provides information
-  about whether a device has to manage cache coherency and about
-  hardware support. This object is mandatory for all devices that
-  can access CPU-visible memory. (cite:[ACPI] Section 6.2.17)._
-| `AML_020` | The Current Resource Setting (_CRS) device method for a PCIe Root Complex SHOULD NOT return any descriptors for I/O ranges (such as created by ASL macros WordIO, DWordIO, QWordIO, IO, FixedIO, or ExtendedIO).
+| `AML_010` | The Current Resource Setting (_CRS) device method for a PCIe Root Complex SHOULD NOT return any descriptors for I/O ranges (such as created by ASL macros WordIO, DWordIO, QWordIO, IO, FixedIO, or ExtendedIO).
 2+| _Legacy PCI I/O BARs are uncommon in modern PCIe devices and support for PCI I/O space may complicate configuration of PCIe Root Complex hardware in a compliant manner._
-| `AML_030` | The Possible Resource Settings (`_PRS`) and Set Resource Settings (`_SRS`) device method SHOULD NOT be implemented.
+| `AML_020` | The Possible Resource Settings (`_PRS`) and Set Resource Settings (`_SRS`) device method SHOULD NOT be implemented.
 2+| _ACPI resource descriptors are typically used to describe devices with fixed I/O regions that do not change. Flexible resource assignment is not supported by most modern ACPI OSes._
-| `AML_040` | Per-hart device objects MUST be defined under `\_SB` (System Bus) namespace and not in the deprecated `\_PR` (Processors) namespace.
-| `AML_050` | Systems supporting OS-directed hart performance control and power management MUST expose these via Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8.4.6).
-| `AML_060` | Processor idle states MUST be described using Low Power Idle (`_LPI`, cite:[ACPI] Section 8.4.3).
-| [[acpi-tad]] `AML_070` | Systems with a Real-Time Clock on an OS-managed bus (e.g. I2C, subject to arbitration issues due to access to the bus by the OS) MUST implement the Time and Alarm Device (TAD) with functioning `_GRT` and `_SRT` methods, and the `_GCP` method returning bit 2 set (i.e. get/set real time features implemented).
+| `AML_030` | Per-hart device objects MUST be defined under `\_SB` (System Bus) namespace and not in the deprecated `\_PR` (Processors) namespace.
+| `AML_040` | Systems supporting OS-directed hart performance control and power management MUST expose these via Collaborative Processor Performance Control (CPPC, cite:[ACPI] Section 8.4.6).
+| `AML_050` | Processor idle states MUST be described using Low Power Idle (`_LPI`, cite:[ACPI] Section 8.4.3).
+| [[acpi-tad]] `AML_060` | Systems with a Real-Time Clock on an OS-managed bus (e.g. I2C, subject to arbitration issues due to access to the bus by the OS) MUST implement the Time and Alarm Device (TAD) with functioning `_GRT` and `_SRT` methods, and the `_GCP` method returning bit 2 set (i.e. get/set real time features implemented).
 2+| _Also see <<uefi-rtc, `URT_020`>>_.
-| `AML_080` | Systems implementing a TAD MUST be functional without additional system-specific OS drivers.
+| `AML_070` | Systems implementing a TAD MUST be functional without additional system-specific OS drivers.
 2+| _In situations where the Time and Alarm Device (TAD) depends on a
 vendor-specific OS driver for correct function (SPI, I2C, etc), the TAD MUST
 be functional if the OS driver is not loaded. That is, when a dependent
 driver is loaded, an AML method switches further accesses to go
 through the driver-backed `OperationRegion`._
-| [[acpi-irq-gsb]] `AML_090` | PLIC and APLIC device objects MUST support
+| [[acpi-irq-gsb]] `AML_080` | PLIC and APLIC device objects MUST support
 the Global System Interrupt Base (`_GSB`, cite:[ACPI] Section 6.2.7) object.
 <<acpi-guidance-gsi-namespace, See additional guidance>>.
-| `AML_100` | UART device objects with ID `RSCV0003` MUST implement <<acpi-props-uart, Properties for UART Devices>>.
-| [[acpi-namespace-dev]]`AML_110` | PLIC/APLIC namespace devices MUST
+| `AML_90` | UART device objects with ID `RSCV0003` MUST implement <<acpi-props-uart, Properties for UART Devices>>.
+| [[acpi-namespace-dev]]`AML_100` | PLIC/APLIC namespace devices MUST
 be present in the ACPI namespace whenever corresponding MADT entries are
 present. <<acpi-ids, See RVI ACPI IDs>>.
-2+| _Also see <<acpi-irq-gsb, AML_090>> and <<acpi-guidance-gsi-namespace, additional guidance>>_.
+2+| _Also see <<acpi-irq-gsb, AML_080>> and <<acpi-guidance-gsi-namespace, additional guidance>>_.
 |===
 
 include::acpi-id.adoc[]
