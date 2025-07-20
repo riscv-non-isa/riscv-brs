@@ -91,7 +91,6 @@
 | `OE_USEC_030_010` | _FIXME_.
 | `OE_USEC_040_010` | _FIXME_.
 | `OE_USEC_050_010` | _FIXME_.
-| `OE_USEC_060_010` | _FIXME_.
 |===
 
 <<<
