@@ -67,7 +67,7 @@ through the driver-backed `OperationRegion`._
 | [[acpi-irq-gsb]] `AML_080` | PLIC and APLIC device objects MUST support
 the Global System Interrupt Base (`_GSB`, cite:[ACPI] Section 6.2.7) object.
 <<acpi-guidance-gsi-namespace, See additional guidance>>.
-| `AML_90` | UART device objects with ID `RSCV0003` MUST implement <<acpi-props-uart, Properties for UART Devices>>.
+| `AML_090` | UART device objects with ID `RSCV0003` MUST implement <<acpi-props-uart, Properties for UART Devices>>.
 | [[acpi-namespace-dev]]`AML_100` | PLIC/APLIC namespace devices MUST
 be present in the ACPI namespace whenever corresponding MADT entries are
 present. <<acpi-ids, See RVI ACPI IDs>>.
