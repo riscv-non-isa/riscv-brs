@@ -44,7 +44,7 @@ additional guidance>>.
 [%header, cols="10,10,10,10,10,10"]
 |===
 | Profile | UEFI | ACPI | DT | SBI | SMBIOS
-| >= RVA20 | >= 2.10 | >= 6.6 | optional, >= v0.3 | >= 2.0 | >= 3.7.0
+| >= RVA20S64 | >= 2.10 | >= 6.6 | optional, >= v0.3 | >= 2.0 | >= 3.7.0
 |===
 
 === BRS-B Recipe
@@ -62,7 +62,7 @@ custom distributions.
 [%header, cols="10,10,20,20,10,20"]
 |===
 | Profile | UEFI | ACPI | DT | SBI | SMBIOS
-| >= RVA20 | EBBR, >= 2.1.0 cite:[EBBR] | optional, >= 6.6 | optional, >= v0.3 | >= 2.0 | optional, >= 3.7.0
+| >= RVA20S64 | EBBR, >= 2.1.0 cite:[EBBR] | optional, >= 6.6 | optional, >= v0.3 | >= 2.0 | optional, >= 3.7.0
 |===
 
 Either ACPI or DT may be used to describe hardware to the OS, but never both at the same time.
