@@ -37,7 +37,7 @@ NOTE: The structures and fields in this section are defined in a manner consiste
 
 IMPORTANT: The information in this section supersedes the definitions in (cite:[SMBIOS], Section 7.5.3.4).
 
-A processor is a grouping of harts in a physical package. In modern designs this MAY mean a SoC.
+A processor is a grouping of harts in a physical package. In modern designs this MAY mean an SoC.
 
 For RISC-V class CPUs, the `Processor ID` field contains two `DWORD`-formatted values describing
 the overall physical processor package vendor and version. For some implementations

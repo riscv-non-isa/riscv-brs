@@ -4,7 +4,7 @@
 The _Advanced Configuration and Power Interface Specification_ provides the OS-centric view of system configuration, various hardware resources, events and power management.
 
 This section defines the BRS-I mandatory and optional ACPI
-requirements on top of existing cite:[ACPI] and cite:[UEFI]
+requirements on top of existing ACPI cite:[ACPI] and UEFI cite:[UEFI]
 specification requirements. Additional non-normative guidance may be
 found in the <<acpi-guidance, firmware implementation guidance>>
 section.
