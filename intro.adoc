@@ -5,7 +5,7 @@ The _RISC-V Boot and Runtime Services Specification_ (BRS) defines a standardize
 
 The BRS specification is targeting systems that implement S/U privilege modes, and optionally the HS privilege mode. This is the expected deployment for OSVs and system vendors in a typical ecosystem covering client systems up through server systems where software is provided by different vendors than the system vendor.
 
-This specification standardizes the requires for software interfaces and capabilities by building on top of relevant industry and ratified RISC-V standards.
+This specification standardizes the requirements for software interfaces and capabilities by building on top of relevant industry and ratified RISC-V standards.
 
 === Releases
 
@@ -13,11 +13,11 @@ It is expected that the BRS will periodically release a new specification. The d
 
 === Approach to Solutions
 
-The BRS focuses on two solutions in the form of what is deemed a recipe. Each recipe contains the requirements needed to fulfill each solution. The requirements of each recipe will be marked accordingly with an unique identifier. The recipes are BRS-I (Interoperable) and BRS-B (Bespoke).
+The BRS focuses on two solutions in the form of what is deemed a recipe. Each recipe contains the requirements needed to fulfill each solution. The requirements of each recipe will be marked accordingly with a unique identifier. The recipes are BRS-I (Interoperable) and BRS-B (Bespoke).
 
 === Testing and Conformance
 
-To be compliant with this specification, an implementation MUST support all mandatory rules and MUST support the listed versions of the specifications. This standard set of capabilities MAY be extended by a specific implementation with additional standard on custom capabilities, including compatible later versions of listed standard specifications. Portable system software MUST support the specified mandatory capabilities to the compliant with this specification.
+To be compliant with this specification, an implementation MUST support all mandatory rules and MUST support the listed versions of the specifications. This standard set of capabilities MAY be extended by a specific implementation with additional standard or custom capabilities, including compatible later versions of listed standard specifications. Portable system software MUST support the specified mandatory capabilities to be compliant with this specification.
 
 The rules in this specification use the following format:
 

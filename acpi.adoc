@@ -4,7 +4,7 @@
 The _Advanced Configuration and Power Interface Specification_ provides the OS-centric view of system configuration, various hardware resources, events and power management.
 
 This section defines the BRS-I mandatory and optional ACPI
-requirements on top of existing cite:[ACPI] and cite:[UEFI]
+requirements on top of existing ACPI cite:[ACPI] and UEFI cite:[UEFI]
 specification requirements. Additional non-normative guidance may be
 found in the <<acpi-guidance, firmware implementation guidance>>
 section.
@@ -67,7 +67,7 @@ through the driver-backed `OperationRegion`._
 | [[acpi-irq-gsb]] `AML_080` | PLIC and APLIC device objects MUST support
 the Global System Interrupt Base (`_GSB`, cite:[ACPI] Section 6.2.7) object.
 <<acpi-guidance-gsi-namespace, See additional guidance>>.
-| `AML_90` | UART device objects with ID `RSCV0003` MUST implement <<acpi-props-uart, Properties for UART Devices>>.
+| `AML_090` | UART device objects with ID `RSCV0003` MUST implement <<acpi-props-uart, Properties for UART Devices>>.
 | [[acpi-namespace-dev]]`AML_100` | PLIC/APLIC namespace devices MUST
 be present in the ACPI namespace whenever corresponding MADT entries are
 present. <<acpi-ids, See RVI ACPI IDs>>.

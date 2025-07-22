@@ -78,13 +78,11 @@ hand-off info to an OS, for example, to provide RAM disk information
 [%header, cols="5,25"]
 |===
 | ID#     ^| Rule
-| `USEC_010` | Systems implementing UEFI secure boot are RECOMMENDED to implement the `EFI_SECURITY_ARCH_PROTOCOL` and `EFI_SECURITY2_ARCH_PROTOCOL` protocols cite:[UEFI-PI].
-2+| _The Security and Security2 architectural protocols are overridden by some bootloaders (e.g. systemd-boot) to validate EFI binaries that cannot be validated against the UEFI security database._
-| `USEC_020` | Systems implementing a TPM MUST implement the _TCG EFI Protocol Specification_ cite:[TcgEfiPlat].
-| `USEC_030` | Systems with UEFI secure boot MUST support a minimum of 128 KiB of non-volatile storage for UEFI variables.
-| `USEC_040` | For systems with UEFI secure boot, the maximum supported variable size MUST be at least 64 KiB.
-| `USEC_050` | For systems with UEFI secure boot, the `db` signature database variable (`EFI_IMAGE_SECURITY_DATABASE`) MUST be created with `EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS`, to prevent rollback attacks.
-| `USEC_060` | For systems with UEFI secure boot, the `dbx` signature database variable (`EFI_IMAGE_SECURITY_DATABASE1`) MUST be created with `EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS`, to prevent rollback attacks.
+| `USEC_010` | Systems implementing a TPM MUST implement the _TCG EFI Protocol Specification_ cite:[TcgEfiPlat].
+| `USEC_020` | Systems with UEFI secure boot MUST support a minimum of 128 KiB of non-volatile storage for UEFI variables.
+| `USEC_030` | For systems with UEFI secure boot, the maximum supported variable size MUST be at least 64 KiB.
+| `USEC_040` | For systems with UEFI secure boot, the `db` signature database variable (`EFI_IMAGE_SECURITY_DATABASE`) MUST be created with `EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS`, to prevent rollback attacks.
+| `USEC_050` | For systems with UEFI secure boot, the `dbx` signature database variable (`EFI_IMAGE_SECURITY_DATABASE1`) MUST be created with `EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS`, to prevent rollback attacks.
 |===
 
 See additional <<uefi-rt, requirements for UEFI runtime services>>.
