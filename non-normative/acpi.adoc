@@ -166,9 +166,9 @@ a DSDT/SSDT MMIO device object without making the OS aware of the underlying PCI
 
 Early serial console can be implemented using either an NS16550 UART (SPCR `Interface Type` 0x12),
 a PL011 UART (SPCR `Interface Type` 0x03),
-or an SBI console (SPCR `Interface Type` 0x15). When SPCR describes SBI console, the OS must use
-the SBI Probe extension (`FID #3`) to detect the Debug Console Extension
-(`DBCN`).
+or an SBI console (SPCR `Interface Type` 0x15). When SPCR describes the SBI console, the operating
+system must use the SBI Probe extension (FID #3) to detect the Debug Console Extension (`DBCN`) or
+both the Console putchar Extension (EID #1) and the Console getchar Extension (EID #2).
 
 The new `Precise Baud Rate` field, introduced in cite:[SPCR] rev. 4, allows describing rates faster
 than 115200 baud for NS16550-compatible UARTS.
