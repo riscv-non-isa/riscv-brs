@@ -74,5 +74,5 @@ present. <<acpi-ids, See RVI ACPI IDs>>.
 2+| _Also see <<acpi-irq-gsb, AML_080>> and <<acpi-guidance-gsi-namespace, additional guidance>>_.
 |===
 
-include::acpi-id.adoc[]
-include::acpi-prop.adoc[]
+include::partial$acpi-id.adoc[]
+include::partial$acpi-prop.adoc[]

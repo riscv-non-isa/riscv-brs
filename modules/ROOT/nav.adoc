@@ -1,5 +1,5 @@
 .Boot and Runtime Services
-* xref:brs-index.adoc[Boot and Runtime Services]
+* xref:index.adoc[Boot and Runtime Services]
 * xref:contributors.adoc[Contributors]
 * xref:intro.adoc[Introduction]
 * xref:recipes.adoc[Recipes]
@@ -8,5 +8,4 @@
 * xref:uefi.adoc[BRS-I UEFI Requirements]
 * xref:acpi.adoc[BRS-I ACPI Requirements]
 * xref:smbios.adoc[BRS-I SMBIOS Requirements]
-* xref:index.adoc[Index]
 * xref:bibliography.adoc[Bibliography]

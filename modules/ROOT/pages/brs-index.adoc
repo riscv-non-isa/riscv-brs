@@ -1,7 +1,0 @@
-image::risc-v_logo.svg[]
-
-== Boot and Runtime Services
-
-
-BRS Task Group
-Version 1.0, 29th August 2025: This document is Ratified.
