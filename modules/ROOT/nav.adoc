@@ -1,5 +1,6 @@
 .Boot and Runtime Services
 * xref:index.adoc[Boot and Runtime Services]
+* xref:copyright.adoc[Copyright and License]
 * xref:contributors.adoc[Contributors]
 * xref:intro.adoc[Introduction]
 * xref:recipes.adoc[Recipes]

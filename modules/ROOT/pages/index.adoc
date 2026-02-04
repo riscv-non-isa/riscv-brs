@@ -1,8 +1,17 @@
 image::risc-v_logo.svg[]
 
-== Boot and Runtime Services
+== RISC-V Boot and Runtime Services Specification (BRS)
 
 
 BRS Task Group
 
 Version 1.0, 29th August 2025: This document is Ratified.
+
+// Preamble
+[WARNING]
+.This document is in the link:http://riscv.org/spec-state[Ratified state]
+====
+No changes are allowed. Any desired or needed changes can be the subject of a
+follow-on new extension. Ratified extensions are never revised.
+====
+
