@@ -6,6 +6,8 @@ nav:
 
 asciidoc:
   attributes:
+    page-group: platform-software
+    page-card-description: 'Boot-time and runtime software interface requirements.'
+    page-release-date: 'August 2025'
     page-pdf_url: _attachments/riscv-brs-spec.pdf
     more_details_url: https://riscv.atlassian.net/wiki/external/YTc0N2FlZDJmNTdiNDJlYzhiMGIyODFlOGQ0YWQyZDg    
-    page-group: platform-software
