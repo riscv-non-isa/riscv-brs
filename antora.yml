@@ -7,5 +7,6 @@ nav:
 asciidoc:
   attributes:
     page-pdf_url: _attachments/riscv-brs-spec.pdf
-    more_details_url: https://riscv.atlassian.net/wiki/external/YTc0N2FlZDJmNTdiNDJlYzhiMGIyODFlOGQ0YWQyZDg    
+    more_details_url: https://riscv.atlassian.net/wiki/external/YTc0N2FlZDJmNTdiNDJlYzhiMGIyODFlOGQ0YWQyZDg
     page-group: platform-software
+    asamBibliography: 'ROOT:resources/brs.bib'
