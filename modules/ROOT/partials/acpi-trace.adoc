@@ -1,0 +1,117 @@
+[[acpi-trace]]
+=== RISC-V Trace Components
+==== RISC-V Trace Component Description in ACPI Namespace
+Each RISC-V Trace component, as defined by the RISC-V Trace Control Interface Specification cite:[TraceCtrl], is
+represented as a device in the ACPI namespace, with its type identified by a `_CID` and its specific
+implementation distinguished by a vendor-assigned `_HID`. The allocation of IDs for RISC-V Trace IPs
+is covered in <<acpi-ids>>.
+
+A RISC-V Trace device node must always appear as a child of the device that owns it.
+
+==== Graph Topology and UUID
+RISC-V Trace graph topology must be described using the ACPI `_DSD` device graph format defined
+in cite:[DSD], using the following UUID:
+
+*42e66f8f-50fe-4eed-9897-cdeed26ecd77*
+
+==== Link Declaration Rules
+Beyond the general graph rules in cite:[DSD], several additional constraints apply specifically to RISC-V
+Trace.
+
+Each link descriptor carries an additional integer field, Link Type, indicating whether the origin
+port is a Source Port (producer, Link Type 1) or a Destination Port (consumer, Link Type 0). A link
+descriptor therefore takes the form:
+
+*{ Source Port, Destination Port, Destination Device, Link Type }*
+
+Every link must be declared on both sides of the connection: a forward link (Link Type 1) on the
+producer side, and a backward link (Link Type 0) on the consumer side.
+
+==== Example
+Consider producer device ENC0 connected to consumer device SNK0. ENC0 declares a forward link
+(Link Type 1) from its Source Port 0 to Destination Port 1 of SNK0; SNK0 declares the corresponding
+backward link (Link Type 0) from its Destination Port 1 to Source Port 0 of ENC0.
+
+The following ASL excerpt illustrates memory-mapped RISC-V Trace components, as defined by the
+RISC-V Trace Control Interface Specification cite:[TraceCtrl], supporting both the RISC-V Efficient Trace (E-trace)
+and RISC-V Nexus-based Trace (N-trace) protocols.
+
+[source]
+----
+Scope (\_SB)
+{
+  Device (C000)
+  {
+    Name (_HID, "ACPI0007" /* Processor Device */)  // _HID: Hardware ID
+    Name (_UID, 0)  // _UID: Unique ID
+    ...
+    Device (SNK0) // RAMSINK component
+    {
+        Name (_HID, "RSCV0007")  // _HID: Hardware ID
+        Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
+        {
+            Memory32Fixed (ReadWrite,
+                0x06000000,         // Address Base
+                0x00000100,         // Address Length
+                )
+        })
+        Name (_DSD, Package (0x02)  // _DSD: Device-Specific Data
+        {
+            ToUUID ("ab02a46b-74c7-45a2-bd68-f7d344ef2153") /* Device Graphs for _DSD */,
+            Package (0x03)
+            {
+                Zero,
+                One,
+                Package (0x04)
+                {
+                    One,
+                    ToUUID ("42e66f8f-50fe-4eed-9897-cdeed26ecd77") /* RISC-V Trace UUID */,
+                    One,
+                    Package (0x04)
+                    {
+                        Zero,
+                        Zero,
+                        ^ENC0,
+                        Zero
+                    }
+                }
+            }
+        })
+    }
+
+    Device (ENC0) // Encoder Component
+    {
+        Name (_HID, "RSCV0007")  // _HID: Hardware ID
+        Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
+        {
+            Memory32Fixed (ReadWrite,
+                0x03020000,         // Address Base
+                0x00000100,         // Address Length
+                )
+        })
+        Name (_DSD, Package (0x02)  // _DSD: Device-Specific Data
+        {
+            ToUUID ("ab02a46b-74c7-45a2-bd68-f7d344ef2153") /* Device Graphs for _DSD */,
+            Package (0x03)
+            {
+                Zero,
+                One,
+                Package (0x04)
+                {
+                    One,
+                    ToUUID ("42e66f8f-50fe-4eed-9897-cdeed26ecd77") /* RISC-V Trace UUID */,
+                    One,
+                    Package (0x04)
+                    {
+                        Zero,
+                        Zero,
+                        ^SNK0,
+                        One
+                    }
+                }
+            }
+        })
+    }
+  }
+}
+----
