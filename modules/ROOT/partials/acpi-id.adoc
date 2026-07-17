@@ -31,5 +31,6 @@ ACPI ID for any new device.
 | `RSCV0004`     | RISC-V IOMMU implemented as a platform device
 | `RSCV0005`     | RISC-V SBI Message Proxy (MPXY) Mailbox Controller
 | `RSCV0006`     | RISC-V RPMI System MSI Interrupt Controller
+| `RSCV0007`     | RISC-V Trace Components. Refer to <<acpi-trace>>
 2+| _Also see <<acpi-props-uart>>._
 |===

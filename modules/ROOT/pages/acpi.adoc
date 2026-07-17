@@ -72,7 +72,11 @@ the Global System Interrupt Base (`_GSB`, cite:[ACPI] Section 6.2.7) object.
 be present in the ACPI namespace whenever corresponding MADT entries are
 present. <<acpi-ids, See RVI ACPI IDs>>.
 2+| _Also see <<acpi-irq-gsb, AML_080>> and <<acpi-guidance-gsi-namespace, additional guidance>>_.
+| [[acpi-trace-dev]]`AML_110` | Systems implementing the RISC-V Efficient Trace (E-trace) protocol or the
+RISC-V Nexus-based Trace (N-trace) protocol MUST have RISC-V Trace components in the ACPI namespace as
+described in <<acpi-trace, RISC-V ACPI Trace>>.
 |===
 
 include::../partials/acpi-id.adoc[leveloffset=-1]
 include::../partials/acpi-prop.adoc[leveloffset=-1]
+include::../partials/acpi-trace.adoc[leveloffset=-1]
