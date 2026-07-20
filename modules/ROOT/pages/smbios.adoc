@@ -1,5 +1,5 @@
 [[smbios]]
-== BRS-I SMBIOS Requirements
+= BRS-I SMBIOS Requirements
 
 The _System Management BIOS (SMBIOS) Reference Specification_ defines a standard format for presenting management information about an implementation, mostly focusing on hardware components.
 
@@ -33,7 +33,7 @@ NOTE: The structures and fields in this section are defined in a manner consiste
 |===
 
 [[smbios-type04]]
-=== Type 04 Processor Information
+== Type 04 Processor Information
 
 IMPORTANT: The information in this section supersedes the definitions in (cite:[SMBIOS], Section 7.5.3.4).
 
@@ -47,7 +47,7 @@ the vendor, where bits 6:0 is the ID without the parity and bits 31:7 represent 
 For hart-specific vendor and revision information, please see <<smbios-type44>>.
 
 [[smbios-type44]]
-=== Type 44 Processor-Specific Data
+== Type 44 Processor-Specific Data
 
 The processor-specific data structure fields are defined to follow the standard Processor-Specific Block fields (cite:[SMBIOS], Section 7.45.1).
 
@@ -71,7 +71,7 @@ of the version of the processor implementation.
 |===
 
 [[smbios-psd-ver]]
-=== Processor-Specific Data Structure Versioning
+== Processor-Specific Data Structure Versioning
 
 The processor-specific data structure begins with a revision field to allow for future extensibility in a backwards-compatible manner.
 

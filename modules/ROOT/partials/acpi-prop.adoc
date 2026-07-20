@@ -31,4 +31,3 @@ to configure a disabled device._
 3+| _1, 2, 4 or 8._
 | `fifo-size` | Integer | The FIFO size (in bytes).
 |===
-

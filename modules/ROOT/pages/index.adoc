@@ -1,0 +1,41 @@
+// Antora landing / cover page for the RISC-V Boot and Runtime Services
+// Specification (BRS).
+//
+// This page is the Antora start_page and is SITE-ONLY: it is NOT part of the
+// ARC submission PDF, whose title page, preamble, TOC, and copyright are built
+// by the assembler at src/brs.adoc. Content here is Antora-exclusive, so there
+// is no dual-source concern -- edit it freely.
+//
+// `common::risc-v_logo.svg` is a shared asset supplied by the central playbook,
+// so it resolves only on the site build; a bare local `npm run preview` has no
+// `common` component and logs one expected unresolved image. CI exception-lists
+// that, which also means CI cannot validate this macro -- check it on the dev
+// site after publishing.
+
+[.space-below]
+image::common::risc-v_logo.svg[id="riscvlogo",role="xs",alt="RISCV"]
+
+
+
+[.space-below]
+== RISC-V Boot and Runtime Services Specification (BRS)
+
+// Revision line in the ARC title-page format ("Version <ver>, <date>: <Display>").
+// Values come from antora.yml attributes stamped by scripts/stamp-antora-version.sh
+// from the same release-info.sh source the PDF uses, so this stays in lockstep
+// with the PDF title page. Do not hardcode a version here.
+Version {page-revnumber}, {page-revdate}: {page-phase-display}
+
+// Phase/status banner mirrors the PDF's "Document State" preface: the label and
+// notice both track the current ARC phase via stamped attributes.
+[NOTE]
+.This document is in the link:http://riscv.org/spec-state[{page-phase-display} state]
+====
+{page-phase-notice}
+====
+
+The RISC-V Boot and Runtime Services Specification (BRS) defines a standardized
+set of software capabilities that portable system software, such as operating
+systems and hypervisors, can rely on being present in an implementation. See the
+xref:intro.adoc[Introduction] chapter for details, and the navigation for the
+full list of chapters.

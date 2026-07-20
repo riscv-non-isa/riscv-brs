@@ -1,5 +1,5 @@
 [[hart]]
-== Hart Requirements
+= Hart Requirements
 
 A compliant system includes a RISC-V application processor and the requirements in this section apply solely to harts in the application processors of a system.
 

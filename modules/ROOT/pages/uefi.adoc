@@ -1,5 +1,5 @@
 [[uefi]]
-== BRS-I UEFI Requirements
+= BRS-I UEFI Requirements
 
 The _Unified Extensible Firmware Interface Specification_ (UEFI) describes the interface between the OS and the supervisor-mode firmware.
 
@@ -35,7 +35,7 @@ hand-off info to an OS, for example, to provide RAM disk information
 (e.g. via `/chosen/linux,initrd-start`)._
 |===
 
-=== BRS-I I/O-specific Requirements
+== BRS-I I/O-specific Requirements
 
 [width=100%]
 [%header, cols="5,25"]
@@ -48,7 +48,7 @@ hand-off info to an OS, for example, to provide RAM disk information
 |===
 
 [[uefi-rt]]
-=== BRS-I UEFI Runtime Services
+== BRS-I UEFI Runtime Services
 
 [width=100%]
 [%header, cols="5,25"]
@@ -72,7 +72,7 @@ hand-off info to an OS, for example, to provide RAM disk information
 2+| _UEFI variables are normally saved in a dedicated storage which is not directly accessible by the operating system._
 |===
 
-=== BRS-I Security Requirements
+== BRS-I Security Requirements
 
 [width=100%]
 [%header, cols="5,25"]
@@ -87,7 +87,7 @@ hand-off info to an OS, for example, to provide RAM disk information
 
 See additional <<uefi-rt, requirements for UEFI runtime services>>.
 
-=== BRS-I Firmware Update
+== BRS-I Firmware Update
 
 [width=100%]
 [%header, cols="5,25"]

@@ -1,5 +1,5 @@
 [[intro]]
-== Introduction
+= Introduction
 
 The _RISC-V Boot and Runtime Services Specification_ (BRS) defines a standardized set of software capabilities, that portable system software, such as operating systems and hypervisors, can rely on being present in an implementation to utilize in acts of device discovery, OS boot and hand-off, system management, and other operations.
 
@@ -7,15 +7,15 @@ The BRS specification is targeting systems that implement S/U privilege modes, a
 
 This specification standardizes the requirements for software interfaces and capabilities by building on top of relevant industry and ratified RISC-V standards.
 
-=== Releases
+== Releases
 
 It is expected that the BRS will periodically release a new specification. The determination of a new release will be based on the evaluation of significant changes to its underlying dependencies.
 
-=== Approach to Solutions
+== Approach to Solutions
 
 The BRS focuses on two solutions in the form of what is deemed a recipe. Each recipe contains the requirements needed to fulfill each solution. The requirements of each recipe will be marked accordingly with a unique identifier. The recipes are BRS-I (Interoperable) and BRS-B (Bespoke).
 
-=== Testing and Conformance
+== Testing and Conformance
 
 To be compliant with this specification, an implementation MUST support all mandatory rules and MUST support the listed versions of the specifications. This standard set of capabilities MAY be extended by a specific implementation with additional standard or custom capabilities, including compatible later versions of listed standard specifications. Portable system software MUST support the specified mandatory capabilities to be compliant with this specification.
 
@@ -42,7 +42,7 @@ The rules in this specification use the following format:
     origin of the rule._
 |===
 
-=== Glossary
+== Glossary
 
 Most terminology has the standard RISC-V meaning. This table captures other terms used in the document. Terms in the document prefixed by *PCIe* have the meaning defined in the _PCI Express Base Specification_ cite:[PCI] (even if they are not in this table).
 

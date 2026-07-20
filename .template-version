@@ -1,0 +1,7 @@
+# Records which docs-spec-template release this repository's tooling came from.
+# Nothing reads this file. You update it manually at the end of every upgrade,
+# in step 2.8. This is not a specification version -- spec versions are the
+# v* git tags created by the version-bot.yml workflow.
+template_ref: template/main
+template_sha: 0b99bd2515b61bdfd934d598ceaabfed4750aec5
+upgraded_on: 2026-09-23
