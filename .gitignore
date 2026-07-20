@@ -1,2 +1,5 @@
 *.pdf
 *.sw[op]
+/build/*
+/node_modules/
+/.cache/

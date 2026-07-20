@@ -1,0 +1,119 @@
+[[header]]
+:url-riscv: http://riscv.org
+ifndef::revnumber[:revnumber: v0.0]
+ifndef::revdate[:revdate: 1/2023]
+// Ratification-layer attribute defaults, and the fallbacks below only apply
+// when the Makefile doesn't pass -a overrides (e.g. a manual asciidoctor
+// invocation). Skipped in doc mode (-a doc-mode is set): a non-ratified doc
+// has no phase/milestone/revremark to fall back to. See scripts/release-info.sh.
+ifndef::doc-mode[]
+ifndef::phase[:phase: draft-and-development]
+ifndef::phase_display[:phase_display: {phase}]
+ifndef::phase_notice[:phase_notice: Assume everything is subject to change. At this stage, ideas, structures, and content are still evolving. Feedback and iteration are encouraged as nothing is final, and adjustments may be frequent.]
+ifndef::revremark[:revremark: This document is under development. Expect potential changes. Visit http://riscv.org/spec-state for further details.]
+ifndef::milestone_id[:milestone_id: {phase}]
+endif::doc-mode[]
+ifndef::spec_short[:spec_short: BRS]
+:description: RISC-V Boot and Runtime Services Specification Document (BRS)
+:docgroup: RISC-V BRS Task Group
+:company: RISC-V.org
+:doctype: book
+:preface-title: Preamble
+:colophon:
+:appendix-caption: Appendix
+// https://docs.asciidoctor.org/asciidoc/latest/macros/images-directory/
+:imagesdir: ../docs-resources/images
+:title-logo-image: image:risc-v_logo.svg[pdfwidth=3.25in,align=center]
+// Settings:
+:experimental:
+:reproducible:
+:imagesoutdir: images
+:bibtex-file: modules/ROOT/resources/brs.bib
+:bibtex-order: appearance
+:bibtex-style: ieee
+:icons: font
+:lang: en
+:listing-caption: Listing
+:sectnums:
+:toc: macro
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: pygments
+ifdef::backend-pdf[]
+:source-highlighter: coderay
+endif::[]
+:data-uri:
+:hide-uri-scheme:
+:stem: latexmath
+:footnote:
+:xrefstyle: short
+
+= RISC-V Boot and Runtime Services Specification (BRS)
+BRS Task Group
+
+// "Document State" preface is the phase Note rendered as page 2 of the PDF
+// (TOC is placed after it via the toc::[] macro below). See ARC_SUBMISSION.md §3.3.
+// Doc mode (non-ratified documentation, e.g. docs-dev-guide) has no phase to
+// report, so the whole preface is dropped straight through to the TOC.
+ifndef::doc-mode[]
+[preface]
+== Document State
+*Note:* {phase_notice}
+endif::doc-mode[]
+
+toc::[]
+
+[preface]
+== Copyright and license information
+This specification is licensed under the Creative Commons
+Attribution 4.0 International License (CC-BY 4.0). The full
+license text is available at
+https://creativecommons.org/licenses/by/4.0/.
+
+Copyright 2026 by RISC-V International.
+
+// Chapter sources live under modules/ROOT/pages/ so they double as standalone
+// Antora pages (each with a level-0 title). leveloffset=+1 demotes those titles
+// by one level here, reproducing the historical PDF section structure. This file
+// is the single PDF assembler; the pages are the single content source. See
+// ANTORA.md and the Antora migration plan for the dual-build rationale.
+[preface]
+include::../modules/ROOT/pages/contributors.adoc[leveloffset=+1]
+
+include::../modules/ROOT/pages/intro.adoc[leveloffset=+1]
+include::../modules/ROOT/pages/recipes.adoc[leveloffset=+1]
+include::../modules/ROOT/pages/hart.adoc[leveloffset=+1]
+include::../modules/ROOT/pages/sbi.adoc[leveloffset=+1]
+include::../modules/ROOT/pages/uefi.adoc[leveloffset=+1]
+include::../modules/ROOT/pages/acpi.adoc[leveloffset=+1]
+include::../modules/ROOT/pages/smbios.adoc[leveloffset=+1]
+
+[[guidance]]
+== Firmware Implementation Guidance
+
+The guidance section is non-normative, and covers certain
+implementation choices, suggestions, historical context, etc.
+
+[[recipes-guidance]]
+=== Recipes Guidance
+include::../non-normative/recipes.adoc[]
+
+[[uefi-guidance]]
+=== UEFI Implementation Guidance
+include::../non-normative/uefi.adoc[]
+
+[[acpi-guidance]]
+=== ACPI Implementation Guidance
+include::../non-normative/acpi.adoc[]
+
+[[smbios-guidance]]
+=== SMBIOS Implementation Guidance
+include::../non-normative/smbios.adoc[]
+
+// The index must precede the bibliography. The index macro is PDF-only (Antora
+// does not generate a back-of-book index), so it lives here in the assembler
+// rather than in a page.
+[index]
+== Index
+
+include::../modules/ROOT/pages/bibliography.adoc[leveloffset=+1]

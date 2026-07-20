@@ -1,5 +1,5 @@
 [[recipes]]
-== Recipes
+= Recipes
 
 In this context, a recipe is a collection of firmware specification
 requirements that hardware, firmware, and software providers can
@@ -9,7 +9,7 @@ recipe will run predictably on all conforming devices.
 The BRS specification defines two recipes: BRS-I (for "Interoperable")
 and BRS-B (for "Bespoke").
 
-=== BRS-I Recipe
+== BRS-I Recipe
 
 The BRS-I recipe aims to simplify end-user experiences, software
 compatibility and OS distribution, by defining a common specification
@@ -47,12 +47,12 @@ additional guidance>>.
 | >= RVA20S64 | >= 2.10 | >= 6.6 | optional, >= v0.3 | >= 2.0 | >= 3.7.0
 |===
 
-=== BRS-B Recipe
+== BRS-B Recipe
 
 BRS-B is intended for cases where only a minimal level of firmware
-interaction is mandated, focusing primarily on the boot process.  The
-BRS-B recipe is the simpler of the two BRS recipes.  It is expected to
-be used by software that is tailored to specific devices.  Examples
+interaction is mandated, focusing primarily on the boot process. The
+BRS-B recipe is the simpler of the two BRS recipes. It is expected to
+be used by software that is tailored to specific devices. Examples
 include many types of mobile devices, devices with real time response
 requirements, or embedded devices running rich operating systems with
 custom distributions.

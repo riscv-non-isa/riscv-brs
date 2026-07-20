@@ -1,5 +1,5 @@
 [[acpi]]
-== BRS-I ACPI Requirements
+= BRS-I ACPI Requirements
 
 The _Advanced Configuration and Power Interface Specification_ provides the OS-centric view of system configuration, various hardware resources, events and power management.
 
@@ -38,7 +38,7 @@ available to an OS loader via the standard `UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL` i
 |===
 
 [[acpi-aml]]
-=== BRS-I ACPI Methods and Objects
+== BRS-I ACPI Methods and Objects
 
 This section lists additional requirements for ACPI methods and
 objects.
@@ -74,5 +74,5 @@ present. <<acpi-ids, See RVI ACPI IDs>>.
 2+| _Also see <<acpi-irq-gsb, AML_080>> and <<acpi-guidance-gsi-namespace, additional guidance>>_.
 |===
 
-include::acpi-id.adoc[]
-include::acpi-prop.adoc[]
+include::../partials/acpi-id.adoc[leveloffset=-1]
+include::../partials/acpi-prop.adoc[leveloffset=-1]
