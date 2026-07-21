@@ -35,6 +35,7 @@ available to an OS loader via the standard `UEFI EFI_GRAPHICS_OUTPUT_PROTOCOL` i
  ** Use `Interface Type` 0x12 (16550-compatible with parameters defined in Generic Address Structure).
  ** There MUST be a matching AML device object with `_HID` (Hardware ID) or `_CID` (Compatible ID) `RSCV0003`.
 2+| _See <<acpi-guidance-spcr, additional guidance>>_.
+| [[acpi-rimt]]`ACPI_070` | The RISC-V IO Mapping Table cite:[RIMT] MUST be implemented on systems with IOMMU.
 |===
 
 [[acpi-aml]]

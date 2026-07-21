@@ -26,4 +26,6 @@ Certain requirements are conditional on the presence of RISC-V ISA extensions or
 | `SBI_050`  | The RFENCE Extension (RFNC) extension MUST be implemented, if the Incoming MSI Controller (IMSIC, cite:[Aia]) is not available.
 | `SBI_060`  | The Performance Monitoring Extension (PMU) MUST be implemented, if the counter delegation-related S-Mode ISA extensions (Sscsrind cite:[Sscsrind] and Ssccfg cite:[Smcdeleg]) are not present.
 | `SBI_070`  | The Debug Console Extension (DBCN) MUST be implemented if the ACPI SPCR table references Interface Type 0x15.
+| `SBI_080`  | The  SBI v3.0 Debug Triggers (DBTR) extension MUST be implemented if the ISA extension Sdtrig cite:[Sdtrig] is present.
+| `SBI_090`  | The SBI v3.0 Supervisor Software Events (SSE) extension MUST be implemented if the system supports the Firmware-First RAS (Reliability, Availability, and Serviceability) feature.
 |===
