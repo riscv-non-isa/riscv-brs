@@ -83,6 +83,15 @@ hand-off info to an OS, for example, to provide RAM disk information
 | `USEC_030` | For systems with UEFI secure boot, the maximum supported variable size MUST be at least 64 KiB.
 | `USEC_040` | For systems with UEFI secure boot, the `db` signature database variable (`EFI_IMAGE_SECURITY_DATABASE`) MUST be created with `EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS`, to prevent rollback attacks.
 | `USEC_050` | For systems with UEFI secure boot, the `dbx` signature database variable (`EFI_IMAGE_SECURITY_DATABASE1`) MUST be created with `EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS`, to prevent rollback attacks.
+| `USEC_060` | If the firmware allows forward-edge control-flow integrity (FCFI) to be enabled for
+the supervisor execution environment, the runtime services MUST be compiled to support FCFI.
+2+| The supervisor execution environment SHOULD enable FCFI through the SBI FWFT LANDING_PAD
+interface.
+| `USEC_070` | The support for forward-edge control-flow integrity in runtime services MUST be
+signaled by the EFI_MEMORY_ATTRIBUTES_FLAGS_RT_FORWARD_CONTROL_FLOW_GUARD flag cite:[UEFI].
+| `USEC_080` | If the runtime services support forward-edge control-flow integrity, the instruction
+at the entry address of any runtime service MUST be a 4-byte aligned, unlabeled landing pad (lpad
+0).
 |===
 
 See additional <<uefi-rt, requirements for UEFI runtime services>>.
