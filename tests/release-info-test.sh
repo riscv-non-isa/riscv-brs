@@ -74,6 +74,9 @@ ok "normalize v0.7 -> v0.70"  v0.70  "$("$RI" normalize v0.7)"
 ok "normalize 0.99 -> v0.99"  v0.99  "$("$RI" normalize 0.99)"
 ok "normalize v1.0 -> v1.0"   v1.0   "$("$RI" normalize v1.0)"
 ok "normalize v0.0 -> v0.0"   v0.0   "$("$RI" normalize v0.0)"
+ok "normalize v0.6.0 -> v0.6.0" v0.6.0 "$("$RI" normalize v0.6.0)"
+ok "normalize 0.0.1 -> v0.0.1" v0.0.1 "$("$RI" normalize 0.0.1)"
+ok "compare v0.6.1 > v0.6.0" 1 "$("$RI" compare v0.6.1 v0.6.0)"
 
 # --- auto-increment (+0.01) --------------------------------------------------
 ok "next v0.6 -> v0.61"   v0.61  "$("$RI" next v0.6)"
@@ -112,6 +115,9 @@ ok "phase v0.9"   frozen                 "$("$RI" phase v0.9)"
 ok "phase v0.98"  frozen                 "$("$RI" phase v0.98)"
 ok "phase v0.99"  ratification-ready     "$("$RI" phase v0.99)"
 ok "phase v1.0"   ratified               "$("$RI" phase v1.0)"
+ok "phase v1.0.6" development-complete   "$("$RI" phase v1.0.6)"
+ok "phase v1.0.99" ratification-ready    "$("$RI" phase v1.0.99)"
+ok "phase v1.1.0" ratified               "$("$RI" phase v1.1.0)"
 
 # --- phase floors round-trip -------------------------------------------------
 ok "floor draft-and-development" v0.0   "$("$RI" phase-floor-version draft-and-development)"
@@ -124,6 +130,7 @@ ok "floor ratified"              v1.0   "$("$RI" phase-floor-version ratified)"
 # --- display labels ----------------------------------------------------------
 ok "display v0.8"  Stabilized  "$("$RI" display v0.8)"
 ok "display v1.0"  Ratified    "$("$RI" display v1.0)"
+ok "milestone v1.0.99 preserves version" "v1.0.99 ratification-ready" "$("$RI" milestone v1.0.99)"
 
 # --- publication milestone is gone ------------------------------------------
 rc "publication is not a valid phase floor"  2  "$RI" phase-floor-version publication
@@ -147,21 +154,24 @@ devrepo="$(mktemp -d)"
   git init -q .
   git -c user.email=t@example.com -c user.name=t commit -q --allow-empty -m init
   git tag v0.6
+  git tag v1.0.6
   git -c user.email=t@example.com -c user.name=t commit -q --allow-empty -m untagged
 ) >/dev/null 2>&1
 ri_clean() { (cd "$devrepo" && env -u VERSION -u RELEASE_VERSION -u GITHUB_REF_NAME -u GITHUB_REF "$RI" "$@"); }
 dev_sha="$(cd "$devrepo" && git rev-parse --short HEAD)"
 dev_version="$(ri_clean version)"
-ok "untagged build version is <latest>-<sha>"  "v0.6-$dev_sha"  "$dev_version"
+ok "untagged build version is <latest>-<sha>"  "v1.0.6-$dev_sha"  "$dev_version"
+ok "latest ignores later lifecycle tags" v1.0.6 "$(ri_clean latest)"
 ok "untagged build version has no date stamp"  ""  "$(printf '%s' "$dev_version" | grep -oE '[0-9]{8}' || true)"
 ok "untagged build phase still resolves"  development-complete  "$(ri_clean phase "$dev_version")"
 (cd "$devrepo" && git checkout -q v0.6)
 ok "tagged build version is the bare tag"  v0.6  "$(ri_clean version)"
 rm -rf "$devrepo"
 
-# --- 3-digit input is rejected ----------------------------------------------
-rc "normalize rejects v0.6.0"  2  "$RI" normalize v0.6.0
-rc "normalize rejects v0.99.1" 2  "$RI" normalize v0.99.1
+# --- 3-component versions ----------------------------------------------------
+ok "phase v0.6.0" development-complete "$("$RI" phase v0.6.0)"
+ok "phase v0.99.0" ratification-ready "$("$RI" phase v0.99.0)"
+ok "normalize v0.99.1" v0.99.1 "$("$RI" normalize v0.99.1)"
 
 # --- .docmode (issue #110) ----------------------------------------------------
 # .docmode is resolved relative to release-info.sh's OWN location (repo_root =

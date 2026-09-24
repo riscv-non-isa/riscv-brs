@@ -3,8 +3,10 @@ set -euo pipefail
 
 # Two-digit (fixed-point decimal) release metadata for the RISC-V spec lifecycle.
 #
-# Versions are `vMAJOR.FRAC` where the value is a decimal to hundredths:
-# v0.0 = 0.00, v0.6 = 0.60, v0.61 = 0.61, v0.99 = 0.99, v1.0 = 1.00. Ordering is
+# Versions are `vMAJOR.FRAC` (or semver-shaped `vMAJOR.MINOR.PATCH`) where the
+# value is a decimal to hundredths:
+# v0.0 = 0.00, v0.6 = 0.60, v0.61 = 0.61, v0.6.1 = 0.601, v0.99 = 0.99,
+# v1.0 = 1.00. Ordering is
 # therefore DECIMAL, not per-component semver: v0.8 (0.80) > v0.61 (0.61). Do NOT
 # compare these with `sort -V` or `git ... --sort=version:refname` -- both order
 # the fractional part component-wise and get v0.8 < v0.61 wrong. Use the `compare`
@@ -97,24 +99,32 @@ base_version() {
 version_valid() {
   local v
   v="$(base_version "$1")"
-  [[ "$v" =~ ^[0-9]+\.[0-9]+$ ]]
+  [[ "$v" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]
 }
 
-# Centi-value: MAJOR*100 + fractional-hundredths. The fractional part is padded
-# to two digits so v0.6 == v0.60 == 60. v1.0 -> 100, v0.0 -> 0.
+# Scaled lifecycle value. Legacy two-component versions use hundredths, while
+# the optional patch component occupies three decimal places. This keeps the
+# existing ordering (v0.8 > v0.61) and makes v0.6.1 sort between v0.6 and v0.61.
 centi_of() {
-  local v major frac
+  local v major frac patch scale
   v="$(base_version "$1")"
-  IFS='.' read -r major frac <<<"$v"
+  IFS='.' read -r major frac patch <<<"$v"
   frac="${frac:-0}"
-  frac="${frac}00"
-  frac="${frac:0:2}"
-  echo $(( 10#$major * 100 + 10#$frac ))
+  if [[ -n "${patch:-}" ]]; then
+    frac="${frac}0"
+    frac="${frac:0:2}"
+    scale=1000
+    echo $(( 10#$major * 100000 + 10#$frac * scale + 10#$patch ))
+  else
+    frac="${frac}00"
+    frac="${frac:0:2}"
+    echo $(( 10#$major * 100000 + 10#$frac * 1000 ))
+  fi
 }
 
 is_milestone_centi() {
   case "$1" in
-    60|80|90|99|100) return 0 ;;
+  60000|80000|90000|99000|100000) return 0 ;;
     *)               return 1 ;;
   esac
 }
@@ -122,12 +132,12 @@ is_milestone_centi() {
 # Canonical short (policy) form for a milestone centi-value.
 milestone_string_for_centi() {
   case "$1" in
-    0)   echo "v0.0"  ;;
-    60)  echo "v0.6"  ;;
-    80)  echo "v0.8"  ;;
-    90)  echo "v0.9"  ;;
-    99)  echo "v0.99" ;;
-    100) echo "v1.0"  ;;
+    0)      echo "v0.0"  ;;
+    60000)  echo "v0.6"  ;;
+    80000)  echo "v0.8"  ;;
+    90000)  echo "v0.9"  ;;
+    99000)  echo "v0.99" ;;
+    100000) echo "v1.0"  ;;
     *)   return 1     ;;
   esac
 }
@@ -137,8 +147,8 @@ milestone_string_for_centi() {
 # fractional form (70 -> v0.70, 5 -> v0.05).
 format_centi() {
   local c="$1" major frac
-  major=$(( c / 100 ))
-  frac=$(( c % 100 ))
+  major=$(( c / 100000 ))
+  frac=$(( (c % 100000) / 1000 ))
   if milestone_string_for_centi "$c" >/dev/null 2>&1; then
     milestone_string_for_centi "$c"
   elif (( frac == 0 )); then
@@ -149,10 +159,15 @@ format_centi() {
 }
 
 canonical_version() {
-  local v="$1" suffix=""
+  local v="$1" suffix="" major frac patch
   if [[ "$v" == *-* ]]; then
     suffix="-${v#*-}"
     v="${v%%-*}"
+  fi
+  if [[ "$(base_version "$v")" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    IFS='.' read -r major frac patch <<<"$(base_version "$v")"
+    printf 'v%d.%d.%d%s\n' "$((10#$major))" "$((10#$frac))" "$((10#$patch))" "$suffix"
+    return 0
   fi
   echo "$(format_centi "$(centi_of "$v")")${suffix}"
 }
@@ -189,12 +204,12 @@ next_version() {
   local c n
   c="$(centi_of "$1")"
 
-  if (( c >= 100 )); then
+  if (( c >= 100000 )); then
     echo "release-info: $1 is at or past v1.0 (ratified); no automatic successor." >&2
     exit 2
   fi
 
-  n=$(( c + 1 ))
+  n=$(( c + 1000 ))
   if is_milestone_centi "$n"; then
     local ms
     ms="$(milestone_string_for_centi "$n")"
@@ -205,11 +220,34 @@ next_version() {
   format_centi "$n"
 }
 
-# Highest valid v* tag by decimal (centi) order -- git's version sort cannot be
-# trusted for this scheme (it would rank v0.8 below v0.61).
+# Highest valid v* tag by decimal (centi) order from origin's advertised tags --
+# git's version sort cannot be trusted for this scheme (it would rank v0.8 below
+# v0.61). The local-tag fallback is for callers without a reachable origin,
+# such as isolated test clones.
 latest_tag() {
-  local best="" bestc=-1 t tc
+  local best="" bestc=-1 t tc ref remote_tags=1
+  local tag_args=()
   if command -v git >/dev/null 2>&1; then
+    if git remote get-url origin >/dev/null 2>&1; then
+      while IFS=$'\t' read -r _ ref; do
+        t="${ref#refs/tags/}"
+        t="${t%\^\{\}}"
+        [[ -n "$t" ]] || continue
+        version_valid "$t" || continue
+        tc="$(centi_of "$t")"
+        if (( tc > bestc )); then
+          bestc="$tc"
+          best="$t"
+        fi
+      done < <(git ls-remote --tags origin 'refs/tags/v*' 2>/dev/null || remote_tags=0)
+      (( remote_tags == 1 )) && [[ -n "$best" ]] && {
+        canonical_version "$best"
+        return 0
+      }
+    fi
+    if git rev-parse --verify --quiet origin/HEAD >/dev/null 2>&1; then
+      tag_args=(--merged origin/HEAD)
+    fi
     while IFS= read -r t; do
       [[ -n "$t" ]] || continue
       version_valid "$t" || continue
@@ -218,7 +256,7 @@ latest_tag() {
         bestc="$tc"
         best="$t"
       fi
-    done < <(git tag --list 'v*' 2>/dev/null || true)
+    done < <(git tag "${tag_args[@]}" --list 'v*' 2>/dev/null || true)
   fi
   if [[ -n "$best" ]]; then
     canonical_version "$best"
@@ -287,24 +325,42 @@ phase_display_for_phase() {
 }
 
 phase_for_version() {
-  local v="$1" c
+  local v="$1" c major minor patch lifecycle
 
   if ! version_valid "$v"; then
     echo "$DEFAULT_PHASE"
     return 0
   fi
 
-  c="$(centi_of "$v")"
+  # In X.Y.Z versions, preserve the old lifecycle progression for the 0.Y
+  # line: Y carries the state and Z is its patch component. Once the major
+  # line is 1, X.0.Z carries the state in Z, while 1.Y.Z (Y > 0) is ratified.
+  if [[ "$(base_version "$v")" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    IFS='.' read -r major minor patch <<<"$(base_version "$v")"
+    if (( 10#$major == 0 )); then
+      lifecycle="${minor}0"
+      lifecycle="${lifecycle:0:2}"
+      c=$(( 10#$lifecycle * 1000 ))
+    elif (( 10#$minor > 0 )); then
+      c=100000
+    else
+      lifecycle="${patch}0"
+      lifecycle="${lifecycle:0:2}"
+      c=$(( 10#$lifecycle * 1000 ))
+    fi
+  else
+    c="$(centi_of "$v")"
+  fi
 
-  if (( c >= 100 )); then
+  if (( c >= 100000 )); then
     echo "ratified"
-  elif (( c >= 99 )); then
+  elif (( c >= 99000 )); then
     echo "ratification-ready"
-  elif (( c >= 90 )); then
+  elif (( c >= 90000 )); then
     echo "frozen"
-  elif (( c >= 80 )); then
+  elif (( c >= 80000 )); then
     echo "stabilized"
-  elif (( c >= 60 )); then
+  elif (( c >= 60000 )); then
     echo "development-complete"
   else
     echo "draft-and-development"
@@ -320,6 +376,16 @@ milestone_for_phase() {
     "ratified")            echo "v1.0 ratified"             ;;
     *)                     echo "draft-and-development"     ;;
   esac
+}
+
+milestone_for_version() {
+  local v="$1" phase="$2" base
+  base="$(base_version "$v")"
+  if [[ "$base" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    printf 'v%s %s\n' "$base" "$phase"
+  else
+    milestone_for_phase "$phase"
+  fi
 }
 
 phase_floor_version() {
@@ -472,7 +538,11 @@ case "$command" in
     ;;
   milestone)
     phase="$(phase_from_input "$value")"
-    milestone_for_phase "$phase"
+    if [[ -n "$value" ]] && version_valid "$value"; then
+      milestone_for_version "$value" "$phase"
+    else
+      milestone_for_phase "$phase"
+    fi
     ;;
   notice)
     phase="$(phase_from_input "$value")"
