@@ -22,11 +22,11 @@ Last updated: ${updated_on}
 
 ## Milestone Targets
 
-- v0.6 Developed
-- v0.8 Stable
-- v0.9 Frozen
-- v0.99 Ratification-Ready
-- v1.0 Ratified
+- v1.0.6 Developed
+- v1.0.8 Stable
+- v1.0.9 Frozen
+- v1.0.99 Ratification-Ready
+- v1.1.0 Ratified
 
 ## State Definitions
 
