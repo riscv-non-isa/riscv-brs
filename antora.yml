@@ -22,7 +22,7 @@ title: RISC-V Example Specification (Zexmpl)
 # stamped from scripts/release-info.sh (the same source the PDF build uses) by
 # scripts/stamp-antora-version.sh / `make stamp-antora`, so the site path
 # (/spec-sample/<version>/) and the released PDF filename always match.
-version: v0.0
+version: v1.0.6
 
 nav:
   - modules/ROOT/nav.adoc
@@ -50,8 +50,8 @@ asciidoc:
     # shared-rendering override. Stamped by scripts/stamp-antora-version.sh; the
     # `version:` key above is the authoritative version and page-revnumber mirrors
     # it for display. Do not hand-edit.
-    page-revnumber: v0.0
-    page-revdate: 2026-07-14
-    page-phase: draft-and-development
-    page-phase-display: 'Draft and Development'
+    page-revnumber: v1.0.6
+    page-revdate: 2026-09-28
+    page-phase: development-complete
+    page-phase-display: 'Development Complete'
     page-phase-notice: 'Assume everything is subject to change. At this stage, ideas, structures, and content are still evolving. Feedback and iteration are encouraged as nothing is final, and adjustments may be frequent.'
