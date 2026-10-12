@@ -106,10 +106,10 @@ The PPTT Processor Properties Topology Table (PPTT) is to be used to
 describe affinities.
 
 [[acpi-guidance-gsi-namespace]]
-==== PLIC/APLIC Namespace Devices
+==== Interrupt Controller Namespace Devices
 
 Here's an example of an ASL excerpt satisfying <<acpi-namespace-dev, `AML_100`>>
-and <<acpi-irq-gsb, `AML_080`>> requirements.
+and <<acpi-irq-gsb, `AML_080`>> requirements for a PLIC:
 
  Scope (\_SB)
  {
@@ -143,6 +143,17 @@ and <<acpi-irq-gsb, `AML_080`>> requirements.
           }
       })
     }
+ }
+
+Here's an example of an ASL excerpt defining an RPMI System MSI Interrupt Controller:
+
+ Device (MIC0)
+ {
+     Name (_HID, "RSCV0006") // _HID: Hardware ID
+     Name (_UID, Zero)  // _UID: Unique ID
+     Method(_GSB) {
+        Return (0x1000) // Global System Interrupt Base for SYSMSI starts at 4096
+     }
  }
 
 [[acpi-guidance-pcie]]
