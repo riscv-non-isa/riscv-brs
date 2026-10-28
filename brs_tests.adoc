@@ -25,38 +25,36 @@
 [%header, cols="8,25"]
 |===
 | ID#            ^| Algorithm
-| `ME_SBI_010_010` | . Get the SBI version by sbi_get_sbi_spec_version().
+| `ME_SBI_010_010` a| . Get the SBI version by sbi_get_sbi_spec_version().
                      . Verify that the version is v2.0 or later.
                      . Report the version into the test output log.
-| `ME_SBI_020_010` | . See `ME_SBI_010_010`.
+| `ME_SBI_020_010` a| . See `ME_SBI_010_010`.
                      . Probe the presence of HSM extension by sbi_probe_extension().
                      . Verify that the result is true.
-| `OE_SBI_030_010` | . If Sstc extension was present(See `ME_HR_010_010`)
-                     .. Report Sstc was present and Skip the test.
-                     . Else
+| `OE_SBI_030_010` a| . If Sstc extension was present (See `ME_HR_010_010`):
+                     .. Report Sstc was present and skip the test.
+                     . Else:
                      .. Probe the presence of TIME extension by sbi_probe_extension().
                      .. Verify that the result is true.
-| `OE_SBI_040_010` | . If Ssaia extension was present(See `ME_HR_010_010`)
-                     .. Report Ssaia was present and Skip the test.
-                     . Else
+| `OE_SBI_040_010` a| . If Ssaia extension was present (See `ME_HR_010_010`):
+                     .. Report Ssaia was present and skip the test.
+                     . Else:
                      .. Probe the presence of sPI extension by sbi_probe_extension().
                      .. Verify that the result is true.
-| `OE_SBI_050_010` | . If Ssaia extension was present(See `ME_HR_010_010`)
-                     .. Report Ssaia was present and Skip the test.
-                     . Else
+| `OE_SBI_050_010` a| . If Ssaia extension was present (See `ME_HR_010_010`):
+                     .. Report Ssaia was present and skip the test.
+                     . Else:
                      .. Probe the presence of RFNC extension by sbi_probe_extension().
                      .. Verify that the result is true.
-| `OE_SBI_060_010` | . If Smcsrind,Sscsrind,Smcdeleg,Ssccfg extensions
-                       were present(See `ME_HR_010_010`).
-                     .. Report Smcsrind,Sscsrind,Smcdeleg,Ssccfg  was present and
-                        Skip the test.
-                     . Else
+| `OE_SBI_060_010` a| . If Smcsrind, Sscsrind, Smcdeleg, and Ssccfg extensions were present (See `ME_HR_010_010`):
+                     .. Report Smcsrind, Sscsrind, Smcdeleg, and Ssccfg were present and skip the test.
+                     . Else:
                      .. Probe the presence of PMU extension by sbi_probe_extension().
                      .. Verify that the result is true.
-| `OE_SBI_070_010` | . If ACPI is used and the ACPI SPCR table references Interface Type 0x15
+| `OE_SBI_070_010` a| . If ACPI is used and the ACPI SPCR table references Interface Type 0x15:
                      .. Probe the presence of DBCN extension by sbi_probe_extension().
                      .. Verify that the result is true.
-                     . Else
+                     . Else:
                      .. Report DBCN is not mandatory in this configuration and skip the test.
 |===
 
