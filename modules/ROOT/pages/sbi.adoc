@@ -12,7 +12,7 @@ privilege mode in order to be compatible with this specification.
 | ID#     ^| Rule
 | `SBI_010`  | The SBI implementation MUST conform to SBI v2.0 or later.
 | `SBI_020`  | The SBI implementation MUST implement the Hart State Management (HSM) extension.
-2+| _HSM is used by an OS for starting up, stopping, suspending and querying the status of secondary harts._
+2+| _HSM is used by OS and UEFI firmware implementations for starting up, stopping, suspending and querying the status of secondary harts._
 |===
 
 Certain requirements are conditional on the presence of RISC-V ISA extensions or system features.

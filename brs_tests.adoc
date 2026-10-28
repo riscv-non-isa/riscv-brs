@@ -72,7 +72,15 @@
 | `ME_UEFI_020_010` | _FIXME_.
 | `ME_UEFI_030_010` | _FIXME_.
 | `OE_UEFI_040_010` | _FIXME_.
-| `OE_UEFI_050_010` | _FIXME_.
+| `ME_UEFI_050_010` a| . Enumerate all application processor harts.
+                       . Determine the boot hart ID.
+		       . For each secondary hart (that is, with the ID not equal to the boot hart):
+		       .. Query its state using SBI HSM sbi_hart_get_status() call.
+		       .. Verify the returned SBI error code is SBI_SUCCESS.
+		       .. Verify the returned hart state is STOPPED.
+2+| _Implementing this test via a generic UEFI test application can validate the essential OS-visible behavior without requiring invasive firmware instrumentation._
+| `OE_UEFI_051_010` | N/A.
+2+| _It's not realistic to write a test that attempts to catch hart state manipulation performed in arbitrary firmware phases._
 | `ME_UEFI_060_010` | _FIXME_.
 | `ME_UEFI_070_010` | _FIXME_.
 | `ME_UEFI_070_010` | _FIXME_.
