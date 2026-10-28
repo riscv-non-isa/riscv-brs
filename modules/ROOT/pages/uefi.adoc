@@ -23,8 +23,10 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
               * Only use `EfiRuntimeServicesData` memory type for describing any SMBIOS data structures.
 2+| _Paged virtual memory scheme is required for platform protection use cases before handing off to the OS._
 | `UEFI_040` | An implementation MAY comply with the _UEFI Platform Initialization Specification_ cite:[UEFI-PI].
-| `UEFI_050` | All hart manipulation internal to a firmware implementation SHOULD be done before completion of the `EFI_EVENT_GROUP_READY_TO_BOOT` event. Firmware MUST place all secondary harts in an offline state before completion of the EFI_EVENT_GROUP_READY_TO_BOOT event.
-2+| _This ensures an OS loader is entered with an OS-compatible state for all harts.The OS loader and/or the OS may resume the secondary harts, if required, as part of their boot and join sequence._
+| `UEFI_050` | Firmware MUST place all secondary harts in an offline state before completion of the EFI_EVENT_GROUP_READY_TO_BOOT event. For the purposes of this requirement, a secondary hart is considered offline when its SBI HSM state is STOPPED.
+2+| _This ensures an OS loader is entered with an OS-compatible state for all harts. The OS loader and/or the OS may resume the secondary harts, if required, as part of their boot and join sequence._
+| `UEFI_051` | All hart manipulation internal to a firmware implementation SHOULD be done before completion of the `EFI_EVENT_GROUP_READY_TO_BOOT` event.
+2+| _Performing hart (primary or secondary) state manipulation in later firmware phases is fragile and may break OS loader, kernels and boot behavior._
 | `UEFI_060` | The implementation MUST declare the `EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID` conformance profile.
 2+| _The `EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID` conformance profile MUST be declared, as the BRS requirements are a superset of UEFI cite:[UEFI] (Section 2.6)._
 | `UEFI_070` | The implementation MUST declare the appropriate BRS UEFI conformance profile GUID as defined in the section <<uefi-conformance-guids>>.

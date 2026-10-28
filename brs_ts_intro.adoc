@@ -22,17 +22,20 @@ The tests in this specification are documented use the following format:
                     If character in position `A` is `M` then the test is for a
                     requirement that MUST be supported and this test MUST pass.
                     If character in position `A` is `O` then the test is for a
-                    requirement that SHOULD or MAY be supported; such tests may
-                    be skipped if the requirement is not implemented. The tests
-                    record if optional features were present in the test output
-                    log.                                                       +
+                    optional requirement that SHOULD or MAY be followed; such
+		    tests may be skipped if the requirement is not implemented.
+		    The tests record if optional features were present in the
+		    test output log.                                           +
                                                                                +
                     The character in position `B` indicates the nature of the
                     test. If this character is `F` then the test exercises some
                     or all of the functionality associated with the feature. If
                     the character is `E` then the test determines for evidence
                     that the feature is implemented (e.g., check ACPI tables)
-                    but does not functionally exercise the feature.
+                    but does not functionally exercise the feature.            +
+                                                                               +
+                    NOTE: Some optional requirements have no meaningful evidence-based
+		    tests. N/A will be listed as the algorithm for such requirements.
 
 |===
 
