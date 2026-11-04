@@ -15,7 +15,6 @@ IMPORTANT: All content in this section is optional and recommended for BRS-B.
 |===
 | ID#     ^| Rule
 | `UEFI_010` | MUST implement a 64-bit UEFI firmware.
-| `UEFI_020` | MUST meet the 3rd Party UEFI Certificate Authority (CA) requirements on UEFI memory mitigations cite:[MSUefiCaRequirements].
 | `UEFI_030` a| MUST meet the following memory map rules:
 
               * The default memory space attribute is `EFI_MEMORY_WB`.
@@ -100,13 +99,29 @@ The EFI Conformance Profile Table (UEFI specification, Section 4.6.4 cite:[UEFI]
 | `USEC_050` | For systems with UEFI secure boot, the `dbx` signature database variable (`EFI_IMAGE_SECURITY_DATABASE1`) MUST be created with `EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS`, to prevent rollback attacks.
 | `USEC_060` | If the firmware allows forward-edge control-flow integrity (FCFI) to be enabled for
 the supervisor execution environment, the runtime services MUST be compiled to support FCFI.
-2+| The supervisor execution environment SHOULD enable FCFI through the SBI FWFT LANDING_PAD
-interface.
+2+| _The supervisor execution environment SHOULD enable FCFI through the SBI FWFT LANDING_PAD interface._
 | `USEC_070` | The support for forward-edge control-flow integrity in runtime services MUST be
 signaled by the EFI_MEMORY_ATTRIBUTES_FLAGS_RT_FORWARD_CONTROL_FLOW_GUARD flag cite:[UEFI].
 | `USEC_080` | If the runtime services support forward-edge control-flow integrity, the instruction
 at the entry address of any runtime service MUST be a 4-byte aligned, unlabeled landing pad (lpad
 0).
+| `USEC_090` | PE/COFF images supplied as part of the firmware MUST have a power-of-two `SectionAlignment` value of at least 4096 bytes.
+| `USEC_091` | PE/COFF images supplied as part of the firmware MUST NOT contain sections with both `IMAGE_SCN_MEM_WRITE` and `IMAGE_SCN_MEM_EXECUTE` set.
+2+| _Along with `USEC_090` this allows executable sections and writable sections to receive separate permissions using 4KiB pages. They introduce no additional `FileAlignment` constraint._
+| `USEC_092` | Firmware MUST apply hardware-enforced read-only protection to executable sections and execute protection to non-executable sections of firmware-supplied images in all mappings under its control. Temporary write access required for image relocation is permitted, but read-only protection MUST be restored when relocation completes.
+2+| _Protection must be effective at the privilege level used by the firmware and apply to any aliases in firmware-controlled mappings. Reporting memory attributes alone does not satisfy this requirement._
+| `USEC_093` | Firmware MUST support transitions between writable execute-protected mappings and read-only executable mappings of caller-allocated `EfiLoaderCode` pages through `EFI_MEMORY_ATTRIBUTE_PROTOCOL`, at 4KiB granularity.
+| `USEC_094` | Firmware MUST publish an `EFI_MEMORY_ATTRIBUTES_TABLE` before invoking the OS loader. The table MUST completely descirbe all `EfiRuntimeServicesCode` and `EfiRuntimeServicesData` regions and remain consistent with the memory map through successful completion of `ExitBootServices()`.
+2+| _Complete coverage includes runtime heaps and other runtime allocations outside of image sections. Runtime MMIO is outside of this requirement._
+| `USEC_095` | Firmware MUST set `EFI_MEMORY_RUNTIME` and at least one of `EFI_MEMORY_RO` or `EFI_MEMORY_XP` in every MAT descriptor for runtime code or data.
+2+| _The supported combinations describe read-only executable memory, writable non-executable memory, or read-only non-executable memory. Omitting both protections would leave a region, for which the firmware would not advertise write/execute exclusivity._
+| `USEC_096` | Firmware runtime services MUST operate correctly with the protections described by the MAT applied and with execute-protected caller-provided stacks and data buffers. Temporary write access required for relocation during `SetVirtualAddressMap()` is excepted.
+| `USEC_097` | During boot services, firmware MUST prevent reads, writes, and instruction fetches at virtual addresses `0x0-0xFFF`.
+2+| _This establishes NULL-pointer protection in the UEFI execution environment._
+| `USEC_098` | Firmware MUST map the stacks it provides during boot services as execute-protected.
+2+| _This includes stacks provided to UEFI applications and drivers._
+| `USEC_099` | Firmware MUST reject `EFI_MEMORY_ATTRIBUTE_PROTOCOL` requests that would make any affected memory page simultaneously writable and executable, by returning `EFI_ACCESS_DENIED`.
+2+| _This enforces write/execute exclusivity for permission changes made through the protocol._
 |===
 
 See additional <<uefi-rt, requirements for UEFI runtime services>>.

@@ -67,7 +67,6 @@
 |===
 | ID#            ^| Algorithm
 | `ME_UEFI_010_010` | _FIXME_.
-| `ME_UEFI_020_010` | _FIXME_.
 | `ME_UEFI_030_010` | _FIXME_.
 | `OE_UEFI_040_010` | _FIXME_.
 | `ME_UEFI_050_010` a| . Enumerate all application processor harts.
@@ -97,6 +96,58 @@
 | `OE_USEC_030_010` | _FIXME_.
 | `OE_USEC_040_010` | _FIXME_.
 | `OE_USEC_050_010` | _FIXME_.
+| `OE_USEC_060_010` | _FIXME_.
+| `OE_USEC_070_010` | _FIXME_.
+| `OE_USEC_080_010` | _FIXME_.
+| `ME_USEC_090_010` a| . Identify all in-scope PE/COFF images supplied with the firmware, using the firmware package and matching build artifacts.
+                       . Read `SectionAlignment` from each image's PE/COFF optional header.
+		       . Verify that each value is a power-of-two and at least 4096 bytes.
+		       . Report each image's identify and alignment for each violation.
+2+| _Enumerating loaded images alone does not establish coverage of all firmware-supplied images._
+| `ME_USEC_091_010` a| . Inspect every section of each image identified by `ME_USEC_090_010`.
+                       . Verify that no section has both `IMAGE_SCN_MEM_WRITE` and `IMAGE_SCN_MEM_EXECUTE` set.
+		       . Report the image, section and characteristics for each violation.
+| `ME_USEC_092_010` a| . Enumerate resident firmware-supplied images and identify their executable and non-executable section ranges.
+                       . Query the memory attributes for those ranges. Verify that executable sections are read-only and non-executable sections are execute-protected.
+		       . Inspect the active hardware mappings and protection controls. Verify that writes to executable sections and instruction fetches from non-executable sections are prohibited at the privilege level used by the firmware.
+		       . Report the inspected image ranges, attributes and effective hardware permissions for violations.
+| `MF_USEC_093_010` a| . Locate the `EFI_MEMORY_ATTRIBUTE_PROTOCOL` and allocate three contiguous `EfiLoaderCode` pages.
+                       . Establish writable, execute-protected mappings for all three pages.
+		       . Write a small test-function into the middle page and perform the required instruction-fetch synchronization.
+		       . On the middle page, set `EFI_MEMORY_RO`, then clear `EFI_MEMORY_XP`, verifying successful calls, a read-only executable mapping and successful execution of the test function.
+		       . On the middle page, set `EFI_MEMORY_XP`, then clear `EFI_MEMORY_RO`, verifying successful calls and restoration of a writable and execute-protected mapping.
+		       . Verify the effective permissions after each transition and that neither neighbouring page's permissions changed.
+2+| _Permission checks use effective CPU permissions or recoverable access probes. Attribute-query results alone do not establish that requested protections are enforced._
+| `ME_USEC_094_010` a| . Enter the test harness as an OS loader and verify that the `EFI_MEMORY_ATTRIBUTES_TABLE` is installed.
+                       . Compare MAT descriptors with `GetMemoryMap()`:
+		       .. Verify that each descriptor lies within a single memory map descriptor of matching type.
+		       .. Verify that combined coverage completely describes every `EfiRuntimeServicesCode` and `EfiRuntimeServicesData` region.
+		       . Repeat the above checks after allocating and freeing runtime memory and after loading a test runtime driver.
+		       . Obtain a final memory map and complete `ExitBootServices()`, refreshing the snapshots if the memory-map key changes.
+		       . Re-read and validate the MAT table against the final accepted memory map after the successful `ExitBootServices()`.
+| `ME_USEC_095_010` a| . Examine the MAT snapshots validated by `ME_USEC_094_010`.
+                       . For every runtime code or data descriptor:
+		       .. Verify that `EFI_MEMORY_RUNTIME` is set.
+		       .. Verify that at least one of `EFI_MEMORY_RO` or `EFI_MEMORY_XP` is set.
+		       . Report the address range and attributes of each violating descriptor.
+| `MF_USEC_096_010` a| . Capture the final memory map and MAT.
+                       . Succesfully complete `ExitBootServices()`.
+		       . Establish identity runtime mappings with the protections described by the MAT, and provide writable, execute-protected caller stacks and data buffers.
+		       . Exercise supported runtime services using valid inputs.
+		       . On a separate boot, perform the tests using non-identity mappings after a `SetVirtualAddressMap()`, permitting temporary write access neded for relocation during the `SetVirtualAddressMap()` and restoring MAT protections before proceeding with the tests.
+		       . Report the services, address modes and execution paths tested on violations (such as unexpected results and faults).
+| `MF_USEC_097_010` | Verify that a read, a write and an instruction fetch from the NULL page fail.
+| `ME_USEC_098_010` a| . Identify the complete ranges of firmware-provided stacks used during boot services.
+                       . Inspect the effective permissions over each stack's full range and verify that instruction fetches are prohibited.
+		       . Use instrumentation or implementation evidence to check stack creation, switching and permission changes throughout boot services.
+		       . Report stack ranges and effective permissions for violations.
+| `MF_USEC_099_010` a| . Locate the `EFI_MEMORY_ATTRIBUTE_PROTOCOL` and allocate test `EfiLoaderCode` pages.
+                       . With a page writable and execute-protected, request removal of `EFI_MEMORY_XP`, expecting `EFI_ACCESS_DENIED`.
+		       . With a page read-only and executable, request removal of `EFI_MEMORY_RO`, expecting `EFI_ACCESS_DENIED`.
+		       . With a page read-only and execute-protected, request removal of both protections with a single call, expecting `EFI_ACCESS_DENIED`.
+		       . Repeat with a request spanning multiple pages, with the requested change making at least one page writable and executable and expecting `EFI_ACCESS_DENIED`.
+		       . After each request, verify that no affected page became both writable and executable.
+		       . Verify that permitted transitions in `MF_USEC_093_010` still succeed on the test pages.
 |===
 
 <<<
